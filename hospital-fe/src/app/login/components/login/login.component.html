@@ -1,0 +1,35 @@
+
+<mat-card>
+  <mat-card-title>Login</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <p>
+        <mat-form-field>
+          <input type="text"
+          matInput
+          placeholder="username"
+          formControlName="username" />
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="fill">
+          <input
+            matInput
+            autocomplete="on"
+            formControlName="password"
+            placeholder="password"
+            type="password"/>
+            <!-- [type]="shouldHidePassword ? 'password' : 'text'" /> -->
+        </mat-form-field>
+      </p>
+
+      <div class="button">
+        <button type="submit" mat-flat-button color="primary">
+          Login
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
