@@ -11,9 +11,6 @@ public class SendEmailController {
     @Autowired
     EmailService emailService;
 
-    @Autowired
-    AppointmentRepository appointmentRepository;
-
     @GetMapping
     public void sendEmail() {
         emailService.sendSimpleMessage("cioropar.andrei3@gmail.com", "Test", "Test");

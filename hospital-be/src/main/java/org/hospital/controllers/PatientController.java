@@ -1,17 +1,21 @@
 package org.hospital.controllers;
 
+import lombok.AllArgsConstructor;
 import org.hospital.api.model.PatientDTO;
 import org.hospital.services.PatientService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import static org.hospital.api.model.general.Constants.API_PATIENT;
+
 @RestController
-@RequestMapping("api/v1/patients")
+@RequestMapping(API_PATIENT)
+@AllArgsConstructor
+@Validated
 public class PatientController {
-    @Autowired
     private PatientService patientService;
 
     @PostMapping

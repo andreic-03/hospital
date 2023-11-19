@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RoleEntity {
+public class RoleEntity extends AuditingEntity {
 
     @Id
     private Integer id;

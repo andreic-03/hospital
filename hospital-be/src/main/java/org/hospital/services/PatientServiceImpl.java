@@ -1,5 +1,6 @@
 package org.hospital.services;
 
+import lombok.AllArgsConstructor;
 import org.hospital.errorhandling.Errors;
 import org.hospital.errorhandling.UncheckedException;
 import org.hospital.persistence.entity.AppointmentEntity;
@@ -17,9 +18,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class PatientServiceImpl implements PatientService {
-    private static final PatientMapper PATIENT_MAPPER = PatientMapper.INSTANCE;
-    private static final MedicMapper MEDIC_MAPPER = MedicMapper.INSTANCE;
+    private final PatientMapper patientMapper;
+    private final MedicMapper medicMapper;
 
     @Autowired
     private PatientRepository patientRepository;
@@ -29,22 +31,22 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientDTO findById(Long id) {
-        return PATIENT_MAPPER.convertPatientEntityToDTO(findPatientById(id));
+        return patientMapper.convertPatientEntityToDTO(findPatientById(id));
     }
 
     @Override
     public PatientDTO createPatient(final PatientDTO patientDTO) {
-        PatientEntity patient = patientRepository.saveAndFlush(PATIENT_MAPPER.convertPatientDTOtoEntity(patientDTO));
+        PatientEntity patient = patientRepository.saveAndFlush(patientMapper.convertPatientDTOtoEntity(patientDTO));
 
         setPatientIdForAllAppointments(patient);
         setMedicIdForPatient(patient);
 
-        return PATIENT_MAPPER.convertPatientEntityToDTO(patient);
+        return patientMapper.convertPatientEntityToDTO(patient);
     }
 
     @Override
     public PatientDTO findPatientByFirstNameAndLastName(final String firstName, final String lastName) {
-        return PATIENT_MAPPER.convertPatientEntityToDTO(patientRepository.findPatientByFirstNameAndLastName(firstName, lastName));
+        return patientMapper.convertPatientEntityToDTO(patientRepository.findPatientByFirstNameAndLastName(firstName, lastName));
     }
 
     @Override
@@ -56,7 +58,7 @@ public class PatientServiceImpl implements PatientService {
             throw new UncheckedException(Errors.Functional.CNP_NOT_FOUND);
         }
 
-        return PATIENT_MAPPER.convertPatientEntityToDTO(patient);
+        return patientMapper.convertPatientEntityToDTO(patient);
     }
 
     @Override
@@ -68,7 +70,7 @@ public class PatientServiceImpl implements PatientService {
             throw new UncheckedException(Errors.Functional.MEDIC_NOT_FOUND);
         }
 
-        return PATIENT_MAPPER.convertPatientEntityToDTO(patient);
+        return patientMapper.convertPatientEntityToDTO(patient);
     }
 //
 //    @Override
@@ -95,7 +97,7 @@ public class PatientServiceImpl implements PatientService {
 
     private void setMedicIdForPatient(PatientEntity patient) {
         List<MedicEntity> medics = patient.getMedics().stream()
-                .map(medic -> MEDIC_MAPPER.convertMedicDTOtoEntity(medicService.findById(medic.getMedicId())))
+                .map(medic -> medicMapper.convertMedicDTOtoEntity(medicService.findById(medic.getMedicId())))
                 .collect(Collectors.toList());
 
         patient.setMedics(medics);

@@ -1,5 +1,6 @@
 package org.hospital.services;
 
+import lombok.AllArgsConstructor;
 import org.hospital.persistence.entity.MedicEntity;
 import org.hospital.api.model.MedicDTO;
 import org.hospital.mappers.MedicMapper;
@@ -12,29 +13,28 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class MedicServiceImpl implements MedicService {
-    private static final MedicMapper MEDIC_MAPPER = MedicMapper.INSTANCE;
-
-    @Autowired
     private MedicRepository medicRepository;
+    private MedicMapper medicMapper;
 
     @Override
     public MedicDTO createMedic(final MedicDTO medicDTO) {
-        MedicEntity medic = medicRepository.saveAndFlush(MEDIC_MAPPER.convertMedicDTOtoEntity(medicDTO));
+        MedicEntity medic = medicRepository.saveAndFlush(medicMapper.convertMedicDTOtoEntity(medicDTO));
 
-        return MEDIC_MAPPER.convertMedicEntityToDTO(medic);
+        return medicMapper.convertMedicEntityToDTO(medic);
     }
 
     @Override
     public List<MedicDTO> findAll() {
         return medicRepository.findAll().stream()
-                .map(MEDIC_MAPPER::convertMedicEntityToDTO)
+                .map(medicMapper::convertMedicEntityToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
     public MedicDTO findById(Long id) {
-        return MEDIC_MAPPER.convertMedicEntityToDTO(findMedicById(id));
+        return medicMapper.convertMedicEntityToDTO(findMedicById(id));
     }
 
     private MedicEntity findMedicById(Long id) {

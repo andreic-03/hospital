@@ -1,30 +1,34 @@
 package org.hospital.controllers;
 
-import org.hospital.api.model.AuthResponseModel;
+import lombok.AllArgsConstructor;
 import org.hospital.api.model.AuthRequestModel;
-import org.hospital.services.AuthenticationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hospital.api.model.AuthResponseModel;
+import org.hospital.services.auth.AuthenticationService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.validation.Valid;
 import java.util.Optional;
 
-import static org.hospital.api.model.general.Constants.ACCESS_TOKEN_PREFIX_NAME;
-import static org.hospital.api.model.general.Constants.AUTHORIZATION_HEADER_NAME;
+import static org.hospital.api.model.general.Constants.*;
 
 @RestController
-@RequestMapping(value = "api/v1")
+@RequestMapping(value = API_AUTH)
+@AllArgsConstructor
+@Validated
 public class AuthenticationController {
 
-	@Autowired
     private AuthenticationService authenticationService;
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<AuthResponseModel> authenticate(@Valid @RequestBody AuthRequestModel authRequestModel) {
-        return ResponseEntity.ok(authenticationService.authenticate(authRequestModel));
+    @PostMapping(value = "/login")
+    public ResponseEntity<AuthResponseModel> login(@Valid @RequestBody AuthRequestModel authRequestModel) {
+        return ResponseEntity.ok(authenticationService.login(authRequestModel));
     }
 
     @PostMapping("/logout")

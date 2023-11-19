@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class TokenEntity {
+public class TokenEntity extends AuditingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column
