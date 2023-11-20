@@ -1,6 +1,7 @@
 package org.hospital.controllers;
 
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.hospital.api.model.UserRequestModel;
 import org.hospital.api.model.UserResponseModel;
@@ -11,7 +12,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 import static org.hospital.api.model.general.Constants.*;
@@ -39,7 +39,6 @@ public class UserController {
     }
 
     @PostMapping
-    @RolesAllowed(ROLE_ADMIN)
     public UserResponseModel createUser(@RequestBody final UserRequestModel userDTO) {
         userDTO.setId(null);
         return userService.create(userDTO);

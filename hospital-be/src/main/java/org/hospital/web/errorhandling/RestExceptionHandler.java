@@ -1,5 +1,7 @@
 package org.hospital.web.errorhandling;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.hospital.errorhandling.AuthenticationException;
 import org.hospital.errorhandling.Errors;
 import org.hospital.errorhandling.GenericCheckedException;
@@ -21,8 +23,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import java.util.*;
 
 @RestControllerAdvice

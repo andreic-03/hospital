@@ -1,5 +1,6 @@
 package org.hospital.services;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.hospital.api.model.UserRequestModel;
 import org.hospital.api.model.UserResponseModel;
@@ -16,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;

@@ -1,5 +1,6 @@
 package org.hospital.controllers;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.hospital.api.model.MedicDTO;
 import org.hospital.services.MedicService;
@@ -7,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 import static org.hospital.api.model.general.Constants.API_MEDIC;

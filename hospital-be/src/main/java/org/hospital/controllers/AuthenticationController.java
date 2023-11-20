@@ -1,5 +1,6 @@
 package org.hospital.controllers;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.hospital.api.model.AuthRequestModel;
 import org.hospital.api.model.AuthResponseModel;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 import static org.hospital.api.model.general.Constants.*;

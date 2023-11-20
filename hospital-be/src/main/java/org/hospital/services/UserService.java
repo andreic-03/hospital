@@ -1,11 +1,10 @@
 package org.hospital.services;
 
-
+import jakarta.validation.Valid;
 import org.hospital.api.model.UserRequestModel;
 import org.hospital.api.model.UserResponseModel;
 import org.hospital.api.model.UserUpdateRequestModel;
 
-import javax.validation.Valid;
 import java.util.List;
 
 public interface UserService {

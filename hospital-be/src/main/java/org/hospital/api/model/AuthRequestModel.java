@@ -1,6 +1,7 @@
 package org.hospital.api.model;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.Objects;
 
 public class AuthRequestModel {
