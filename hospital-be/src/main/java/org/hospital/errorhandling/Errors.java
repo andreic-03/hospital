@@ -42,7 +42,7 @@ public enum Errors {
 	public enum Functional implements ErrorDetails {
 	
 		GENERIC("F000", "An error occured. Please check the context information (if any) or contact support."),
-		UNAUTHENTICATED("F001", "Authentication required."),
+		UNAUTHENTICATED("F001", "Authentication error."),
 		UNAUTHORIZED("F002", "You are not authorized to access this resource."),
 		TOKEN_EXPIRED("F003", "The token has expired."),
 		TOKEN_INVALID("F004", "The token is invalid."),

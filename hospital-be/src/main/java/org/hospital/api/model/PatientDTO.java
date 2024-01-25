@@ -10,7 +10,7 @@ public class PatientDTO {
     private Long cnp;
     private Long age;
     private String diagnosis;
-    private Long mobilePhone;
+    private String mobilePhone;
     private String observations;
     private String indications;
     private List<MedicDTO> medics;
@@ -73,11 +73,11 @@ public class PatientDTO {
         this.diagnosis = diagnosis;
     }
 
-    public Long getMobilePhone() {
+    public String getMobilePhone() {
         return mobilePhone;
     }
 
-    public void setMobilePhone(Long mobilePhone) {
+    public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
     }
 

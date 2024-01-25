@@ -27,7 +27,7 @@ public class MedicEntity extends AuditingEntity {
     private String lastName;
 
     @Column(name = "mobile_phone")
-    private Long mobilePhone;
+    private String mobilePhone;
 
     @Column(unique = true)
     @Email(message = "Email must be a valid email address")

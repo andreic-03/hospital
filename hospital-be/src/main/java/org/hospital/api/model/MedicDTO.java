@@ -9,7 +9,7 @@ public class MedicDTO {
     private Long medicId;
     private String firstName;
     private String lastName;
-    private Long mobilePhone;
+    private String mobilePhone;
     private String email;
 
     public Long getMedicId() {
@@ -36,11 +36,11 @@ public class MedicDTO {
         this.lastName = lastName;
     }
 
-    public Long getMobilePhone() {
+    public String getMobilePhone() {
         return mobilePhone;
     }
 
-    public void setMobilePhone(Long mobilePhone) {
+    public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
     }
 

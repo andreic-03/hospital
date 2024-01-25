@@ -37,7 +37,7 @@ public class PatientEntity extends AuditingEntity {
     private String diagnosis;
 
     @Column(name = "mobilePhone")
-    private Long mobilePhone;
+    private String mobilePhone;
 
     @Column(name = "observations")
     private String observations;
