@@ -21,13 +21,11 @@ public class AppointmentController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public AppointmentDTO create(@Valid @RequestBody final AppointmentDTO appointmentDTO) {
-        appointmentDTO.setAppointmentId(null);
         return appointmentService.createAppointment(appointmentDTO);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
     public AppointmentDTO update(@PathVariable final Long id, @Valid @RequestBody final AppointmentDTO appointmentDTO) {
-        appointmentDTO.setAppointmentId(id);
-        return appointmentService.updateAppointment(appointmentDTO);
+        return appointmentService.updateAppointment(appointmentDTO, id);
     }
 }

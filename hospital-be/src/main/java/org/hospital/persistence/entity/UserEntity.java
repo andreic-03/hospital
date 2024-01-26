@@ -26,23 +26,6 @@ public class UserEntity extends AuditingEntity {
     @Column(nullable = false)
     private String password;
 
-    @Column(length = 50)
-    private String firstName;
-
-    @Column(length = 50)
-    private String lastName;
-
-    @Column
-    private String phone;
-
-    @Column(unique = true)
-    @Email(message = "Email must be a valid email address")
-    @NotBlank(message = "Email is mandatory")
-    private String email;
-
-    @Column
-    private String gender;
-
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserStatus status;
@@ -58,4 +41,9 @@ public class UserEntity extends AuditingEntity {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<TokenEntity> jwtTokens = new HashSet<>();
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private MedicEntity medic;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private PatientEntity patient;
 }

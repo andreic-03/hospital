@@ -7,10 +7,12 @@ import org.hospital.api.model.UserResponseModel;
 import org.hospital.api.model.UserUpdateRequestModel;
 import org.hospital.errorhandling.Errors;
 import org.hospital.errorhandling.UncheckedException;
+import org.hospital.mappers.MedicMapper;
+import org.hospital.mappers.PatientMapper;
 import org.hospital.mappers.UserMapper;
-import org.hospital.persistence.entity.RoleEntity;
-import org.hospital.persistence.entity.UserEntity;
-import org.hospital.persistence.entity.UserStatus;
+import org.hospital.persistence.entity.*;
+import org.hospital.persistence.repository.MedicRepository;
+import org.hospital.persistence.repository.PatientRepository;
 import org.hospital.persistence.repository.RoleRepository;
 import org.hospital.persistence.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,7 +29,11 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final MedicRepository medicRepository;
+    private final PatientRepository patientRepository;
     private final UserMapper userMapper;
+    private final MedicMapper medicMapper;
+    private final PatientMapper patientMapper;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -53,10 +59,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseModel create(@Valid final UserRequestModel userDTO) {
-        if(userDTO.getId() != null) {
-            System.out.println("Id must be null");
-            throw new RuntimeException("Id must be null");
-        }
         UserEntity userEntity = userMapper.toUserEntity(userDTO);
 
         Set<RoleEntity> roles = mapRoles(userDTO.getRoles());
@@ -66,6 +68,20 @@ public class UserServiceImpl implements UserService {
         userEntity.setStatus(UserStatus.ACTIVE);
 
         UserEntity user = userRepository.saveAndFlush(userEntity);
+
+        if (userDTO.getMedic() != null) {
+            MedicEntity medic = medicMapper.toMedicEntity(userDTO.getMedic());
+            medic.setUser(user);
+
+            medicRepository.save(medic);
+        }
+
+        if (userDTO.getPatient() != null) {
+            PatientEntity patient = patientMapper.toPatientEntity(userDTO.getPatient());
+            patient.setUser(user);
+
+            patientRepository.save(patient);
+        }
 
         return userMapper.toUserModel(user);
     }

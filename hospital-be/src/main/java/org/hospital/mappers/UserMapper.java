@@ -9,10 +9,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UserMapper {
+    @Mapping(source = "medic.medicId", target = "medicId")
+    @Mapping(source = "patient.patientId", target = "patientId")
     UserResponseModel toUserModel(UserEntity userEntity);
 
     @Mapping(target = "roles", ignore = true)

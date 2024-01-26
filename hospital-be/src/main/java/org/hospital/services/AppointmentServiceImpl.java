@@ -39,8 +39,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public AppointmentDTO updateAppointment(AppointmentDTO appointmentDTO) {
-        findAppointmentById(appointmentDTO.getAppointmentId());
+    public AppointmentDTO updateAppointment(AppointmentDTO appointmentDTO, Long id) {
+        findAppointmentById(id);
 
         AppointmentEntity appointment = appointmentMapper.convertAppointmentDTOtoEntity(appointmentDTO);
 

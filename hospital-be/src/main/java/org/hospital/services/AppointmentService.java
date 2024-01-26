@@ -13,5 +13,5 @@ public interface AppointmentService {
 
     AppointmentDTO createAppointment(final AppointmentDTO appointmentDTO);
 
-    AppointmentDTO updateAppointment(final AppointmentDTO appointmentDTO);
+    AppointmentDTO updateAppointment(final AppointmentDTO appointmentDTO, final Long id);
 }

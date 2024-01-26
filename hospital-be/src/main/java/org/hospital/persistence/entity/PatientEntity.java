@@ -27,6 +27,9 @@ public class PatientEntity extends AuditingEntity {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column
+    private String gender;
+
     @Column(name = "cnp")
     private Long cnp;
 
@@ -55,5 +58,9 @@ public class PatientEntity extends AuditingEntity {
             joinColumns = @JoinColumn(name = "patient_id"),
             inverseJoinColumns = @JoinColumn(name = "medic_id"))
     private List<MedicEntity> medics;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
 }

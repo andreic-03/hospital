@@ -2,7 +2,9 @@ package org.hospital.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.hospital.api.model.PatientDTO;
+import org.hospital.api.model.PatientCreateRequestModel;
+import org.hospital.api.model.PatientResponseModel;
+import org.hospital.api.model.PatientUpdateRequestModel;
 import org.hospital.services.PatientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -20,31 +22,29 @@ public class PatientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PatientDTO create(@Valid @RequestBody final PatientDTO patientDTO) {
-        patientDTO.setPatientId(null);
-        return patientService.createPatient(patientDTO);
+    public PatientResponseModel create(@Valid @RequestBody final PatientCreateRequestModel patientCreateRequestModel) {
+        return patientService.createPatient(patientCreateRequestModel);
     }
 
     @GetMapping(value = "{firstName}/{lastName}")
-    public PatientDTO findPatientByFirstNameAndLastName(@PathVariable final String firstName,
-                                                        @PathVariable final String lastName) {
+    public PatientResponseModel findPatientByFirstNameAndLastName(@PathVariable final String firstName,
+                                                                  @PathVariable final String lastName) {
         return patientService.findPatientByFirstNameAndLastName(firstName, lastName);
     }
 
     @GetMapping(value = "/cnp/{cnp}")
-    public PatientDTO findPatientByCnp(@PathVariable final Long cnp) {
+    public PatientResponseModel findPatientByCnp(@PathVariable final Long cnp) {
         return patientService.findPatientByCnp(cnp);
     }
 
     @GetMapping(value = "/medic/{medicId}")
-    public PatientDTO findPatientByMedic(@PathVariable final Long medicId) {
+    public PatientResponseModel findPatientByMedic(@PathVariable final Long medicId) {
         return patientService.findPatientByMedic(medicId);
     }
 
-//    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-//    public PatientDTO update(@PathVariable final Long id, @Valid @RequestBody final PatientDTO patientDTO) {
-//        patientDTO.setPatientId(id);
-//        return patientService.updatePatient(patientDTO);
-//    }
+    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+    public PatientResponseModel update(@PathVariable final Long id, @Valid @RequestBody final PatientUpdateRequestModel patientUpdateRequestModel) {
+        return patientService.updatePatient(patientUpdateRequestModel, id);
+    }
 
 }

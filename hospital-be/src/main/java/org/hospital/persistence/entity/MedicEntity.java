@@ -34,7 +34,13 @@ public class MedicEntity extends AuditingEntity {
     @NotBlank(message = "Email is mandatory")
     private String email;
 
+    @Column
+    private String gender;
+
     @ManyToMany(mappedBy = "medics")
     private List<PatientEntity> patients;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 }

@@ -1,14 +1,14 @@
 package org.hospital.mappers;
 
+import org.hospital.api.model.MedicRequestModel;
+import org.hospital.api.model.MedicResponseModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
-import org.mapstruct.factory.Mappers;
 import org.hospital.persistence.entity.MedicEntity;
-import org.hospital.api.model.MedicDTO;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface MedicMapper {
-    MedicEntity convertMedicDTOtoEntity(MedicDTO medicDTO);
+    MedicEntity toMedicEntity(MedicRequestModel medicRequestModel);
 
-    MedicDTO convertMedicEntityToDTO(MedicEntity medic);
+    MedicResponseModel toUserModel(MedicEntity medic);
 }

@@ -1,18 +1,20 @@
 package org.hospital.services;
 
-import org.hospital.api.model.PatientDTO;
+import org.hospital.api.model.PatientCreateRequestModel;
+import org.hospital.api.model.PatientResponseModel;
+import org.hospital.api.model.PatientUpdateRequestModel;
 
 public interface PatientService {
 
-    PatientDTO findById(final Long id);
+    PatientResponseModel findById(final Long id);
 
-    PatientDTO createPatient(final PatientDTO patientDTO);
+    PatientResponseModel createPatient(final PatientCreateRequestModel patientCreateRequestModel);
 
-    PatientDTO findPatientByFirstNameAndLastName(final String firstName, final String lastName);
+    PatientResponseModel findPatientByFirstNameAndLastName(final String firstName, final String lastName);
 
-    PatientDTO findPatientByCnp(final Long cnp);
+    PatientResponseModel findPatientByCnp(final Long cnp);
 
-    PatientDTO findPatientByMedic(final Long medicId);
+    PatientResponseModel findPatientByMedic(final Long medicId);
 
-//    PatientDTO updatePatient(final PatientDTO patientDTO);
+    PatientResponseModel updatePatient(final PatientUpdateRequestModel patientUpdateRequestModel, final Long id);
 }

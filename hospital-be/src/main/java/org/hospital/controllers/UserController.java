@@ -40,7 +40,6 @@ public class UserController {
 
     @PostMapping
     public UserResponseModel createUser(@RequestBody final UserRequestModel userDTO) {
-        userDTO.setId(null);
         return userService.create(userDTO);
     }
 

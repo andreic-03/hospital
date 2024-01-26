@@ -2,7 +2,8 @@ package org.hospital.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.hospital.api.model.MedicDTO;
+import org.hospital.api.model.MedicRequestModel;
+import org.hospital.api.model.MedicResponseModel;
 import org.hospital.services.MedicService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -22,18 +23,23 @@ public class MedicController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MedicDTO create(@Valid @RequestBody final MedicDTO medicDTO) {
-        medicDTO.setMedicId(null);
-        return medicService.createMedic(medicDTO);
+    public MedicResponseModel create(@Valid @RequestBody final MedicRequestModel medicRequestModel) {
+        return medicService.createMedic(medicRequestModel);
     }
 
     @GetMapping(value = "{id}")
-    public MedicDTO get(@PathVariable final Long id) {
+    public MedicResponseModel get(@PathVariable final Long id) {
         return medicService.findById(id);
     }
 
     @GetMapping
-    public List<MedicDTO> list() {
+    public List<MedicResponseModel> list() {
         return medicService.findAll();
+    }
+
+    @GetMapping(value = "{firstName}/{lastName}")
+    public MedicResponseModel findMedicByFirstNameAndLastName(@PathVariable final String firstName,
+                                                                  @PathVariable final String lastName) {
+        return medicService.findMedicByFirstNameAndLastName(firstName, lastName);
     }
 }
