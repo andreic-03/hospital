@@ -56,10 +56,12 @@ public enum Errors {
 		CONSTRAINT_VIOLATION("F012", "Validation error. Check context for details."),
 		NOT_FOUND("F014", "The requested object was not found: ${id}"),
 		CNP_NOT_FOUND("F016", "The patient with the entered CNP was not found."),
-		MEDIC_NOT_FOUND("F017", "The patient for the given medic was not found."),
+		PATIENT_FOR_MEDIC_NOT_FOUND("F017", "The patient for the given medic was not found."),
 		ROLE_NOT_FOUND("F018", "The role was not found."),
 		USER_NOT_FOUND("F019", "The user was not found."),
-		EMAIL_ALREADY_EXISTS("F020", "The email already exists.");
+		EMAIL_ALREADY_EXISTS("F020", "The email already exists."),
+		MEDIC_NOT_FOUND("F021", "The medic was not found."),
+		PATIENT_NOT_FOUND("F022", "The patient was not found.");
 
 		private String errorCode;
 		private String errorMessage;

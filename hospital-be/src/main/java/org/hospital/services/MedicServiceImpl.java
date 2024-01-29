@@ -45,7 +45,13 @@ public class MedicServiceImpl implements MedicService {
 
     @Override
     public MedicResponseModel findMedicByFirstNameAndLastName(String firstName, String lastName) {
-        return medicMapper.toMedicModel(medicRepository.findMedicByFirstNameAndLastName(firstName, lastName));
+        MedicEntity medic = medicRepository.findMedicByFirstNameAndLastName(firstName, lastName);
+
+        if (medic == null) {
+            throw new UncheckedException(Errors.Functional.MEDIC_NOT_FOUND);
+        }
+
+        return medicMapper.toMedicModel(medic);
     }
 
     private MedicEntity findMedicById(Long id) {

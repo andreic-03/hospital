@@ -9,7 +9,6 @@ import org.hospital.errorhandling.UncheckedException;
 import org.hospital.persistence.entity.AppointmentEntity;
 import org.hospital.persistence.entity.MedicEntity;
 import org.hospital.persistence.entity.PatientEntity;
-import org.hospital.mappers.MedicMapper;
 import org.hospital.mappers.PatientMapper;
 import org.hospital.persistence.repository.MedicRepository;
 import org.hospital.persistence.repository.PatientRepository;
@@ -19,7 +18,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,13 +25,9 @@ import java.util.stream.Collectors;
 public class PatientServiceImpl implements PatientService {
     private final PatientMapper patientMapper;
     private final MedicRepository medicRepository;
-    private final MedicMapper medicMapper;
 
     @Autowired
     private PatientRepository patientRepository;
-
-    @Autowired
-    private MedicService medicService;
 
     @Override
     public PatientResponseModel findById(Long id) {
@@ -52,7 +46,13 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientResponseModel findPatientByFirstNameAndLastName(final String firstName, final String lastName) {
-        return patientMapper.toPatientModel(patientRepository.findPatientByFirstNameAndLastName(firstName, lastName));
+        PatientEntity patient = patientRepository.findPatientByFirstNameAndLastName(firstName, lastName);
+
+        if (patient == null) {
+            throw new UncheckedException(Errors.Functional.PATIENT_NOT_FOUND);
+        }
+
+        return patientMapper.toPatientModel(patient);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class PatientServiceImpl implements PatientService {
         PatientEntity patient = patientRepository.findPatientByMedicId(medicId);
 
         if (patient == null ){
-            throw new UncheckedException(Errors.Functional.MEDIC_NOT_FOUND);
+            throw new UncheckedException(Errors.Functional.PATIENT_FOR_MEDIC_NOT_FOUND);
         }
 
         return patientMapper.toPatientModel(patient);
