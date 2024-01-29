@@ -40,11 +40,8 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public PatientResponseModel createPatient(final PatientCreateRequestModel patientResponseModel) {
-        PatientEntity patient = patientRepository.saveAndFlush(patientMapper.toPatientEntity(patientResponseModel));
-
-        setPatientIdForAllAppointments(patient);
-        setMedicIdForPatient(patient);
+    public PatientResponseModel createPatient(final PatientCreateRequestModel patientCreateRequestModel) {
+        PatientEntity patient = patientRepository.saveAndFlush(patientMapper.toPatientEntity(patientCreateRequestModel));
 
         return patientMapper.toPatientModel(patient);
     }
@@ -105,14 +102,6 @@ public class PatientServiceImpl implements PatientService {
                 .collect(Collectors.toList());
 
         patient.setAppointments(appointments);
-    }
-
-    private void setMedicIdForPatient(PatientEntity patient) {
-        List<MedicEntity> medics = patient.getMedics().stream()
-                .map(medic -> medicRepository.findMedicByFirstNameAndLastName(medic.getFirstName(), medic.getLastName()))
-                .collect(Collectors.toList());
-
-        patient.setMedics(medics);
     }
 
     private void setMedicsForPatient(PatientUpdateRequestModel patientUpdateRequestModel, PatientEntity existingPatient) {
