@@ -15,6 +15,7 @@ import org.hospital.persistence.repository.MedicRepository;
 import org.hospital.persistence.repository.PatientRepository;
 import org.hospital.util.ValidationsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,9 +42,12 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientResponseModel createPatient(final PatientCreateRequestModel patientCreateRequestModel) {
-        PatientEntity patient = patientRepository.saveAndFlush(patientMapper.toPatientEntity(patientCreateRequestModel));
-
-        return patientMapper.toPatientModel(patient);
+        try {
+            PatientEntity patient = patientRepository.saveAndFlush(patientMapper.toPatientEntity(patientCreateRequestModel));
+            return patientMapper.toPatientModel(patient);
+        } catch (DataIntegrityViolationException e) {
+            throw new UncheckedException(Errors.Functional.EMAIL_ALREADY_EXISTS);
+        }
     }
 
     @Override

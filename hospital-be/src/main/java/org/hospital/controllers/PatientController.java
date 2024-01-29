@@ -26,9 +26,9 @@ public class PatientController {
         return patientService.createPatient(patientCreateRequestModel);
     }
 
-    @GetMapping(value = "{firstName}/{lastName}")
-    public PatientResponseModel findPatientByFirstNameAndLastName(@PathVariable final String firstName,
-                                                                  @PathVariable final String lastName) {
+    @GetMapping("/getByFirstNameAndLastName")
+    public PatientResponseModel findPatientByFirstNameAndLastName(@RequestParam("firstName") final String firstName,
+                                                                  @RequestParam("lastName") final String lastName) {
         return patientService.findPatientByFirstNameAndLastName(firstName, lastName);
     }
 

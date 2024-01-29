@@ -58,7 +58,8 @@ public enum Errors {
 		CNP_NOT_FOUND("F016", "The patient with the entered CNP was not found."),
 		MEDIC_NOT_FOUND("F017", "The patient for the given medic was not found."),
 		ROLE_NOT_FOUND("F018", "The role was not found."),
-		USER_NOT_FOUND("F019", "The user was not found.");
+		USER_NOT_FOUND("F019", "The user was not found."),
+		EMAIL_ALREADY_EXISTS("F020", "The email already exists.");
 
 		private String errorCode;
 		private String errorMessage;

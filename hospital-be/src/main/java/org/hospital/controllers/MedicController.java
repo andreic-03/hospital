@@ -37,9 +37,9 @@ public class MedicController {
         return medicService.findAll();
     }
 
-    @GetMapping(value = "{firstName}/{lastName}")
-    public MedicResponseModel findMedicByFirstNameAndLastName(@PathVariable final String firstName,
-                                                                  @PathVariable final String lastName) {
+    @GetMapping("/getByFirstNameAndLastName")
+    public MedicResponseModel findMedicByFirstNameAndLastName(@RequestParam("firstName") final String firstName,
+                                                              @RequestParam("lastName") final String lastName) {
         return medicService.findMedicByFirstNameAndLastName(firstName, lastName);
     }
 }

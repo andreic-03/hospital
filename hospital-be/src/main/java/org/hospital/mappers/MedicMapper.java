@@ -10,5 +10,5 @@ import org.hospital.persistence.entity.MedicEntity;
 public interface MedicMapper {
     MedicEntity toMedicEntity(MedicRequestModel medicRequestModel);
 
-    MedicResponseModel toUserModel(MedicEntity medic);
+    MedicResponseModel toMedicModel(MedicEntity medic);
 }
