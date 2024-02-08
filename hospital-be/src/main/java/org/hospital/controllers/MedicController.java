@@ -42,4 +42,10 @@ public class MedicController {
                                                               @RequestParam("lastName") final String lastName) {
         return medicService.findMedicByFirstNameAndLastName(firstName, lastName);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable final Long id) {
+        medicService.delete(id);
+    }
 }

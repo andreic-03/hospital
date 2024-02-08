@@ -13,4 +13,6 @@ public interface MedicService {
     MedicResponseModel findMedicByFirstNameAndLastName(final String firstName, final String lastName);
 
     List<MedicResponseModel> findAll();
+
+    void delete(final Long id);
 }
