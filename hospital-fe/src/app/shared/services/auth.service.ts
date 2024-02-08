@@ -8,8 +8,8 @@ import { User } from "../model/user.mode";
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly LOGIN_URL = '/api/v1/authenticate';
-  private readonly CURRENT_USER_URL = '/api/v1/users/info';
+  private readonly LOGIN_URL = '/api/auth/login';
+  private readonly CURRENT_USER_URL = '/api/user/info';
 
   constructor(private http: HttpClient) {}
 
@@ -17,7 +17,7 @@ export class AuthService {
     return this.http.post<LoginResponse>(this.LOGIN_URL, loginRequest);
   }
 
-  public getCurrentUserInfo(username: string): Observable<User> {
-    return this.http.get<User>(`${this.CURRENT_USER_URL}/${username}`);
+  public getCurrentUserInfo(): Observable<User> {
+    return this.http.get<User>(`${this.CURRENT_USER_URL}`);
   }
 }

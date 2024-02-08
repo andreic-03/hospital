@@ -1,7 +1,7 @@
 .idea
 .vs
 target
-hospital.iml
+hospital-fe.iml
 .settings
 .classpath
 .project

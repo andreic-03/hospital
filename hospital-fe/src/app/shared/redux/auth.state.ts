@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { User } from "../model/user.mode";
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { Login } from "./auth.actions";
+import {GetCurrentUserInfo, Login} from "./auth.actions";
 import { AuthService } from "../services/auth.service";
-import { tap, switchMap } from 'rxjs';
+import {tap, switchMap, EMPTY} from 'rxjs';
 
 export class AuthStateModel {
   accessToken?: string;
@@ -18,6 +18,17 @@ export class AuthStateModel {
 export class AuthState {
   constructor(private authService: AuthService) {}
 
+  @Selector()
+  static getAccessToken(state: AuthStateModel): string | undefined {
+    const savedAccessToken = AuthState.loadAccessToken();
+    return state.accessToken || savedAccessToken;
+  }
+
+  @Selector()
+  static getCurrentUserInfo(state: AuthStateModel): User | undefined {
+    return state.user;
+  }
+
   @Action(Login)
   login({ patchState }: StateContext<AuthStateModel>, login: Login) {
     return this.authService
@@ -28,11 +39,11 @@ export class AuthState {
       .pipe(
         tap(response => {
           patchState({
-            accessToken: response.jwtToken,
+            accessToken: response.accessToken,
           });
-          AuthState.saveAccessToken(response.jwtToken);
+          AuthState.saveAccessToken(response.accessToken);
         }),
-        switchMap(() => this.authService.getCurrentUserInfo(login.username)),
+        switchMap(() => this.authService.getCurrentUserInfo()),
         tap(response => {
           patchState({
             user: response,
@@ -41,8 +52,30 @@ export class AuthState {
       );
   }
 
+  @Action(GetCurrentUserInfo)
+  getCurrentUserInfo({ getState, patchState }: StateContext<AuthStateModel>) {
+    if (!AuthState.getAccessToken(getState())) {
+      return EMPTY;
+    } else {
+      return this.authService.getCurrentUserInfo().pipe(
+        tap(response => {
+          patchState({
+            user: response,
+          });
+        })
+      );
+    }
+  }
+
   private static saveAccessToken(accessToken: string): void {
     localStorage.setItem('accessToken', accessToken);
+  }
+
+  private static loadAccessToken(): string | undefined {
+    return localStorage.getItem('accessToken') || undefined;
+  }
+  private static clearAccessToken(): void {
+    localStorage.removeItem('accessToken');
   }
 }
 

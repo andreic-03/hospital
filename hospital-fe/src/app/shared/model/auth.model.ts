@@ -4,5 +4,6 @@ export interface LoginRequest {
 }
 
 export interface LoginResponse {
-  jwtToken: string;
+  username: string;
+  accessToken: string;
 }
