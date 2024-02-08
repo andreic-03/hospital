@@ -10,11 +10,13 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthHttpInterceptor } from './shared/interceptor/auth-http.interceptor';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

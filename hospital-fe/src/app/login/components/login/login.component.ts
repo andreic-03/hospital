@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       .dispatch(new Login(username, password))
       .subscribe(res => {
         if (res) {
-          this.store.dispatch(new Navigate(["/"]));
+          this.store.dispatch(new Navigate(['/dashboard']));
         }
       })
   }
