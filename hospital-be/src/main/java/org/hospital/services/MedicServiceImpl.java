@@ -14,7 +14,6 @@ import org.hospital.persistence.repository.MedicRepository;
 import org.hospital.persistence.repository.UserRepository;
 import org.hospital.util.ValidationsUtil;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

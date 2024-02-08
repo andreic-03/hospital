@@ -37,6 +37,10 @@ public class MedicEntity extends AuditingEntity {
     @Column
     private String gender;
 
+    @Column(name = "specialization", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private MedicSpecialization specialization;
+
     @ManyToMany(mappedBy = "medics")
     private List<PatientEntity> patients;
 

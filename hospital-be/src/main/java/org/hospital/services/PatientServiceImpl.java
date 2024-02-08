@@ -10,8 +10,11 @@ import org.hospital.persistence.entity.AppointmentEntity;
 import org.hospital.persistence.entity.MedicEntity;
 import org.hospital.persistence.entity.PatientEntity;
 import org.hospital.mappers.PatientMapper;
+import org.hospital.persistence.entity.UserEntity;
+import org.hospital.persistence.repository.AppointmentRepository;
 import org.hospital.persistence.repository.MedicRepository;
 import org.hospital.persistence.repository.PatientRepository;
+import org.hospital.persistence.repository.UserRepository;
 import org.hospital.util.ValidationsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -25,6 +28,8 @@ import java.util.stream.Collectors;
 public class PatientServiceImpl implements PatientService {
     private final PatientMapper patientMapper;
     private final MedicRepository medicRepository;
+    private final AppointmentRepository appointmentRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     private PatientRepository patientRepository;
@@ -94,6 +99,29 @@ public class PatientServiceImpl implements PatientService {
         }
 
         return patientMapper.toPatientModel(patientRepository.saveAndFlush(existingPatient));
+    }
+
+    @Override
+    public void delete(final Long id) {
+        PatientEntity patientEntity = patientRepository.findById(id)
+                .orElseThrow(() -> new UncheckedException(Errors.Functional.PATIENT_NOT_FOUND));
+
+        UserEntity user = patientEntity.getUser();
+
+        //If there is a patient who is assigned to this medic, remove the medic from patient
+        if (!patientEntity.getAppointments().isEmpty()) {
+            appointmentRepository.deleteAll(patientEntity.getAppointments());
+        }
+
+        if (user != null) {
+            user.setPatient(null);
+        }
+
+        patientRepository.delete(patientEntity);
+
+        if (user != null) {
+            userRepository.delete(user);
+        }
     }
 
     private PatientEntity findPatientById(Long id) {

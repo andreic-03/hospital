@@ -17,4 +17,6 @@ public interface PatientService {
     PatientResponseModel findPatientByMedic(final Long medicId);
 
     PatientResponseModel updatePatient(final PatientUpdateRequestModel patientUpdateRequestModel, final Long id);
+
+    void delete(final Long id);
 }
