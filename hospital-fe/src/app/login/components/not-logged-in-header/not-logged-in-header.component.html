@@ -1,0 +1,14 @@
+<div class="flex justify-between items-center p-4">
+  <div class="flex items-center justify-start">
+    <img src="assets/images/logo.jpg" alt="Logo" class="h-20">
+  </div>
+
+  <div *ngIf="showCreateAccountButton" class="flex items-center">
+    <div class="mr-4">Don't have an account ?</div>
+
+    <button (click)="navigateToSignUp()"
+      class="bg-white hover:bg-gray-300 text-black py-2 px-4 border border-gray-200 rounded">
+      Create new account
+    </button>
+  </div>
+</div>

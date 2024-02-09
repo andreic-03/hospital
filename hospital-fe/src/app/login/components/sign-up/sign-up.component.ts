@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngxs/store';
-import { Login } from 'src/app/shared/redux/auth.actions';
-import { Navigate } from '@ngxs/router-plugin';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Store} from "@ngxs/store";
+import {Login} from "../../../shared/redux/auth.actions";
+import {Navigate} from "@ngxs/router-plugin";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class SignUpComponent implements OnInit {
 
   shouldHidePassword = true;
 
@@ -35,5 +35,4 @@ export class LoginComponent implements OnInit {
         }
       })
   }
-
 }

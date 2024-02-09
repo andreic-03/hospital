@@ -11,6 +11,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthHttpInterceptor } from './shared/interceptor/auth-http.interceptor';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {LoginModule} from "./login/login.module";
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
       developmentMode: !environment.production,
     }),
     NgxsRouterPluginModule.forRoot(),
+    LoginModule,
   ],
   providers: [
     {
