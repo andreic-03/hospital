@@ -1,9 +1,7 @@
 package org.hospital.services;
 
 import jakarta.validation.Valid;
-import org.hospital.api.model.UserRequestModel;
-import org.hospital.api.model.UserResponseModel;
-import org.hospital.api.model.UserUpdateRequestModel;
+import org.hospital.api.model.*;
 
 import java.util.List;
 
@@ -18,4 +16,6 @@ public interface UserService {
     void deleteById(final Long id);
 
     UserResponseModel update(final Long id, final UserUpdateRequestModel userModel);
+
+    public UserRegisterStepOneResponseModel registerUserStepOne(final UserRegisterStepOneRequestModel userRegisterStepOneRequestModel);
 }

@@ -3,9 +3,7 @@ package org.hospital.controllers;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.hospital.api.model.UserRequestModel;
-import org.hospital.api.model.UserResponseModel;
-import org.hospital.api.model.UserUpdateRequestModel;
+import org.hospital.api.model.*;
 import org.hospital.security.model.AppUserPrincipal;
 import org.hospital.services.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -53,5 +51,10 @@ public class UserController {
     public UserResponseModel updateUser(@AuthenticationPrincipal AppUserPrincipal user,
                                     @Valid @RequestBody final UserUpdateRequestModel userModel) {
         return userService.update(user.getUserEntity().getId(), userModel);
+    }
+
+    @PostMapping("/registration/step-one")
+    public UserRegisterStepOneResponseModel userRegisterStepOne(@RequestBody final UserRegisterStepOneRequestModel userRegisterStepOneRequestModel){
+        return userService.registerUserStepOne(userRegisterStepOneRequestModel);
     }
 }

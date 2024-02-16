@@ -1,8 +1,6 @@
 package org.hospital.mappers;
 
-import org.hospital.api.model.UserRequestModel;
-import org.hospital.api.model.UserResponseModel;
-import org.hospital.api.model.UserUpdateRequestModel;
+import org.hospital.api.model.*;
 import org.hospital.persistence.entity.RoleEntity;
 import org.hospital.persistence.entity.UserEntity;
 import org.mapstruct.Mapper;
@@ -16,6 +14,8 @@ public interface UserMapper {
     @Mapping(source = "patient.patientId", target = "patientId")
     UserResponseModel toUserModel(UserEntity userEntity);
 
+    UserRegisterStepOneResponseModel stepOneToUserModel(UserEntity userEntity);
+
     @Mapping(target = "roles", ignore = true)
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "id", ignore = true)
@@ -27,6 +27,18 @@ public interface UserMapper {
     @Mapping(target = "status", ignore = true)
     @Mapping(target = "jwtTokens", ignore = true)
     UserEntity toUserEntity(UserRequestModel user);
+
+    @Mapping(target = "roles", ignore = true)
+    @Mapping(target = "password", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdOn", ignore = true)
+    @Mapping(target = "updatedOn", ignore = true)
+    @Mapping(target = "version", ignore = true)
+    @Mapping(target = "createdBy", ignore = true)
+    @Mapping(target = "updatedBy", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "jwtTokens", ignore = true)
+    UserEntity stepOneToUserEntity(UserRegisterStepOneRequestModel user);
 
     @Mapping(target = "roles", ignore = true)
     @Mapping(target = "password", ignore = true)

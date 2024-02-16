@@ -2,7 +2,7 @@ package org.hospital.scheduler;
 
 import org.hospital.persistence.entity.AppointmentEntity;
 import org.hospital.services.AppointmentService;
-import org.hospital.services.EmailService;
+import org.hospital.services.notification.email.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +24,7 @@ public class Scheduler {
 
         if (!appointments.isEmpty()) {
             appointments.forEach(appointment -> {
-                emailService.sendSimpleMessage("cioropar.andrei3@gmail.com", "test", appointment.getAppointmentDetails());
+//                emailService.sendEmail("cioropar.andrei3@gmail.com", "test", appointment.getAppointmentDetails());
             });
         }
     }
