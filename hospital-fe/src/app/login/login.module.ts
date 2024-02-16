@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { NotLoggedInHeaderComponent } from './components/not-logged-in-header/not-logged-in-header.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import {CommonModule} from "@angular/common";
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 @NgModule({
   declarations: [],
@@ -27,7 +28,8 @@ export class LoginMaterialModule {}
   declarations: [
     LoginComponent,
     NotLoggedInHeaderComponent,
-    SignUpComponent
+    SignUpComponent,
+    ConfirmationComponent
   ],
   imports: [
     LoginRoutingModule,

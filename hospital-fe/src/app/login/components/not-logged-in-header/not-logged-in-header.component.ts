@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class NotLoggedInHeaderComponent implements OnInit {
 
   showCreateAccountButton: boolean = false;
+  showSignInButton: boolean = false;
 
   constructor(private store: Store,
               private router: Router) { }
@@ -20,10 +21,17 @@ export class NotLoggedInHeaderComponent implements OnInit {
     if (currentRoute === '/login') {
       this.showCreateAccountButton = true;
     }
+    if (currentRoute === '/sign-up') {
+      this.showSignInButton = true;
+    }
   }
 
   navigateToSignUp() {
     this.store.dispatch(new Navigate(['/sign-up']));
+  }
+
+  navigateToLogin() {
+    this.store.dispatch(new Navigate(['/login']));
   }
 
 }

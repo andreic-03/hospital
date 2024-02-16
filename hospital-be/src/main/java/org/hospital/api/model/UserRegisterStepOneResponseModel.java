@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserRegisterStepOneResponseModel {
-    private Long userId;
+    private Long id;
     private String username;
-    private String email;
 }

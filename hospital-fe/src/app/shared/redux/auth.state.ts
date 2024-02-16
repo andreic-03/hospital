@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { User } from "../model/user.mode";
+import { User } from "../model/user.model";
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import {GetCurrentUserInfo, Login} from "./auth.actions";
 import { AuthService } from "../services/auth.service";

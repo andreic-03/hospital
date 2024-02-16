@@ -103,11 +103,16 @@ public class UserServiceImpl implements UserService {
         Set<RoleEntity> roles = mapRoles(userRegisterStepOneRequestModel.getRoles());
         userEntity.setRoles(roles);
 
+        userEntity.setPassword(passwordEncoder.encode(userRegisterStepOneRequestModel.getPassword()));
+        userEntity.setStatus(UserStatus.WAITING_CONFIRMATION);
+
         //TODO Create a registerTokenRepository then save this token and add an expiration date on the token
         //TODO Later on stepTwo verify the expiration token when accessing the link
         final var token = secureRandomGeneratorService.generateRandomString();
 
         sendRegistrationEmail(userRegisterStepOneRequestModel, token);
+
+        userRepository.save(userEntity);
 
         return userMapper.stepOneToUserModel(userEntity);
     }
