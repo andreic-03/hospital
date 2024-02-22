@@ -1,0 +1,62 @@
+:host {
+  display: flex;
+  flex-direction: column; /* Ensure header and content stack vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: flex-start; /* Align items to the top of the page */
+  height: 100vh;
+  width: 100vw;
+  background-color: whitesmoke;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between; /* Distribute items evenly */
+  align-items: center; /* Center vertically */
+  padding: 20px; /* Adjust padding as needed */
+}
+
+.text-on-left {
+  /* Add styles for text on the left */
+}
+
+.mat-card {
+  background-color: white;
+  width: 100%;
+  max-width: 350px;
+  margin-right: 50px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+mat-card-title,
+mat-card-content {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+form,
+mat-form-field {
+  width: 100%;
+}
+
+button {
+  width: 100%;
+}
+
+.sign-in-options {
+  font-size: 17px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+img.facebook-icon,
+img.google-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 10px;
+}

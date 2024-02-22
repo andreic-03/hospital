@@ -3,6 +3,7 @@ package org.hospital.services;
 import org.hospital.api.model.PatientCreateRequestModel;
 import org.hospital.api.model.PatientResponseModel;
 import org.hospital.api.model.PatientUpdateRequestModel;
+import org.hospital.api.model.UserRegisterStepTwoRequestModel;
 
 public interface PatientService {
 
@@ -19,4 +20,6 @@ public interface PatientService {
     PatientResponseModel updatePatient(final PatientUpdateRequestModel patientUpdateRequestModel, final Long id);
 
     void delete(final Long id);
+
+    PatientResponseModel registerUserStepTwo(final UserRegisterStepTwoRequestModel userRegisterStepTwoRequestModel);
 }

@@ -112,6 +112,11 @@
             <artifactId>hibernate-validator</artifactId>
             <version>7.0.2.Final</version>
         </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.70</version>
+        </dependency>
     </dependencies>
 
     <build>

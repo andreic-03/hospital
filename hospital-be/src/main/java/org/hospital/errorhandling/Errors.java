@@ -61,7 +61,8 @@ public enum Errors {
 		USER_NOT_FOUND("F019", "The user was not found."),
 		EMAIL_ALREADY_EXISTS("F020", "The email already exists."),
 		MEDIC_NOT_FOUND("F021", "The medic was not found."),
-		PATIENT_NOT_FOUND("F022", "The patient was not found.");
+		PATIENT_NOT_FOUND("F022", "The patient was not found."),
+		REGISTER_TOKEN_NOT_FOUND("F023", "Register account token not found.");
 
 		private String errorCode;
 		private String errorMessage;

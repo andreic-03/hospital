@@ -21,13 +21,16 @@ export class NotLoggedInHeaderComponent implements OnInit {
     if (currentRoute === '/login') {
       this.showCreateAccountButton = true;
     }
-    if (currentRoute === '/sign-up') {
+    if (currentRoute === '/register/step-one') {
+      this.showSignInButton = true;
+    }
+    if (currentRoute.startsWith('/register/step-two')) {
       this.showSignInButton = true;
     }
   }
 
   navigateToSignUp() {
-    this.store.dispatch(new Navigate(['/sign-up']));
+    this.store.dispatch(new Navigate(['/register/step-one']));
   }
 
   navigateToLogin() {

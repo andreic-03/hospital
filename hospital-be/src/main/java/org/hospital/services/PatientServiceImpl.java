@@ -1,35 +1,36 @@
 package org.hospital.services;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hospital.api.model.PatientCreateRequestModel;
 import org.hospital.api.model.PatientResponseModel;
 import org.hospital.api.model.PatientUpdateRequestModel;
+import org.hospital.api.model.UserRegisterStepTwoRequestModel;
 import org.hospital.errorhandling.Errors;
 import org.hospital.errorhandling.UncheckedException;
-import org.hospital.persistence.entity.AppointmentEntity;
-import org.hospital.persistence.entity.MedicEntity;
-import org.hospital.persistence.entity.PatientEntity;
+import org.hospital.persistence.entity.*;
 import org.hospital.mappers.PatientMapper;
-import org.hospital.persistence.entity.UserEntity;
-import org.hospital.persistence.repository.AppointmentRepository;
-import org.hospital.persistence.repository.MedicRepository;
-import org.hospital.persistence.repository.PatientRepository;
-import org.hospital.persistence.repository.UserRepository;
+import org.hospital.persistence.repository.*;
+import org.hospital.services.crypto.CryptoHashService;
 import org.hospital.util.ValidationsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @AllArgsConstructor
 public class PatientServiceImpl implements PatientService {
     private final PatientMapper patientMapper;
     private final MedicRepository medicRepository;
     private final AppointmentRepository appointmentRepository;
     private final UserRepository userRepository;
+    private final RegisterAccountTokenRepository registerAccountTokenRepository;
+    private final CryptoHashService cryptoHashService;
 
     @Autowired
     private PatientRepository patientRepository;
@@ -122,6 +123,39 @@ public class PatientServiceImpl implements PatientService {
         if (user != null) {
             userRepository.delete(user);
         }
+    }
+
+    @Override
+    public PatientResponseModel registerUserStepTwo(final UserRegisterStepTwoRequestModel userRegisterStepTwoRequestModel) {
+        final var hashedToken = cryptoHashService.hashContent(userRegisterStepTwoRequestModel.getToken());
+        final var existingToken = registerAccountTokenRepository.findByToken(hashedToken)
+                .orElseThrow(() -> {
+                    log.error("No token found");
+                    return new UncheckedException(Errors.Functional.REGISTER_TOKEN_NOT_FOUND);
+                });
+
+        if (existingToken.getUsed()) {
+            log.error("Token already used");
+            throw new UncheckedException(Errors.Functional.REGISTER_TOKEN_NOT_FOUND);
+        }
+
+        if (existingToken.getExpireAt().isBefore(LocalDateTime.now())) {
+            log.error("Token is expired");
+            throw new UncheckedException(Errors.Functional.REGISTER_TOKEN_NOT_FOUND);
+        }
+
+        existingToken.setUsed(Boolean.TRUE);
+
+        var existingUserEntity = existingToken.getUser();
+
+        var patientEntity = patientMapper.toPatientStepTwoEntity(userRegisterStepTwoRequestModel);
+        patientEntity.setUser(existingUserEntity);
+        patientRepository.save(patientEntity);
+
+        existingUserEntity.setStatus(UserStatus.ACTIVE);
+        userRepository.save(existingUserEntity);
+
+        return patientMapper.toPatientModel(patientEntity);
     }
 
     private PatientEntity findPatientById(Long id) {

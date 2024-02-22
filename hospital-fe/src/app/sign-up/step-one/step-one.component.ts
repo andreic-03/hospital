@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngxs/store";
-import {RegisterService} from "../../../shared/services/register.service";
-import {RegisterStepOneModelRequest, RegisterStepOneModelResponse} from "../../../shared/model/register.model";
+import {RegisterService} from "../../shared/services/register.service";
+import {RegisterStepOneModelRequest, RegisterStepOneModelResponse} from "../../shared/model/register.model";
 import {Router} from "@angular/router";
 import {Navigate} from "@ngxs/router-plugin";
 
 @Component({
   selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  templateUrl: './step-one.component.html',
+  styleUrls: ['./step-one.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class StepOneComponent implements OnInit {
 
   userResponse!: RegisterStepOneModelResponse;
 
@@ -25,15 +25,13 @@ export class SignUpComponent implements OnInit {
   });
 
   constructor(private store: Store,
-              private registerService: RegisterService,
-              private router: Router) { }
+              private registerService: RegisterService) { }
 
   ngOnInit(): void {
   }
 
-  signUp() {
-    if (this.form.valid) {
-      const user: RegisterStepOneModelRequest = this.form.value;
+  signUpStepOne() {
+      const user: RegisterStepOneModelRequest = this.form?.value;
       user.roles = ["PATIENT"];
 
       this.registerService.registerStepOne(user).subscribe(
@@ -44,6 +42,5 @@ export class SignUpComponent implements OnInit {
           }
         }
       );
-    }
   }
 }

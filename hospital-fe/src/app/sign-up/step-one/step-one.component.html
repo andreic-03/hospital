@@ -2,12 +2,12 @@
 
 <div class="container">
   <div class="text-on-left">
-    <img src="assets/images/doctors.png">
+    <img src="../../../assets/images/doctors.png">
   </div>
   <mat-card>
     <mat-card-title>Create Account</mat-card-title>
     <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="signUp()">
+      <form [formGroup]="form" (ngSubmit)="signUpStepOne()">
         <p>
           <mat-form-field appearance="fill">
             <input type="text"
@@ -70,7 +70,7 @@
           </mat-form-field>
         </p>
 
-        <button type="submit" mat-flat-button color="primary">
+        <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">
           Register Account
         </button>
 

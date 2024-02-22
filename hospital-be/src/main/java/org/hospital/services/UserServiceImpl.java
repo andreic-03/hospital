@@ -1,7 +1,7 @@
 package org.hospital.services;
 
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hospital.api.model.*;
 import org.hospital.common.model.NotificationDetails;
@@ -11,40 +11,45 @@ import org.hospital.errorhandling.Errors;
 import org.hospital.errorhandling.UncheckedException;
 import org.hospital.mappers.MedicMapper;
 import org.hospital.mappers.PatientMapper;
+import org.hospital.mappers.RegisterAccountTokenMapper;
 import org.hospital.mappers.UserMapper;
 import org.hospital.persistence.entity.*;
-import org.hospital.persistence.repository.MedicRepository;
-import org.hospital.persistence.repository.PatientRepository;
-import org.hospital.persistence.repository.RoleRepository;
-import org.hospital.persistence.repository.UserRepository;
+import org.hospital.persistence.repository.*;
+import org.hospital.services.crypto.CryptoHashService;
 import org.hospital.services.notification.dispatcher.NotificationDispatcherService;
 import org.hospital.services.random.SecureRandomGeneratorService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.hospital.common.model.NotificationDetails.REGISTER_LINK_KEY;
 
-@Service
 @Slf4j
-@Validated
-@AllArgsConstructor
+@RequiredArgsConstructor
+@Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final MedicRepository medicRepository;
     private final PatientRepository patientRepository;
+    private final RegisterAccountTokenRepository registerAccountTokenRepository;
     private final UserMapper userMapper;
     private final MedicMapper medicMapper;
     private final PatientMapper patientMapper;
+    private final RegisterAccountTokenMapper registerAccountTokenMapper;
     private final PasswordEncoder passwordEncoder;
     private final EmailNotificationProperties emailNotificationProperties;
     private final SecureRandomGeneratorService secureRandomGeneratorService;
     private final NotificationDispatcherService notificationDispatcherService;
+    private final CryptoHashService cryptoHashService;
+
+    @Value("${app.password-reset.expire-in}")
+    private Integer expireIn;
 
     @Override
     public List<UserResponseModel> findAll() {
@@ -106,13 +111,15 @@ public class UserServiceImpl implements UserService {
         userEntity.setPassword(passwordEncoder.encode(userRegisterStepOneRequestModel.getPassword()));
         userEntity.setStatus(UserStatus.WAITING_CONFIRMATION);
 
-        //TODO Create a registerTokenRepository then save this token and add an expiration date on the token
-        //TODO Later on stepTwo verify the expiration token when accessing the link
         final var token = secureRandomGeneratorService.generateRandomString();
+        final var hashedToken = cryptoHashService.hashContent(token);
+        final var expireAt = LocalDateTime.now().plusMinutes(expireIn);
+        final var registerAccountTokenEntity = registerAccountTokenMapper.toRegisterAccountTokenEntity(hashedToken, userEntity, expireAt);
 
         sendRegistrationEmail(userRegisterStepOneRequestModel, token);
 
         userRepository.save(userEntity);
+        registerAccountTokenRepository.save(registerAccountTokenEntity);
 
         return userMapper.stepOneToUserModel(userEntity);
     }

@@ -10,3 +10,13 @@ export interface RegisterStepOneModelResponse {
   username: string;
   email: string;
 }
+
+export interface RegisterStepTwoModelRequest {
+  token: string;
+  firstName: string;
+  lastName: string;
+  cnp: number;
+  age: number;
+  gender: string;
+  mobilePhone: string;
+}

@@ -2,9 +2,7 @@ package org.hospital.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.hospital.api.model.PatientCreateRequestModel;
-import org.hospital.api.model.PatientResponseModel;
-import org.hospital.api.model.PatientUpdateRequestModel;
+import org.hospital.api.model.*;
 import org.hospital.services.PatientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -51,5 +49,10 @@ public class PatientController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable final Long id) {
         patientService.delete(id);
+    }
+
+    @PostMapping("/registration/step-two")
+    public PatientResponseModel userRegisterStepTwo(@RequestBody final UserRegisterStepTwoRequestModel userRegisterStepTwoRequestModel) {
+        return patientService.registerUserStepTwo(userRegisterStepTwoRequestModel);
     }
 }

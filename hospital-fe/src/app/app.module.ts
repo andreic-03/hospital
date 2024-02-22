@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxsModule } from '@ngxs/store';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,24 +11,25 @@ import { environment } from 'src/environments/environment';
 import { AuthHttpInterceptor } from './shared/interceptor/auth-http.interceptor';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {LoginModule} from "./login/login.module";
-
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    NgxsModule.forRoot(appStates, {
-      developmentMode: !environment.production,
-    }),
-    NgxsRouterPluginModule.forRoot(),
-    LoginModule,
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        NgxsModule.forRoot(appStates, {
+            developmentMode: !environment.production,
+        }),
+        NgxsRouterPluginModule.forRoot(),
+        LoginModule,
+        SharedModule,
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
