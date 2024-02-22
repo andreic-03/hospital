@@ -1,0 +1,20 @@
+<ng-container *ngIf="currentUser$ | async as user">
+  <button [matMenuTriggerFor]="menu" mat-button>
+    <mat-icon class="big-mat-icon">account_circle</mat-icon>
+    <span class="ml-2">
+      {{ currentPatient ? currentPatient.firstName : (currentMedic ? currentMedic.firstName : '') }}
+      {{ currentPatient ? currentPatient.lastName : (currentMedic ? currentMedic.lastName : '') }}
+    </span>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="'/profile'">
+      <mat-icon>account_box</mat-icon>
+      Profile
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Log out
+    </button>
+  </mat-menu>
+</ng-container>

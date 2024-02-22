@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { User } from "../model/user.model";
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import {GetCurrentUserInfo, Login} from "./auth.actions";
+import {GetCurrentUserInfo, Login, Logout} from "./auth.actions";
 import { AuthService } from "../services/auth.service";
 import {tap, switchMap, EMPTY} from 'rxjs';
 
@@ -50,6 +50,19 @@ export class AuthState {
           });
         })
       );
+  }
+
+  @Action(Logout)
+  logout({ patchState }: StateContext<AuthStateModel>) {
+    return this.authService.logout().pipe(
+      tap(() => {
+        patchState({
+          accessToken: undefined,
+          user: undefined,
+        });
+        AuthState.clearAccessToken();
+      })
+    );
   }
 
   @Action(GetCurrentUserInfo)

@@ -24,6 +24,11 @@ public class PatientController {
         return patientService.createPatient(patientCreateRequestModel);
     }
 
+    @GetMapping(value = "{id}")
+    public PatientResponseModel findById(@PathVariable final Long id) {
+        return patientService.findById(id);
+    }
+
     @GetMapping("/getByFirstNameAndLastName")
     public PatientResponseModel findPatientByFirstNameAndLastName(@RequestParam("firstName") final String firstName,
                                                                   @RequestParam("lastName") final String lastName) {

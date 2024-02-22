@@ -9,12 +9,17 @@ import { User } from "../model/user.model";
 })
 export class AuthService {
   private readonly LOGIN_URL = '/api/auth/login';
+  private readonly LOGOUT_URL = '/api/auth/logout';
   private readonly CURRENT_USER_URL = '/api/user/info';
 
   constructor(private http: HttpClient) {}
 
   public login(loginRequest: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(this.LOGIN_URL, loginRequest);
+  }
+
+  public logout(): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(this.LOGOUT_URL, null);
   }
 
   public getCurrentUserInfo(): Observable<User> {

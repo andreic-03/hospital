@@ -1,14 +1,15 @@
 export interface User {
   id: number;
-  firstName: string;
-  lastName: string;
-  phone: string;
-  email: string;
-  gender: string;
+  username: string;
+  status: string;
+  // email: string;
   roles: Role[];
+  medicId: number;
+  patientId: number;
 }
 
 export enum Role {
   ADMIN = 'Admin',
-  USER = 'User'
+  MEDIC = 'MEDIC',
+  PATIENT = 'PATIENT',
 }

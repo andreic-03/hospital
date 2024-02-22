@@ -7,6 +7,9 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatCardModule} from "@angular/material/card";
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
+import { HeaderComponent } from './components/header/header.component';
+import { HeaderUserComponent } from './components/header/header-user/header-user.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [],
@@ -16,6 +19,7 @@ import {RouterModule} from "@angular/router";
     MatInputModule,
     MatProgressSpinnerModule,
     MatCardModule,
+    MatMenuModule,
   ],
 })
 export class SharedMaterialModule {}
@@ -23,13 +27,18 @@ export class SharedMaterialModule {}
 @NgModule({
   declarations: [
     NotLoggedInHeaderComponent,
+    HeaderComponent,
+    HeaderUserComponent,
   ],
   exports: [
     NotLoggedInHeaderComponent,
+    HeaderComponent,
+    HeaderUserComponent
   ],
-    imports: [
-        CommonModule,
-        RouterModule
-    ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    SharedMaterialModule,
+  ],
 })
 export class SharedModule {}
