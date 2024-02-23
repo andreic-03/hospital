@@ -1,4 +1,4 @@
-<app-not-logged-in-header class="w-4/5"></app-not-logged-in-header>
+<app-not-logged-in-header class="w-full"></app-not-logged-in-header>
 
 <div class="container">
   <div class="text-on-left">
@@ -57,7 +57,7 @@
           </mat-form-field>
         </p>
 
-        <button type="submit" mat-flat-button color="primary">
+        <button type="submit" mat-flat-button class="bg-customBG text-white" [disabled]="form.invalid">
           Finalize Registration
         </button>
 

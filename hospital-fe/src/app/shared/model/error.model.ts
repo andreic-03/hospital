@@ -1,6 +1,5 @@
 export interface ErrorResponse {
-  code: string;
-  message: string;
-  errorType: string;
-  details: string[];
+  errorCode: string;
+  errorMessage: string;
+  context: { [key: string]: any };
 }

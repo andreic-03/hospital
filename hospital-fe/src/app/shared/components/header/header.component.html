@@ -1,11 +1,14 @@
-<div class="flex justify-between items-center p-4">
-  <div class="flex items-center justify-start">
+<div class="flex justify-between items-center p-2 bg-customBG">
+  <div class="pl-40">
     <a routerLink="/" class="flex items-center justify-start">
-      <img src="../../../../assets/images/logo.jpg" alt="Logo" class="h-20">
+      <img src="../../../../assets/images/logo4.svg" alt="Logo" class="h-12">
+      <div class="ml-4 flex items-center -mb-4">
+        <h1 class="text-white">Hospital</h1>
+      </div>
     </a>
   </div>
 
-  <div class="flex justify-center items-center">
-    <app-header-user></app-header-user>
+  <div class="flex justify-center items-center pr-44">
+    <app-header-user (currentPersonOutput)="receiveCurrentPerson($event)"></app-header-user>
   </div>
 </div>

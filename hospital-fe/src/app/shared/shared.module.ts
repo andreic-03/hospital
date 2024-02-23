@@ -10,6 +10,7 @@ import {RouterModule} from "@angular/router";
 import { HeaderComponent } from './components/header/header.component';
 import { HeaderUserComponent } from './components/header/header-user/header-user.component';
 import {MatMenuModule} from "@angular/material/menu";
+import { ErrorMessageComponent } from './components/error-message/error-message.component';
 
 @NgModule({
   declarations: [],
@@ -29,11 +30,13 @@ export class SharedMaterialModule {}
     NotLoggedInHeaderComponent,
     HeaderComponent,
     HeaderUserComponent,
+    ErrorMessageComponent
   ],
   exports: [
     NotLoggedInHeaderComponent,
     HeaderComponent,
-    HeaderUserComponent
+    HeaderUserComponent,
+    ErrorMessageComponent,
   ],
   imports: [
     CommonModule,

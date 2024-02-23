@@ -16,7 +16,7 @@ export class BaseComponent implements OnDestroy {
   protected getGenericErrorHandlingCallback() {
     return (err: any) => {
       const errResponse = mapError(err);
-      this.genericErrorMessage = errResponse.message;
+      this.genericErrorMessage = errResponse.errorMessage;
       return EMPTY;
     };
   }

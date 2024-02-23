@@ -1,20 +1,35 @@
 <ng-container *ngIf="currentUser$ | async as user">
-  <button [matMenuTriggerFor]="menu" mat-button>
-    <mat-icon class="big-mat-icon">account_circle</mat-icon>
-    <span class="ml-2">
-      {{ currentPatient ? currentPatient.firstName : (currentMedic ? currentMedic.firstName : '') }}
-      {{ currentPatient ? currentPatient.lastName : (currentMedic ? currentMedic.lastName : '') }}
-    </span>
-  </button>
+  <div class="flex items-center">
+    <button *ngIf="user.roles.includes(Role.MEDIC); else createAppointmentTemplate" mat-button
+            class="button-with-border">
+      <mat-icon>add</mat-icon>
+      <span class="ml-2">Create a patient</span>
+    </button>
+    <ng-template #createAppointmentTemplate>
+      <button class="button-with-border" mat-button>
+        <mat-icon>add</mat-icon>
+        <span class="ml-2">Make an appointment</span>
+      </button>
+    </ng-template>
 
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item [routerLink]="'/profile'">
-      <mat-icon>account_box</mat-icon>
-      Profile
-    </button>
-    <button mat-menu-item (click)="logout()">
-      <mat-icon>logout</mat-icon>
-      Log out
-    </button>
-  </mat-menu>
+    <div class="flex items-center ml-5">
+      <button [matMenuTriggerFor]="menu" mat-button>
+        <mat-icon class="big-mat-icon text-white">account_circle</mat-icon>
+        <span class="ml-2 text-white" *ngIf="currentPerson">
+          {{ currentPerson.firstName }} {{ currentPerson.lastName }}
+        </span>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="'/profile'">
+          <mat-icon>account_box</mat-icon>
+          Profile
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          Log out
+        </button>
+      </mat-menu>
+    </div>
+  </div>
 </ng-container>

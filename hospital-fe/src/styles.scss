@@ -9,3 +9,9 @@ TAILWIND
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: #EF5350 !important;
+  //background-color: #1dc70b !important;
+}

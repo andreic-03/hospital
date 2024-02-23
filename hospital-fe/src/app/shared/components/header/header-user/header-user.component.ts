@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthState} from "../../../redux/auth.state";
 import {Select, Store} from "@ngxs/store";
 import {catchError, EMPTY, Observable, switchMap, takeUntil, tap} from "rxjs";
@@ -17,12 +17,14 @@ import {Navigate} from "@ngxs/router-plugin";
   styleUrls: ['./header-user.component.scss']
 })
 export class HeaderUserComponent extends BaseComponent implements OnInit {
+  Role = Role;
 
   @Select(AuthState.getCurrentUserInfo)
   currentUser$!: Observable<User>;
 
-  currentPatient!: PatientResponseModel;
-  currentMedic!: MedicResponseModel;
+  currentPerson: MedicResponseModel | PatientResponseModel | null = null;
+
+  @Output() currentPersonOutput = new EventEmitter<MedicResponseModel | PatientResponseModel>();
 
   constructor(private store: Store,
               private patientService: PatientService,
@@ -52,14 +54,16 @@ export class HeaderUserComponent extends BaseComponent implements OnInit {
       return this.medicService.findById(user.medicId).pipe(
         catchError(this.getGenericErrorHandlingCallback()),
         tap((medic: MedicResponseModel) => {
-          this.currentMedic = medic;
+          this.currentPerson = medic;
+          this.currentPersonOutput.emit(medic);
         })
       );
     } else if (user.roles.includes(Role.PATIENT)) {
       return this.patientService.findById(user.patientId).pipe(
         catchError(this.getGenericErrorHandlingCallback()),
         tap((patient: PatientResponseModel) => {
-          this.currentPatient = patient;
+          this.currentPerson = patient;
+          this.currentPersonOutput.emit(patient);
         })
       );
     } else {

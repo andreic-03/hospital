@@ -1,25 +1,28 @@
-<div class="flex justify-between items-center p-4">
-  <div class="flex items-center justify-start">
+<div class="flex justify-between items-center p-2 bg-customBG">
+  <div class="flex items-center justify-start pl-40">
     <a routerLink="/" class="flex items-center justify-start">
-      <img src="../../../../assets/images/logo.jpg" alt="Logo" class="h-20">
+      <img src="../../../../assets/images/logo4.svg" alt="Logo" class="h-12">
+      <div class="ml-4 flex items-center -mb-4">
+        <h1 class="text-white">Hospital</h1>
+      </div>
     </a>
   </div>
 
-  <div *ngIf="showCreateAccountButton" class="flex items-center">
-    <div class="mr-4">Don't have an account ?</div>
+  <div *ngIf="showCreateAccountButton" class="flex items-center pr-44">
+    <div class="mr-5 text-white">Don't have an account ?</div>
 
-    <button (click)="navigateToSignUp()"
-      class="bg-white hover:bg-gray-300 text-black py-2 px-4 border border-gray-200 rounded">
-      Create new account
+    <button (click)="navigateToSignUp()" class="button-with-border" mat-button>
+      <mat-icon>person_add</mat-icon>
+      <span class="ml-4 text-white">Create new account</span>
     </button>
   </div>
 
-  <div *ngIf="showSignInButton" class="flex items-center">
-    <div class="mr-4">Do you have an account ?</div>
+  <div *ngIf="showSignInButton" class="flex items-center pr-44">
+    <span class="mr-5 text-white">Already have an account ?</span>
 
-    <button (click)="navigateToLogin()"
-            class="bg-white hover:bg-gray-300 text-black py-2 px-4 border border-gray-200 rounded">
-      Sign in
+    <button (click)="navigateToLogin()" class="button-with-border" mat-button>
+      <mat-icon>person</mat-icon>
+      <span class="ml-4 text-white">Sign in</span>
     </button>
   </div>
 </div>

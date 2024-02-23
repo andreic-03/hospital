@@ -1,4 +1,4 @@
-<app-not-logged-in-header class="w-4/5"></app-not-logged-in-header>
+<app-not-logged-in-header class="w-full"></app-not-logged-in-header>
 
 <div class="container">
   <div class="text-on-left">
@@ -11,9 +11,9 @@
         <p>
           <mat-form-field appearance="fill">
             <input type="text"
-            matInput
-            placeholder="username"
-            formControlName="username" />
+                   matInput
+                   placeholder="username"
+                   formControlName="username"/>
           </mat-form-field>
         </p>
 
@@ -24,31 +24,32 @@
               formControlName="password"
               placeholder="password"
               type="password"
-              [type]="shouldHidePassword ? 'password' : 'text'" />
-              <button
-                mat-icon-button
-                matSuffix
-                type="button"
-                (click)="shouldHidePassword = !shouldHidePassword"
-                [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="shouldHidePassword">
-                <mat-icon>{{
-                  shouldHidePassword ? 'visibility_off' : 'visibility'
-                  }}</mat-icon>
-              </button>
+              [type]="shouldHidePassword ? 'password' : 'text'"/>
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="shouldHidePassword = !shouldHidePassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="shouldHidePassword">
+              <mat-icon>{{
+                shouldHidePassword ? 'visibility_off' : 'visibility'
+                }}</mat-icon>
+            </button>
           </mat-form-field>
         </p>
 
-        <p>
-          <a href="">Forgot password ?</a>
-        </p>
 
-        <button type="submit" mat-flat-button color="primary">
+        <div class="mb-5">
+          <a href="">Forgot password ?</a>
+        </div>
+
+        <button type="submit" mat-flat-button class="bg-customBG text-white">
           Login
         </button>
 
         <div class="sign-in-options">
-          <p>Or sign in with:</p>
+          <p>Sign in with:</p>
         </div>
 
         <div class="flex justify-center items-center m-5">
@@ -59,6 +60,9 @@
             <img src="assets/link-icons/google.svg" alt="Sign in with Google" class="google-icon">
           </a>
         </div>
+
+        <app-error-message [errorMessage]="error"></app-error-message>
+
       </form>
     </mat-card-content>
   </mat-card>

@@ -1,5 +1,17 @@
-<app-header class="w-4/5"></app-header>
+<app-header class="w-full"
+            (currentPerson)="receiveCurrentPerson($event)">
+</app-header>
 
-<h1>Sugi o ceapa FLAMA!</h1>
-<button (click)="sugiPula()">Click here for more info!</button>
-<h1 *ngIf="showNewTitle">Sugi o ceapa iar FLAMA!</h1>
+<div *ngIf="currentUser$ | async as user" >
+  <ng-container *ngIf="user.roles.includes(Role.MEDIC); else patientTemplate">
+    <h1 *ngIf="currentPerson">
+          Hello {{ currentPerson.firstName }} {{ currentPerson.lastName }}
+          Have a nice day!
+    </h1>
+  </ng-container>
+
+  <ng-template #patientTemplate>
+    AAAAAAAAAAA
+    AAAAAAAAAAA
+  </ng-template>
+</div>
