@@ -4,9 +4,8 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hospital.common.model.NotificationDetails;
+import org.hospital.configuration.exception.model.HospitalException;
 import org.hospital.configuration.porperties.EmailNotificationProperties;
-import org.hospital.errorhandling.Errors;
-import org.hospital.errorhandling.UncheckedException;
 
 import java.util.Optional;
 
@@ -23,7 +22,7 @@ public final class NotificationDetailsUtil {
                 .map(value -> value.get(property))
                 .orElseThrow(() -> {
                     log.error("Additional property: {} cannot be found for notificationType: {}", property, notificationType);
-                    return new UncheckedException(Errors.Technical.GENERIC);
+                    return new HospitalException();
                 });
     }
 
@@ -36,7 +35,7 @@ public final class NotificationDetailsUtil {
                 .findFirst()
                 .orElseThrow(() -> {
                     log.error("Property not found: ", key);
-                    return new UncheckedException(Errors.Technical.GENERIC);
+                    return new HospitalException();
                 });
     }
 }

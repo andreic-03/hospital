@@ -1,8 +1,8 @@
 package org.hospital.services.auth;
 
 import lombok.extern.slf4j.Slf4j;
-import org.hospital.errorhandling.Errors;
-import org.hospital.errorhandling.UncheckedException;
+import org.hospital.configuration.exception.model.ErrorType;
+import org.hospital.configuration.exception.model.HospitalUnauthorizedException;
 import org.hospital.security.model.AppUserPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -28,7 +28,7 @@ public class AppUserPrincipalServiceImpl implements AppUserPrincipalService {
         return this.getLoggedUserInfo()
                 .orElseThrow(() -> {
                     log.error("No authenticated user!");
-                    return new UncheckedException(Errors.Functional.UNAUTHORIZED);
+                    return new HospitalUnauthorizedException(ErrorType.UNAUTHORIZED);
                 });
     }
 }

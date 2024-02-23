@@ -2,9 +2,9 @@ package org.hospital.web.config;
 
 import org.hospital.web.properties.CorsProperties;
 import org.hospital.web.properties.EndpointSecurityProperties;
-import org.hospital.web.security.JwtAuthenticationEntryPoint;
-import org.hospital.web.security.JwtAuthorizationEntryPoint;
-import org.hospital.web.security.JwtRequestFilter;
+import org.hospital.web.security.handlers.AuthenticationExceptionHandler;
+import org.hospital.web.security.handlers.AuthorizationExceptionHandler;
+import org.hospital.web.security.filters.JwtRequestFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,8 +48,8 @@ public class WebSecurityConfiguration {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http, JwtRequestFilter jwtRequestFilter,
 										   EndpointSecurityProperties endpointSecurityProperties,
-										   JwtAuthenticationEntryPoint authenticationExceptionHandler,
-										   JwtAuthorizationEntryPoint authorizationExceptionHandler,
+										   AuthenticationExceptionHandler authenticationExceptionHandler,
+										   AuthorizationExceptionHandler authorizationExceptionHandler,
 										   CorsProperties corsProperties) throws Exception {
 
 		// TODO: don't leave this off pls

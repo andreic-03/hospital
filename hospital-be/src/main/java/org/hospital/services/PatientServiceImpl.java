@@ -6,8 +6,8 @@ import org.hospital.api.model.PatientCreateRequestModel;
 import org.hospital.api.model.PatientResponseModel;
 import org.hospital.api.model.PatientUpdateRequestModel;
 import org.hospital.api.model.UserRegisterStepTwoRequestModel;
-import org.hospital.errorhandling.Errors;
-import org.hospital.errorhandling.UncheckedException;
+import org.hospital.configuration.exception.model.ErrorType;
+import org.hospital.configuration.exception.model.HospitalException;
 import org.hospital.persistence.entity.*;
 import org.hospital.mappers.PatientMapper;
 import org.hospital.persistence.repository.*;
@@ -46,7 +46,7 @@ public class PatientServiceImpl implements PatientService {
             PatientEntity patient = patientRepository.saveAndFlush(patientMapper.toPatientEntity(patientCreateRequestModel));
             return patientMapper.toPatientModel(patient);
         } catch (DataIntegrityViolationException e) {
-            throw new UncheckedException(Errors.Functional.EMAIL_ALREADY_EXISTS);
+            throw new HospitalException(ErrorType.EMAIL_ALREADY_EXISTS);
         }
     }
 
@@ -55,7 +55,7 @@ public class PatientServiceImpl implements PatientService {
         PatientEntity patient = patientRepository.findPatientByFirstNameAndLastName(firstName, lastName);
 
         if (patient == null) {
-            throw new UncheckedException(Errors.Functional.PATIENT_NOT_FOUND);
+            throw new HospitalException(ErrorType.PATIENT_NOT_FOUND);
         }
 
         return patientMapper.toPatientModel(patient);
@@ -67,7 +67,7 @@ public class PatientServiceImpl implements PatientService {
         PatientEntity patient = patientRepository.findPatientByCnp(cnp);
 
         if (patient == null ){
-            throw new UncheckedException(Errors.Functional.CNP_NOT_FOUND);
+            throw new HospitalException(ErrorType.CNP_NOT_FOUND);
         }
 
         return patientMapper.toPatientModel(patient);
@@ -79,7 +79,7 @@ public class PatientServiceImpl implements PatientService {
         PatientEntity patient = patientRepository.findPatientByMedicId(medicId);
 
         if (patient == null ){
-            throw new UncheckedException(Errors.Functional.PATIENT_FOR_MEDIC_NOT_FOUND);
+            throw new HospitalException(ErrorType.PATIENT_FOR_MEDIC_NOT_FOUND);
         }
 
         return patientMapper.toPatientModel(patient);
@@ -105,7 +105,7 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void delete(final Long id) {
         PatientEntity patientEntity = patientRepository.findById(id)
-                .orElseThrow(() -> new UncheckedException(Errors.Functional.PATIENT_NOT_FOUND));
+                .orElseThrow(() -> new HospitalException(ErrorType.PATIENT_NOT_FOUND));
 
         UserEntity user = patientEntity.getUser();
 
@@ -131,17 +131,17 @@ public class PatientServiceImpl implements PatientService {
         final var existingToken = registerAccountTokenRepository.findByToken(hashedToken)
                 .orElseThrow(() -> {
                     log.error("No token found");
-                    return new UncheckedException(Errors.Functional.REGISTER_TOKEN_NOT_FOUND);
+                    return new HospitalException(ErrorType.REGISTER_TOKEN_NOT_FOUND);
                 });
 
         if (existingToken.getUsed()) {
             log.error("Token already used");
-            throw new UncheckedException(Errors.Functional.REGISTER_TOKEN_NOT_FOUND);
+            throw new HospitalException(ErrorType.REGISTER_TOKEN_NOT_FOUND);
         }
 
         if (existingToken.getExpireAt().isBefore(LocalDateTime.now())) {
             log.error("Token is expired");
-            throw new UncheckedException(Errors.Functional.REGISTER_TOKEN_NOT_FOUND);
+            throw new HospitalException(ErrorType.REGISTER_TOKEN_NOT_FOUND);
         }
 
         existingToken.setUsed(Boolean.TRUE);

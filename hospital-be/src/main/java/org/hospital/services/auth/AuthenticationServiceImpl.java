@@ -6,8 +6,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hospital.api.model.AuthRequestModel;
 import org.hospital.api.model.AuthResponseModel;
-import org.hospital.errorhandling.AuthenticationException;
-import org.hospital.errorhandling.Errors;
+import org.hospital.configuration.exception.model.ErrorType;
+import org.hospital.configuration.exception.model.HospitalUnauthorizedException;
 import org.hospital.mappers.AuthMapper;
 import org.hospital.mappers.TokenMapper;
 import org.hospital.persistence.repository.TokenRepository;
@@ -44,7 +44,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 					);
 		} catch (BadCredentialsException | LockedException ex) {
 			logger.error(ex.getMessage());
-			throw new AuthenticationException(Errors.Functional.UNAUTHENTICATED);
+			throw new HospitalUnauthorizedException(ErrorType.AUTHENTICATION);
 		}
 
 		final var user = (AppUserPrincipal) authentication.getPrincipal();

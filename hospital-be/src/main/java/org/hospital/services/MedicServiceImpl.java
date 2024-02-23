@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hospital.api.model.MedicRequestModel;
 import org.hospital.api.model.MedicResponseModel;
-import org.hospital.errorhandling.Errors;
-import org.hospital.errorhandling.UncheckedException;
+import org.hospital.configuration.exception.model.ErrorType;
+import org.hospital.configuration.exception.model.HospitalException;
 import org.hospital.persistence.entity.MedicEntity;
 import org.hospital.mappers.MedicMapper;
 import org.hospital.persistence.entity.PatientEntity;
@@ -33,7 +33,7 @@ public class MedicServiceImpl implements MedicService {
             MedicEntity medic = medicRepository.saveAndFlush(medicMapper.toMedicEntity(medicRequestModel));
             return medicMapper.toMedicModel(medic);
         } catch (DataIntegrityViolationException e) {
-            throw new UncheckedException(Errors.Functional.EMAIL_ALREADY_EXISTS);
+            throw new HospitalException(ErrorType.EMAIL_ALREADY_EXISTS);
         }
     }
 
@@ -54,7 +54,7 @@ public class MedicServiceImpl implements MedicService {
         MedicEntity medic = medicRepository.findMedicByFirstNameAndLastName(firstName, lastName);
 
         if (medic == null) {
-            throw new UncheckedException(Errors.Functional.MEDIC_NOT_FOUND);
+            throw new HospitalException(ErrorType.MEDIC_NOT_FOUND);
         }
 
         return medicMapper.toMedicModel(medic);
@@ -63,7 +63,7 @@ public class MedicServiceImpl implements MedicService {
     @Override
     public void delete(final Long id) {
         MedicEntity medicEntity = medicRepository.findById(id)
-                .orElseThrow(() -> new UncheckedException(Errors.Functional.MEDIC_NOT_FOUND));
+                .orElseThrow(() -> new HospitalException(ErrorType.MEDIC_NOT_FOUND));
 
         UserEntity user = medicEntity.getUser();
 

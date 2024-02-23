@@ -6,9 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.hospital.api.model.*;
 import org.hospital.common.model.NotificationDetails;
 import org.hospital.common.util.NotificationDetailsUtil;
+import org.hospital.configuration.exception.model.ErrorType;
+import org.hospital.configuration.exception.model.HospitalNotFoundException;
 import org.hospital.configuration.porperties.EmailNotificationProperties;
-import org.hospital.errorhandling.Errors;
-import org.hospital.errorhandling.UncheckedException;
 import org.hospital.mappers.MedicMapper;
 import org.hospital.mappers.PatientMapper;
 import org.hospital.mappers.RegisterAccountTokenMapper;
@@ -62,14 +62,14 @@ public class UserServiceImpl implements UserService {
     public UserResponseModel findById(final Long id) {
         return userRepository.findById(id)
                 .map(userMapper::toUserModel)
-                .orElseThrow(() -> new UncheckedException(Errors.Functional.USER_NOT_FOUND));
+                .orElseThrow(() -> new HospitalNotFoundException(ErrorType.USER_NOT_FOUND));
     }
 
     @Override
     public UserResponseModel findByUsername(final String username) {
         return userRepository.findByUsername(username)
                 .map(userMapper::toUserModel)
-                .orElseThrow(() -> new UncheckedException(Errors.Functional.USER_NOT_FOUND));
+                .orElseThrow(() -> new HospitalNotFoundException(ErrorType.USER_NOT_FOUND));
     }
 
     @Override
@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseModel update(final Long id, final UserUpdateRequestModel userModel) {
         UserEntity existingUser = userRepository.findById(id)
-                .orElseThrow(() -> new UncheckedException(Errors.Functional.USER_NOT_FOUND));
+                .orElseThrow(() -> new HospitalNotFoundException(ErrorType.USER_NOT_FOUND));
 
         userMapper.updateUserEntity(existingUser, userModel);
 
@@ -145,7 +145,7 @@ public class UserServiceImpl implements UserService {
         return roles
                 .stream()
                 .map(roleRepository::findByName)
-                .map(roleEntity -> roleEntity.orElseThrow(() -> new UncheckedException(Errors.Functional.ROLE_NOT_FOUND)))
+                .map(roleEntity -> roleEntity.orElseThrow(() -> new HospitalNotFoundException(ErrorType.ROLE_NOT_FOUND)))
                 .collect(Collectors.toSet());
     }
 

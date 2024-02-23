@@ -1,8 +1,7 @@
 package org.hospital.util;
 
-
-import org.hospital.errorhandling.Errors;
-import org.hospital.errorhandling.UncheckedException;
+import org.hospital.configuration.exception.model.ErrorType;
+import org.hospital.configuration.exception.model.HospitalException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +13,7 @@ public class ValidationsUtil {
         return optional.orElseThrow(() -> {
             Map<String, Object> context = new HashMap<>();
             context.put(idKey, idValue);
-            return new UncheckedException(Errors.Functional.NOT_FOUND, context);
+            return new HospitalException(ErrorType.NOT_FOUND);
         });
     }
 }

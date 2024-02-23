@@ -1,4 +1,4 @@
-package org.hospital.web.security;
+package org.hospital.web.security.filters;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

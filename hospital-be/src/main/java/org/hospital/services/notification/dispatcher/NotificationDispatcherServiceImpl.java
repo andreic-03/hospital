@@ -5,9 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.hospital.common.model.EmailNotificationDetails;
 import org.hospital.common.model.NotificationDetails;
 import org.hospital.common.util.NotificationDetailsUtil;
+import org.hospital.configuration.exception.model.HospitalException;
 import org.hospital.configuration.porperties.EmailNotificationProperties;
-import org.hospital.errorhandling.Errors;
-import org.hospital.errorhandling.UncheckedException;
 import org.hospital.services.notification.email.EmailService;
 import org.hospital.services.notification.template.TemplateResolverService;
 import org.springframework.retry.annotation.Retryable;
@@ -28,21 +27,21 @@ public class NotificationDispatcherServiceImpl implements NotificationDispatcher
     private final EmailService emailSenderService;
 
     @Async(NOTIFICATION_BEAN_NAME)
-    @Retryable(retryFor = UncheckedException.class)
+    @Retryable(retryFor = HospitalException.class)
     @Override
     public void dispatchNotification(NotificationDetails notificationDetails) {
         final var notificationType = notificationDetails.getNotificationType();
         final var properties = Optional.ofNullable(
                 emailNotificationProperties.get(notificationType)).orElseThrow(() -> {
             log.error("No configurations found for notification type: {}", notificationType);
-            return new UncheckedException(Errors.Technical.GENERIC);
+            return new HospitalException();
         });
 
         final var templateName = Optional.ofNullable(
                 properties.getTemplateName()
         ).orElseThrow(() -> {
             log.error("No templateName defined for notification type: {}", notificationType);
-            return new UncheckedException(Errors.Technical.GENERIC);
+            return new HospitalException();
         });
 
         final String content = templateResolverService.resolveContent(templateName, notificationDetails);
