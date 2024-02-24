@@ -6,6 +6,7 @@ import {LoginModule} from "../login/login.module";
 import {SharedMaterialModule, SharedModule} from "../shared/shared.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import { StepTwoComponent } from './step-two/step-two.component';
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { StepTwoComponent } from './step-two/step-two.component';
     LoginModule,
     SharedModule,
     SharedMaterialModule,
+    TranslateModule,
   ],
 })
 export class SignUpModule {}

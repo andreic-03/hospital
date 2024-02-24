@@ -1,0 +1,56 @@
+{
+  "app": {
+    "title": "Hospital",
+    "page-not-found": "Page was not found"
+  },
+  "validation": {
+    "required": "This field is mandatory.",
+    "password-match": "Passwords doesn't match.",
+    "password-strength": {
+      "uppercase": "The password must contain at least one capital letter.",
+      "lowercase": "The password must contain at least one lowercase letter.",
+      "numbers": "The password must contain at least one number.",
+      "special-char": "The password must contain at least one special character: {{charOptions}}",
+      "length": "The password had to consist of at least {{minLength}} characters."
+    }
+  },
+  "login": {
+    "title": "Welcome!",
+    "login-button": "Sign in",
+    "username": "User name",
+    "password": "Password",
+    "sign-with": "Sign in with:",
+    "forgot-password": {
+      "title": "Forgot password",
+      "link": "Forgot password"
+    }
+  },
+  "header": {
+    "login": "Sign in",
+    "create-account": "Create new account",
+    "info": {
+      "no-account": "Don't have an account ?",
+      "have-account": "Already have an account ?"
+    }
+  },
+  "register": {
+    "step-one": {
+      "title": "Create Account",
+      "username": "User name",
+      "email": "Email address",
+      "password": "Password",
+      "confirm-password": "Confirm password",
+      "register-button": "Create account"
+    },
+    "step-two": {
+      "title": "Continue registration",
+      "first-name": "First name",
+      "last-name": "Last name",
+      "cnp": "CNP",
+      "age": "Age",
+      "gender": "Gender",
+      "phone-number": "Phone number",
+      "register-button": "Finalize registration"
+    }
+  }
+}

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { Login } from 'src/app/shared/redux/auth.actions';
 import { Navigate } from '@ngxs/router-plugin';
-import {BaseComponent} from "../base/base.component";
+import {BaseComponent} from "../../../shared/base/base.component";
 import {catchError, EMPTY, takeUntil} from "rxjs";
 import {mapError} from "../../../shared/error.util";
 
@@ -40,7 +40,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
         takeUntil(this.unsubscribe$),
         catchError(err => {
           const errorResponse = mapError(err);
-          this.error = errorResponse.errorMessage;
+          this.error = errorResponse.message;
           return EMPTY;
         })
       )

@@ -5,74 +5,82 @@
     <img src="../../../assets/images/doctors.png">
   </div>
   <mat-card>
-    <mat-card-title>Create Account</mat-card-title>
+    <mat-card-title>{{ 'register.step-one.title' | translate }}</mat-card-title>
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="signUpStepOne()">
-        <p>
-          <mat-form-field appearance="fill">
-            <input type="text"
-                   matInput
-                   placeholder="username"
-                   formControlName="username" />
-          </mat-form-field>
-        </p>
+        <mat-form-field appearance="fill">
+          <input type="text"
+                 matInput
+                 placeholder="{{ 'register.step-one.username' | translate }}"
+                 formControlName="username"/>
+        </mat-form-field>
 
-        <p>
-          <mat-form-field appearance="fill">
-            <input type="text"
-                   matInput
-                   placeholder="email"
-                   formControlName="email" />
-          </mat-form-field>
-        </p>
+        <mat-form-field appearance="fill">
+          <input type="text"
+                 matInput
+                 placeholder="{{ 'register.step-one.email' | translate }}"
+                 formControlName="email"/>
 
-        <p>
-          <mat-form-field appearance="fill">
-            <input
-              matInput
-              formControlName="password"
-              placeholder="password"
-              type="password"
-              [type]="shouldHidePassword ? 'password' : 'text'" />
-            <button
-              mat-icon-button
-              matSuffix
-              type="button"
-              (click)="shouldHidePassword = !shouldHidePassword"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="shouldHidePassword">
-              <mat-icon>{{
-                shouldHidePassword ? 'visibility_off' : 'visibility'
-                }}</mat-icon>
-            </button>
-          </mat-form-field>
-        </p>
+          <mat-error *ngIf="form.controls['email'].invalid">
+            {{ form.controls['email'].errors | formErrorTranslate }}
+          </mat-error>
+        </mat-form-field>
 
-        <p>
-          <mat-form-field appearance="fill">
-            <input
-              matInput
-              formControlName="confirmPassword"
-              placeholder="confirmPassword"
-              type="password"
-              [type]="shouldHidePassword ? 'password' : 'text'" />
-            <button
-              mat-icon-button
-              matSuffix
-              type="button"
-              (click)="shouldHidePassword = !shouldHidePassword"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="shouldHidePassword">
-              <mat-icon>{{
-                shouldHidePassword ? 'visibility_off' : 'visibility'
-                }}</mat-icon>
-            </button>
-          </mat-form-field>
-        </p>
+        <mat-form-field appearance="fill">
+          <input
+            matInput
+            formControlName="password"
+            placeholder="{{ 'register.step-one.password' | translate }}"
+            type="password"
+            [type]="shouldHidePassword ? 'password' : 'text'"/>
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="shouldHidePassword = !shouldHidePassword"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="shouldHidePassword">
+            <mat-icon>{{
+              shouldHidePassword ? 'visibility_off' : 'visibility'
+              }}</mat-icon>
+          </button>
 
-        <button type="submit" mat-flat-button class="bg-customBG text-white" [disabled]="form.invalid">
-          Register Account
+          <mat-error *ngIf="form.controls['password'].touched && form.invalid">
+            {{ form.controls['password'].errors | formErrorTranslate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <input
+            matInput
+            formControlName="confirmPassword"
+            placeholder="{{ 'register.step-one.confirm-password' | translate }}"
+            type="password"
+            [type]="shouldHidePassword ? 'password' : 'text'"/>
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="shouldHidePassword = !shouldHidePassword"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="shouldHidePassword">
+            <mat-icon>{{
+              shouldHidePassword ? 'visibility_off' : 'visibility'
+              }}</mat-icon>
+          </button>
+
+        </mat-form-field>
+
+        <mat-error
+          *ngIf="form.controls['confirmPassword'].touched && form.invalid">
+          {{ form.errors | formErrorTranslate }}
+        </mat-error>
+
+        <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">
+          {{ 'register.step-one.register-button' | translate }}
         </button>
+
+        <app-error-message [errorMessage]="error"></app-error-message>
 
       </form>
     </mat-card-content>

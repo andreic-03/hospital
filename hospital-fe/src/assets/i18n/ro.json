@@ -1,0 +1,57 @@
+{
+  "app": {
+    "title": "Spital",
+    "page-not-found": "Pagina nu a fost gasita."
+  },
+  "validation": {
+    "required": "Campul este obligatoriu.",
+    "email": "Introduceti un email valid.",
+    "password-match": "Parolele nu sunt indentice.",
+    "password-strength": {
+      "uppercase": "Parola trebuie sa contina cel putin o litera majuscula.",
+      "lowercase": "Parola trebuie sa contina cel putin o litera minuscula.",
+      "numbers": "Parola trebuie sa contina cel putin un numar",
+      "special-char": "Parola trebuie sa contina cel putin un caracter special: {{charOptions}}",
+      "length": "Parola trebuia sa fie alcatunita din minim {{minLength}} caractere."
+    }
+  },
+  "login": {
+    "title": "Bine ai venit!",
+    "login-button": "Intra in cont",
+    "username": "Nume de utilizator",
+    "password": "Parola",
+    "sign-with": "Conecteaza-te cu",
+    "forgot-password": {
+      "title": "Am uitat parola",
+      "link": "Am uitat parola"
+    }
+  },
+  "header": {
+    "login": "Intra in cont",
+    "create-account": "Creaza un cont nou",
+    "info": {
+      "no-account": "Nu ai un cont ?",
+      "have-account": "Ai deja un cont ?"
+    }
+  },
+  "register": {
+    "step-one": {
+      "title": "Creaza contul",
+      "username": "Nume de utilizator",
+      "email": "Adresa de email",
+      "password": "Parola",
+      "confirm-password": "Confirma parola",
+      "register-button": "Creaza contul"
+    },
+    "step-two": {
+      "title": "Continua inregistrarea",
+      "first-name": "Prenume",
+      "last-name": "Nume",
+      "cnp": "CNP",
+      "age": "Varsta",
+      "gender": "Sex",
+      "phone-number": "Numar de telefon",
+      "register-button": "Finalizeaza inregistrarea"
+    }
+  }
+}

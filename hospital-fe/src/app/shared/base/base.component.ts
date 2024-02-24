@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { EMPTY, Subject } from 'rxjs';
-import {mapError} from "../../../shared/error.util";
+import {mapError} from "../error.util";
 
 @Injectable()
 export class BaseComponent implements OnDestroy {
@@ -16,7 +16,7 @@ export class BaseComponent implements OnDestroy {
   protected getGenericErrorHandlingCallback() {
     return (err: any) => {
       const errResponse = mapError(err);
-      this.genericErrorMessage = errResponse.errorMessage;
+      this.genericErrorMessage = errResponse.message;
       return EMPTY;
     };
   }

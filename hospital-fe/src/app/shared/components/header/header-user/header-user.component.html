@@ -2,13 +2,13 @@
   <div class="flex items-center">
     <button *ngIf="user.roles.includes(Role.MEDIC); else createAppointmentTemplate" mat-button
             class="button-with-border">
-      <mat-icon>add</mat-icon>
-      <span class="ml-2">Create a patient</span>
+      <mat-icon class="text-white">add</mat-icon>
+      <span class="text-white">Create a patient</span>
     </button>
     <ng-template #createAppointmentTemplate>
       <button class="button-with-border" mat-button>
-        <mat-icon>add</mat-icon>
-        <span class="ml-2">Make an appointment</span>
+        <mat-icon class="text-white">add</mat-icon>
+        <span class="text-white">Make an appointment</span>
       </button>
     </ng-template>
 

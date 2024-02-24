@@ -5,14 +5,14 @@
     <img src="../../../assets/images/doctors.png">
   </div>
   <mat-card>
-    <mat-card-title>Continue Registration</mat-card-title>
+    <mat-card-title>{{ 'register.step-two.title' | translate }}</mat-card-title>
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="signUpStepTwo()">
         <p>
           <mat-form-field appearance="fill">
             <input type="text"
                    matInput
-                   placeholder="First Name"
+                   placeholder="{{ 'register.step-two.first-name' | translate }}"
                    formControlName="firstName" />
           </mat-form-field>
         </p>
@@ -20,7 +20,7 @@
           <mat-form-field appearance="fill">
             <input type="text"
                    matInput
-                   placeholder="Last Name"
+                   placeholder="{{ 'register.step-two.last-name' | translate }}"
                    formControlName="lastName" />
           </mat-form-field>
         </p>
@@ -28,7 +28,7 @@
           <mat-form-field appearance="fill">
             <input type="text"
                    matInput
-                   placeholder="CNP"
+                   placeholder="{{ 'register.step-two.cnp' | translate }}"
                    formControlName="cnp" />
           </mat-form-field>
         </p>
@@ -36,7 +36,7 @@
           <mat-form-field appearance="fill">
             <input type="text"
                    matInput
-                   placeholder="Age"
+                   placeholder="{{ 'register.step-two.age' | translate }}"
                    formControlName="age" />
           </mat-form-field>
         </p>
@@ -44,7 +44,7 @@
           <mat-form-field appearance="fill">
             <input type="text"
                    matInput
-                   placeholder="Gender"
+                   placeholder="{{ 'register.step-two.gender' | translate }}"
                    formControlName="gender" />
           </mat-form-field>
         </p>
@@ -52,13 +52,13 @@
           <mat-form-field appearance="fill">
             <input type="text"
                    matInput
-                   placeholder="Phone number"
+                   placeholder="{{ 'register.step-two.phone-number' | translate }}"
                    formControlName="mobilePhone" />
           </mat-form-field>
         </p>
 
-        <button type="submit" mat-flat-button class="bg-customBG text-white" [disabled]="form.invalid">
-          Finalize Registration
+        <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">
+          {{ 'register.step-two.register-button' | translate }}
         </button>
 
       </form>

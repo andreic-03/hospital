@@ -6,7 +6,7 @@ import {Role, User} from "../../../model/user.model";
 import {GetCurrentUserInfo, Logout} from "../../../redux/auth.actions";
 import {PatientResponseModel} from "../../../model/patient.mode";
 import {PatientService} from "../../../services/patient.service";
-import {BaseComponent} from "../../../../login/components/base/base.component";
+import {BaseComponent} from "../../../base/base.component";
 import {MedicService} from "../../../services/medic.service";
 import {MedicResponseModel} from "../../../model/medic.mode";
 import {Navigate} from "@ngxs/router-plugin";

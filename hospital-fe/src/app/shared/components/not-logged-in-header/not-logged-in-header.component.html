@@ -1,28 +1,28 @@
-<div class="flex justify-between items-center p-2 bg-customBG">
+<div class="flex justify-between items-center p-2 header">
   <div class="flex items-center justify-start pl-40">
     <a routerLink="/" class="flex items-center justify-start">
       <img src="../../../../assets/images/logo4.svg" alt="Logo" class="h-12">
       <div class="ml-4 flex items-center -mb-4">
-        <h1 class="text-white">Hospital</h1>
+        <h1 class="text-white">{{ 'app.title' | translate }}</h1>
       </div>
     </a>
   </div>
 
   <div *ngIf="showCreateAccountButton" class="flex items-center pr-44">
-    <div class="mr-5 text-white">Don't have an account ?</div>
+    <div class="mr-5 text-white">{{ 'header.info.no-account' | translate }}</div>
 
     <button (click)="navigateToSignUp()" class="button-with-border" mat-button>
-      <mat-icon>person_add</mat-icon>
-      <span class="ml-4 text-white">Create new account</span>
+      <mat-icon class="text-white">person_add</mat-icon>
+      <span class="text-white">{{ 'header.create-account' | translate }}</span>
     </button>
   </div>
 
   <div *ngIf="showSignInButton" class="flex items-center pr-44">
-    <span class="mr-5 text-white">Already have an account ?</span>
+    <span class="mr-5 text-white">{{ 'header.info.have-account' | translate }}</span>
 
     <button (click)="navigateToLogin()" class="button-with-border" mat-button>
-      <mat-icon>person</mat-icon>
-      <span class="ml-4 text-white">Sign in</span>
+      <mat-icon class="text-white">person</mat-icon>
+      <span class="text-white">{{ 'header.login' | translate }}</span>
     </button>
   </div>
 </div>

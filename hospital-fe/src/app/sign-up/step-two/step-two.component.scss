@@ -17,18 +17,14 @@
   padding: 20px; /* Adjust padding as needed */
 }
 
-.text-on-left {
-  /* Add styles for text on the left */
-}
-
-.mat-card {
+mat-card {
   background-color: white;
   width: 100%;
   max-width: 350px;
   margin-right: 50px;
 }
 
-.mat-form-field {
+mat-form-field {
   width: 100%;
 }
 
@@ -46,17 +42,4 @@ mat-form-field {
 
 button {
   width: 100%;
-}
-
-.sign-in-options {
-  font-size: 17px;
-  margin-top: 15px;
-  text-align: center;
-}
-
-img.facebook-icon,
-img.google-icon {
-  width: 70px;
-  height: 70px;
-  margin: 0 10px;
 }
