@@ -3,12 +3,12 @@
     <button *ngIf="user.roles.includes(Role.MEDIC); else createAppointmentTemplate" mat-button
             class="button-with-border">
       <mat-icon class="text-white">add</mat-icon>
-      <span class="text-white">Create a patient</span>
+      <span class="text-white">{{ 'header.add-patient' | translate }}</span>
     </button>
     <ng-template #createAppointmentTemplate>
       <button class="button-with-border" mat-button>
         <mat-icon class="text-white">add</mat-icon>
-        <span class="text-white">Make an appointment</span>
+        <span class="text-white">{{ 'header.make-appointment' | translate }}</span>
       </button>
     </ng-template>
 
@@ -23,11 +23,11 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item [routerLink]="'/profile'">
           <mat-icon>account_box</mat-icon>
-          Profile
+          {{ 'header.profile' | translate }}
         </button>
         <button mat-menu-item (click)="logout()">
           <mat-icon>logout</mat-icon>
-          Log out
+          {{ 'header.logout' | translate }}
         </button>
       </mat-menu>
     </div>

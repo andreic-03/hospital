@@ -12,6 +12,7 @@ public class UserRequestModel {
     private String username;
     private String password;
     private String status;
+    private String email;
     private Set<String> roles;
     private MedicRequestModel medic;
     private PatientCreateRequestModel patient;

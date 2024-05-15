@@ -29,11 +29,6 @@ public class MedicEntity extends AuditingEntity {
     @Column(name = "mobile_phone")
     private String mobilePhone;
 
-    @Column(unique = true)
-    @Email(message = "Email must be a valid email address")
-    @NotBlank(message = "Email is mandatory")
-    private String email;
-
     @Column
     private String gender;
 

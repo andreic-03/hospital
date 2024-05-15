@@ -1,0 +1,95 @@
+server:
+  servlet:
+    context-path: /api
+
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect  # Set in dev profile
+  mvc:
+    throw-exception-if-no-handler-found: true
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+  main:
+    allow-circular-references: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    jpa:
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate:
+        ddl-auto: update
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: andrei.cioropar.stmp@gmail.com #gmail password Testpass12#
+    password: joppwqlqpwslkxdi
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+
+# JWT Configuration
+jwt:
+  secret: CHANGE_ME  # Replace with a strong secret
+
+# Swagger Configuration
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+# Application Information
+module-name: "hospital-server"
+api-version: "1.0"
+
+# Security Configuration
+security:
+  apis:
+    public-endpoints:
+      - method: POST
+        uris:
+          - /auth/login
+          - /user
+          - /user/registration/**
+          - /patient/registration/**
+      - method: GET
+        uris:
+          - /medic/**
+          - /swagger-ui/**
+          - /v3/api-docs/**
+          - /error/**
+          - /management/**
+  cors:
+    config:
+      allowed-origins: ["*"]  # Consider restricting origins in production
+      allowed-methods:
+        - POST
+        - GET
+        - PUT
+        - DELETE
+      allowed-headers:
+        - Content-Type
+        - Authorization
+        - Accept
+      exposed-headers:
+        - Location
+
+# Password Reset Configuration
+app:
+  password-reset:
+    expire-in: 5
+  mail:
+    REGISTER_ACCOUNT:
+      template-name: register-account
+      additional-details:
+        registerLink: http://localhost:4200/register/step-two/{token}
+
+
+

@@ -27,6 +27,8 @@
   },
   "header": {
     "login": "Sign in",
+    "logout": "Logout",
+    "profile": "Profile",
     "create-account": "Create new account",
     "info": {
       "no-account": "Don't have an account ?",
@@ -52,5 +54,9 @@
       "phone-number": "Phone number",
       "register-button": "Finalize registration"
     }
+  },
+  "confirmation": {
+    "context": "The user has been created, to complete the registration check your email and follow the steps.",
+    "return-button": "Return to Home Page"
   }
 }

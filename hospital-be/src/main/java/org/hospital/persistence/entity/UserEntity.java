@@ -26,6 +26,9 @@ public class UserEntity extends AuditingEntity {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String email;
+
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserStatus status;

@@ -116,10 +116,11 @@ public class UserServiceImpl implements UserService {
         final var expireAt = LocalDateTime.now().plusMinutes(expireIn);
         final var registerAccountTokenEntity = registerAccountTokenMapper.toRegisterAccountTokenEntity(hashedToken, userEntity, expireAt);
 
-        sendRegistrationEmail(userRegisterStepOneRequestModel, token);
 
         userRepository.save(userEntity);
         registerAccountTokenRepository.save(registerAccountTokenEntity);
+
+        sendRegistrationEmail(userRegisterStepOneRequestModel, token);
 
         return userMapper.stepOneToUserModel(userEntity);
     }

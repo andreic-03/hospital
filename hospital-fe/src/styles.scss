@@ -5,20 +5,31 @@
 
 @include mat.core();
 
-$my-primary: mat.define-palette(mat.$red-palette, 500);
-$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+//light theme
+//$my-primary: mat.define-palette(mat.$red-palette, 500);
+//$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+//
+//$my-red-theme: mat.define-light-theme((
+//  color: (
+//    primary: $my-primary,
+//    accent: $my-accent,
+//  ),
+//  typography: mat.define-typography-config(),
+//  density: 0,
+//));
+//
+//@include mat.core-theme($my-red-theme);
+//@include mat.button-theme($my-red-theme);
 
-$my-red-theme: mat.define-light-theme((
+//dark theme
+$mat-dark-theme: mat.define-dark-theme((
   color: (
-    primary: $my-primary,
-    accent: $my-accent,
-  ),
-  typography: mat.define-typography-config(),
-  density: 0,
+    primary: mat.define-palette(mat.$grey-palette),
+    accent: mat.define-palette(mat.$grey-palette),
+  )
 ));
 
-@include mat.core-theme($my-red-theme);
-@include mat.button-theme($my-red-theme);
+@include mat.all-component-themes($mat-dark-theme);
 
 /**
 TAILWIND
@@ -34,10 +45,18 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  //dark theme
+  background-color: #212121;
+  color: #f4f4f4;
+  //light theme
+  //background-color: whitesmoke;
 }
 
 .header {
-  background-color: #f44336;
+  //dark theme
+  background-color: grey;
+  //light theme
+  //background-color: #f44336;
 }
 
 

@@ -12,7 +12,6 @@ public class MedicRequestModel {
     private String firstName;
     private String lastName;
     private String mobilePhone;
-    private String email;
     private String gender;
     private MedicSpecialization specialization;
 

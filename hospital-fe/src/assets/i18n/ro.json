@@ -28,7 +28,11 @@
   },
   "header": {
     "login": "Intra in cont",
+    "logout": "Deconectare",
+    "profile": "Profil",
     "create-account": "Creaza un cont nou",
+    "add-patient": "Adauga un pacient",
+    "make-appointment": "Solicita programare",
     "info": {
       "no-account": "Nu ai un cont ?",
       "have-account": "Ai deja un cont ?"
@@ -53,5 +57,9 @@
       "phone-number": "Numar de telefon",
       "register-button": "Finalizeaza inregistrarea"
     }
+  },
+  "confirmation": {
+    "context": "Utilizatorul a fost creat cu succes. Pentru a finazila crearea contului urmariti pasii din email.",
+    "return-button": "Intoarce-te la pagina principala"
   }
 }

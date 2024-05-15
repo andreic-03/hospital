@@ -19,9 +19,6 @@ public class EmailServiceImpl implements EmailService{
 
     private JavaMailSender emailSender;
 
-//    @Value("${spring.mail.username}")
-//    private final String username;
-
     @Override
     public void sendEmail(EmailNotificationDetails emailNotificationDetails) {
         final MimeMessage message = emailSender.createMimeMessage();

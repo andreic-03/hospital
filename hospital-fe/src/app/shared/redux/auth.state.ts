@@ -3,7 +3,7 @@ import { User } from "../model/user.model";
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import {GetCurrentUserInfo, Login, Logout} from "./auth.actions";
 import { AuthService } from "../services/auth.service";
-import {tap, switchMap, EMPTY} from 'rxjs';
+import {tap, switchMap, EMPTY, filter} from 'rxjs';
 
 export class AuthStateModel {
   accessToken?: string;
@@ -71,9 +71,12 @@ export class AuthState {
       return EMPTY;
     } else {
       return this.authService.getCurrentUserInfo().pipe(
-        tap(response => {
-          patchState({
-            user: response,
+        filter((res) =>
+          JSON.stringify(getState().user) !== JSON.stringify(res),
+        ),
+        tap((res) => {
+          return patchState({
+            user: res,
           });
         })
       );

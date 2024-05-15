@@ -13,6 +13,7 @@ public class UserResponseModel {
     private Long id;
     private String username;
     private String status;
+    private String email;
     private Set<String> roles;
     private Long medicId;
     private Long patientId;

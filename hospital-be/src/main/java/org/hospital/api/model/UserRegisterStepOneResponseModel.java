@@ -10,4 +10,5 @@ import lombok.Setter;
 public class UserRegisterStepOneResponseModel {
     private Long id;
     private String username;
+    private String email;
 }
