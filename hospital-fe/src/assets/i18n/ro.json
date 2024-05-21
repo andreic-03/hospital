@@ -45,7 +45,8 @@
       "email": "Adresa de email",
       "password": "Parola",
       "confirm-password": "Confirma parola",
-      "register-button": "Creaza contul"
+      "register-button": "Creaza contul",
+      "phone-number": "Telefon"
     },
     "step-two": {
       "title": "Continua inregistrarea",
@@ -61,5 +62,34 @@
   "confirmation": {
     "context": "Utilizatorul a fost creat cu succes. Pentru a finazila crearea contului urmariti pasii din email.",
     "return-button": "Intoarce-te la pagina principala"
+  },
+  "profile": {
+    "title": "Profilul meu",
+    "account-details": "Date cont",
+    "user-name": "NUME UTILIZATOR",
+    "phone-number": "NUMAR DE TELEFON",
+    "email": "EMAIL",
+    "change-button": "Modifica",
+    "password": "PAROLA",
+    "personal-information": "Informatii personale",
+    "info": "Te rugam sa ne tii la curent cu orice modificare a datelor personale, pentru a pastra accesul la informatiile medicale.",
+    "last-name": "NUME DE FAMILIE",
+    "first-name": "PRENUME",
+    "citizenship": "CETATENIE",
+    "cnp": "CNP",
+    "gender": "SEX",
+    "specialization": "SPECIALIZARE",
+    "delete-account": "Sterge cont",
+    "cancel-button": "Renunta",
+    "save-button": "Modifica",
+    "delete-account-info": "Contul meu nu stocheaza date, dar e o interfata intre tine si dosarul tau medical. De aceea stergerea contului nu presupune si stergerea datelor preluate de catre noi.",
+    "change-password": {
+      "text-1": "Adauga noua parola in campurile de mai jos.",
+      "text-2": "Aceasta trebuie sa aiba minimum 8 caractere si sa contina o litera mica, o litera mare, o cifra si un caracter special.",
+      "attention": "Atentie!",
+      "current-password": "Parola actuala",
+      "new-password": "Noua parola",
+      "confirm-new-password": "Confirmare noua parola"
+    }
   }
 }

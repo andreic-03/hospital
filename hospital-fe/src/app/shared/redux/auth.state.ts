@@ -1,13 +1,19 @@
 import { Injectable } from "@angular/core";
 import { User } from "../model/user.model";
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import {GetCurrentUserInfo, Login, Logout} from "./auth.actions";
+import {GetCurrentUserInfo, GetMedicInfo, GetPatientInfo, Login, Logout} from "./auth.actions";
 import { AuthService } from "../services/auth.service";
 import {tap, switchMap, EMPTY, filter} from 'rxjs';
+import {PatientResponseModel} from "../model/patient.model";
+import {MedicResponseModel} from "../model/medic.model";
+import {MedicService} from "../services/medic.service";
+import {PatientService} from "../services/patient.service";
 
 export class AuthStateModel {
   accessToken?: string;
   user?: User;
+  medic?: MedicResponseModel;
+  patient?: PatientResponseModel;
 }
 
 @State<AuthStateModel>({
@@ -16,7 +22,9 @@ export class AuthStateModel {
 })
 @Injectable()
 export class AuthState {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,
+              private medicService: MedicService,
+              private patientService: PatientService) {}
 
   @Selector()
   static getAccessToken(state: AuthStateModel): string | undefined {
@@ -27,6 +35,16 @@ export class AuthState {
   @Selector()
   static getCurrentUserInfo(state: AuthStateModel): User | undefined {
     return state.user;
+  }
+
+  @Selector()
+  static getMedicInfo(state: AuthStateModel): MedicResponseModel | undefined {
+    return state.medic;
+  }
+
+  @Selector()
+  static getPatientInfo(state: AuthStateModel): PatientResponseModel | undefined {
+    return state.patient;
   }
 
   @Action(Login)
@@ -78,6 +96,44 @@ export class AuthState {
           return patchState({
             user: res,
           });
+        })
+      );
+    }
+  }
+
+  @Action(GetMedicInfo)
+  getMedicInfo({ getState, patchState}: StateContext<AuthStateModel>) {
+    const user = getState().user;
+    if (user == null) {
+      return EMPTY;
+    } else {
+      return this.medicService.findById(user.medicId).pipe(
+        filter((res) =>
+          JSON.stringify(getState().medic) !== JSON.stringify(res),
+        ),
+        tap((res) => {
+          return patchState({
+            medic: res,
+          })
+        })
+      );
+    }
+  }
+
+  @Action(GetPatientInfo)
+  getPatientInfo({ getState, patchState}: StateContext<AuthStateModel>) {
+    const user = getState().user;
+    if (user == null) {
+      return EMPTY;
+    } else {
+      return this.patientService.findById(user.patientId).pipe(
+        filter((res) =>
+          JSON.stringify(getState().patient) !== JSON.stringify(res),
+        ),
+        tap((res) => {
+          return patchState({
+            patient: res,
+          })
         })
       );
     }

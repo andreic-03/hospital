@@ -1,4 +1,4 @@
-package org.hospital.api.model;
+package org.hospital.api.model.user;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -14,6 +14,7 @@ public class UserResponseModel {
     private String username;
     private String status;
     private String email;
+    private String phoneNumber;
     private Set<String> roles;
     private Long medicId;
     private Long patientId;

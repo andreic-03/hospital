@@ -14,7 +14,6 @@ public class PatientCreateRequestModel {
     private Long age;
     private String gender;
     private String diagnosis;
-    private String mobilePhone;
     private String observations;
     private String indications;
 

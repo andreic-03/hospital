@@ -1,14 +1,12 @@
 package org.hospital.mappers;
 
-import org.hospital.api.model.*;
+import org.hospital.api.model.user.*;
 import org.hospital.persistence.entity.RoleEntity;
 import org.hospital.persistence.entity.UserEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface UserMapper {
     @Mapping(source = "medic.medicId", target = "medicId")
     @Mapping(source = "patient.patientId", target = "patientId")

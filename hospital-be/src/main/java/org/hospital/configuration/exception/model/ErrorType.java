@@ -39,7 +39,8 @@ public enum ErrorType {
     MISSING_REQUEST_HEADER("F029", "Missing request header: {0}"),
     BAD_REQUEST("F030", "Bad request"),
     INVALID_PARAMETERS("F030", "Invalid parameters"),
-    AUTHORIZATION("F031", "Authorization error.")
+    AUTHORIZATION("F031", "Authorization error."),
+    OLD_PASSWORD_DID_NOT_MATCH("F032", "Old password did not match")
     ;
 
     private final String errorCode;

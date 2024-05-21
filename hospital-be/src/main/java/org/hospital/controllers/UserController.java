@@ -1,11 +1,11 @@
 package org.hospital.controllers;
 
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.hospital.api.model.*;
+import org.hospital.api.model.user.*;
 import org.hospital.security.model.AppUserPrincipal;
 import org.hospital.services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +47,6 @@ public class UserController {
     }
 
     @PutMapping
-    @RolesAllowed({ROLE_EDITOR, ROLE_ADMIN})
     public UserResponseModel updateUser(@AuthenticationPrincipal AppUserPrincipal user,
                                     @Valid @RequestBody final UserUpdateRequestModel userModel) {
         return userService.update(user.getUserEntity().getId(), userModel);
@@ -56,5 +55,12 @@ public class UserController {
     @PostMapping("/registration/step-one")
     public UserRegisterStepOneResponseModel userRegisterStepOne(@RequestBody final UserRegisterStepOneRequestModel userRegisterStepOneRequestModel){
         return userService.registerUserStepOne(userRegisterStepOneRequestModel);
+    }
+
+    @PutMapping("/password-reset")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void changeUserPassword(@AuthenticationPrincipal AppUserPrincipal user,
+                                   @RequestBody @Valid ChangePasswordRequestModel changePasswordRequestModel) {
+        userService.changeUserPassword(user.getUserEntity().getId(), changePasswordRequestModel);
     }
 }

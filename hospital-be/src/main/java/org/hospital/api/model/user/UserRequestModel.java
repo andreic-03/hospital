@@ -1,7 +1,9 @@
-package org.hospital.api.model;
+package org.hospital.api.model.user;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hospital.api.model.MedicRequestModel;
+import org.hospital.api.model.PatientCreateRequestModel;
 
 import java.util.Set;
 
@@ -13,6 +15,7 @@ public class UserRequestModel {
     private String password;
     private String status;
     private String email;
+    private String phoneNumber;
     private Set<String> roles;
     private MedicRequestModel medic;
     private PatientCreateRequestModel patient;

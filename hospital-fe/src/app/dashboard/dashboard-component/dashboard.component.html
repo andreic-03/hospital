@@ -1,0 +1,11 @@
+<ng-container *ngIf="currentUser$ | async as user" >
+  <!-- TODO To add different dashboard for medic and patient -->
+  <div *ngIf="medic$ | async as medic">
+        Hello {{ medic.firstName }} {{ medic.lastName }}
+        Have a nice day!
+  </div>
+
+  <div *ngIf="patient$ | async as patient">
+    AAAAAAAAAAAAAAPATIENT
+  </div>
+</ng-container>

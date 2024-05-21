@@ -13,6 +13,32 @@
     </ng-template>
 
     <div class="flex items-center ml-5">
+      <button mat-icon-button (click)="toggleTheme()">
+        <mat-icon>{{ isDarkTheme ? 'brightness_7' : 'brightness_4' }}</mat-icon>
+      </button>
+
+      <button [matMenuTriggerFor]="langMenu" mat-button>
+        <img [src]="getFlagUrl(selectedLanguage)" alt="Selected Language" class="w-8" />
+      </button>
+
+      <mat-menu #langMenu="matMenu">
+        <div class="mb-2 ml-2">
+          <button (click)="switchLanguage('en')" class="flex items-center">
+            <img src="assets/icons/uk-flag.svg" alt="English" class="w-8"/>
+            <span class="ml-2">EN</span>
+            <mat-icon *ngIf="selectedLanguage === 'en'" class="ml-2">check</mat-icon>
+          </button>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="mt-2 ml-2">
+          <button (click)="switchLanguage('ro')" class="flex items-center">
+            <img src="assets/icons/romania-flag.svg" alt="Română" class="w-8"/>
+            <span class="ml-2">RO</span>
+            <mat-icon *ngIf="selectedLanguage === 'ro'" class="ml-2">check</mat-icon>
+          </button>
+        </div>
+      </mat-menu>
+
       <button [matMenuTriggerFor]="menu" mat-button>
         <mat-icon class="big-mat-icon text-white">account_circle</mat-icon>
         <span class="ml-2 text-white" *ngIf="currentPerson">

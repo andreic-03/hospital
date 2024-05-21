@@ -6,7 +6,7 @@ import {
   RegisterStepTwoModelRequest
 } from "../model/register.model";
 import {Observable} from "rxjs";
-import {PatientResponseModel} from "../model/patient.mode";
+import {PatientResponseModel} from "../model/patient.model";
 
 
 @Injectable({

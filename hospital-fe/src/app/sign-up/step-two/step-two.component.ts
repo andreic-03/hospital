@@ -6,7 +6,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngxs/store";
 import {RegisterService} from "../../shared/services/register.service";
 import {Navigate} from "@ngxs/router-plugin";
-import {PatientResponseModel} from "../../shared/model/patient.mode";
+import {PatientResponseModel} from "../../shared/model/patient.model";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 
 @Component({

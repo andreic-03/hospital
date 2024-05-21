@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {DashboardComponent} from "./dashboard/dashboard.component";
-import {ConfirmationComponent} from "./login/components/confirmation/confirmation.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -11,15 +9,15 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
   },
   {
     path: 'register',
     loadChildren: () => import('./sign-up/sign-up.module').then(m => m.SignUpModule),
   },
   {
-    path: 'confirmation',
-    component: ConfirmationComponent
+    path: 'profile',
+    loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule),
   },
 ];
 

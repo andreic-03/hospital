@@ -2,15 +2,13 @@ package org.hospital.mappers;
 
 import org.hospital.api.model.PatientCreateRequestModel;
 import org.hospital.api.model.PatientUpdateRequestModel;
-import org.hospital.api.model.UserRegisterStepTwoRequestModel;
+import org.hospital.api.model.user.UserRegisterStepTwoRequestModel;
 import org.hospital.persistence.entity.PatientEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
+import org.mapstruct.*;
 import org.hospital.api.model.PatientResponseModel;
-import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface PatientMapper {
     PatientEntity toPatientEntity(PatientCreateRequestModel patientResponseModel);
 
@@ -19,7 +17,7 @@ public interface PatientMapper {
     @Mapping(target = "version", ignore = true)
     @Mapping(target = "createdBy", ignore = true)
     @Mapping(target = "updatedBy", ignore = true)
-    PatientEntity updateUserEntity(@MappingTarget PatientEntity entity, PatientUpdateRequestModel patientUpdateRequestModel);
+    PatientEntity updatePatientEntity(@MappingTarget PatientEntity entity, PatientUpdateRequestModel patientUpdateRequestModel);
 
     PatientResponseModel toPatientModel(PatientEntity patient);
 

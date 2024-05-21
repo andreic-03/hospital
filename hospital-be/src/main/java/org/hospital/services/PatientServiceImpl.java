@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hospital.api.model.PatientCreateRequestModel;
 import org.hospital.api.model.PatientResponseModel;
 import org.hospital.api.model.PatientUpdateRequestModel;
-import org.hospital.api.model.UserRegisterStepTwoRequestModel;
+import org.hospital.api.model.user.UserRegisterStepTwoRequestModel;
 import org.hospital.configuration.exception.model.ErrorType;
 import org.hospital.configuration.exception.model.HospitalException;
 import org.hospital.persistence.entity.*;
@@ -89,7 +89,7 @@ public class PatientServiceImpl implements PatientService {
     public PatientResponseModel updatePatient(PatientUpdateRequestModel patientUpdateRequestModel, Long id) {
         PatientEntity existingPatient = findPatientById(id);
 
-        patientMapper.updateUserEntity(existingPatient, patientUpdateRequestModel);
+        patientMapper.updatePatientEntity(existingPatient, patientUpdateRequestModel);
 
         //TODO Check if user is already assigned to the medic
         if (patientUpdateRequestModel.getMedics() != null) {

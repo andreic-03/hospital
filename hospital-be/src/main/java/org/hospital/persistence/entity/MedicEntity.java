@@ -26,9 +26,6 @@ public class MedicEntity extends AuditingEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "mobile_phone")
-    private String mobilePhone;
-
     @Column
     private String gender;
 

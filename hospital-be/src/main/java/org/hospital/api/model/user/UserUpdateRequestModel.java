@@ -1,15 +1,13 @@
-package org.hospital.api.model;
+package org.hospital.api.model.user;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Set;
 
 @Getter
 @Setter
 public class UserUpdateRequestModel {
     private String firstName;
     private String lastName;
-    private String phone;
+    private String phoneNumber;
     private String email;
 }

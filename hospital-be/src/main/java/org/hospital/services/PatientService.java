@@ -3,7 +3,7 @@ package org.hospital.services;
 import org.hospital.api.model.PatientCreateRequestModel;
 import org.hospital.api.model.PatientResponseModel;
 import org.hospital.api.model.PatientUpdateRequestModel;
-import org.hospital.api.model.UserRegisterStepTwoRequestModel;
+import org.hospital.api.model.user.UserRegisterStepTwoRequestModel;
 
 public interface PatientService {
 

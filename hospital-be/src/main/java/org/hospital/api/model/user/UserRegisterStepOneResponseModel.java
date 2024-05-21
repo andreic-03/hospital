@@ -1,4 +1,4 @@
-package org.hospital.api.model;
+package org.hospital.api.model.user;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

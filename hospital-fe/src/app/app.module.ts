@@ -9,8 +9,6 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthHttpInterceptor } from './shared/interceptor/auth-http.interceptor';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import {LoginModule} from "./login/login.module";
 import {SharedModule} from "./shared/shared.module";
 import {LOCATION_INITIALIZED} from "@angular/common";
 import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
@@ -19,14 +17,12 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
   ],
     imports: [
         BrowserModule,
         HttpClientModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        LoginModule,
         SharedModule,
         NgxsModule.forRoot(appStates, {
           developmentMode: !environment.production,

@@ -3,10 +3,11 @@ package org.hospital.services;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hospital.api.model.*;
+import org.hospital.api.model.user.*;
 import org.hospital.common.model.NotificationDetails;
 import org.hospital.common.util.NotificationDetailsUtil;
 import org.hospital.configuration.exception.model.ErrorType;
+import org.hospital.configuration.exception.model.HospitalBadRequestException;
 import org.hospital.configuration.exception.model.HospitalNotFoundException;
 import org.hospital.configuration.porperties.EmailNotificationProperties;
 import org.hospital.mappers.MedicMapper;
@@ -18,6 +19,7 @@ import org.hospital.persistence.repository.*;
 import org.hospital.services.crypto.CryptoHashService;
 import org.hospital.services.notification.dispatcher.NotificationDispatcherService;
 import org.hospital.services.random.SecureRandomGeneratorService;
+import org.hospital.services.security.TokenService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -47,6 +49,7 @@ public class UserServiceImpl implements UserService {
     private final SecureRandomGeneratorService secureRandomGeneratorService;
     private final NotificationDispatcherService notificationDispatcherService;
     private final CryptoHashService cryptoHashService;
+    private final TokenService tokenService;
 
     @Value("${app.password-reset.expire-in}")
     private Integer expireIn;
@@ -132,14 +135,32 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseModel update(final Long id, final UserUpdateRequestModel userModel) {
-        UserEntity existingUser = userRepository.findById(id)
-                .orElseThrow(() -> new HospitalNotFoundException(ErrorType.USER_NOT_FOUND));
+        UserEntity existingUser = getUserById(id);
 
         userMapper.updateUserEntity(existingUser, userModel);
 
-        UserEntity savedUser = userRepository.save(existingUser);
+        return userMapper.toUserModel(userRepository.saveAndFlush(existingUser));
+    }
 
-        return userMapper.toUserModel(savedUser);
+    @Override
+    public void changeUserPassword(final Long id, final ChangePasswordRequestModel changePasswordRequestModel) {
+        UserEntity user = getUserById(id);
+
+        final var oldPassword = changePasswordRequestModel.getOldPassword();
+
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            throw new HospitalBadRequestException(ErrorType.OLD_PASSWORD_DID_NOT_MATCH);
+        }
+
+        final var newHashedPassword = passwordEncoder.encode(changePasswordRequestModel.getNewPassword());
+        user.setPassword(newHashedPassword);
+
+        tokenService.invalidateAllUserSession(user);
+    }
+
+    private UserEntity getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new HospitalNotFoundException(ErrorType.USER_NOT_FOUND));
     }
 
     private Set<RoleEntity> mapRoles(Set<String> roles) {

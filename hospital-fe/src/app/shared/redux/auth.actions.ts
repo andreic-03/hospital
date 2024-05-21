@@ -11,3 +11,15 @@ export class Logout{
 export class GetCurrentUserInfo {
   static readonly type = '[Auth] Get current user info';
 }
+
+export class GetMedicInfo {
+  static readonly type = '[Auth] Get current medic info';
+
+  constructor(public id: number) {}
+}
+
+export class GetPatientInfo {
+  static readonly type = '[Auth] Get current patient info';
+
+  constructor(public id: number) {}
+}

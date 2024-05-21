@@ -32,6 +32,7 @@ export class StepOneComponent implements OnInit {
     email: new FormControl('', [
       Validators.required,
       Validators.email]),
+    phoneNumber: new FormControl('', [Validators.required])
   });
 
   constructor(private store: Store,
@@ -64,7 +65,7 @@ export class StepOneComponent implements OnInit {
         .subscribe(res => {
           if (res) {
             this.userResponse = res;
-            this.store.dispatch(new Navigate(['/confirmation']));
+            this.store.dispatch(new Navigate(['/register/confirmation']));
           }
         }
       );

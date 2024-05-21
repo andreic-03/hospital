@@ -5,6 +5,7 @@
   },
   "validation": {
     "required": "This field is mandatory.",
+    "email": "Enter a valid email.",
     "password-match": "Passwords doesn't match.",
     "password-strength": {
       "uppercase": "The password must contain at least one capital letter.",
@@ -30,6 +31,8 @@
     "logout": "Logout",
     "profile": "Profile",
     "create-account": "Create new account",
+    "add-patient": "Add a patient",
+    "make-appointment": "Make an appointment",
     "info": {
       "no-account": "Don't have an account ?",
       "have-account": "Already have an account ?"
@@ -42,7 +45,8 @@
       "email": "Email address",
       "password": "Password",
       "confirm-password": "Confirm password",
-      "register-button": "Create account"
+      "register-button": "Create account",
+      "phone-number": "Phone number"
     },
     "step-two": {
       "title": "Continue registration",
@@ -58,5 +62,34 @@
   "confirmation": {
     "context": "The user has been created, to complete the registration check your email and follow the steps.",
     "return-button": "Return to Home Page"
+  },
+  "profile": {
+    "title": "My profile",
+    "account-details": "Account details",
+    "user-name": "USER NAME",
+    "phone-number": "PHONE NUMBER",
+    "email": "EMAIL",
+    "change-button": "Change",
+    "password": "PASSWORD",
+    "personal-information": "Personal information",
+    "info": "Please keep us informed of any changes to your personal data, in order to maintain access to medical information.",
+    "last-name": "LAST NAME",
+    "first-name": "FIRST NAME",
+    "citizenship": "CITIZENSHIP",
+    "cnp": "CNP",
+    "gender": "GENDER",
+    "specialization": "SPECIALTY",
+    "delete-account": "Delete account",
+    "cancel-button": "Cancel",
+    "save-button": "Save",
+    "delete-account-info": "My account does not store data, but it is an interface between you and your medical file. That's why deleting the account does not mean deleting the data taken by us.",
+    "change-password": {
+      "text-1": "Add the new password in the fields below.",
+      "text-2": "It must have at least 8 characters and contain a lowercase letter, an uppercase letter, a number and a special character.",
+      "attention": "Attention!",
+      "current-password": "Current password",
+      "new-password": "New password",
+      "confirm-new-password": "Confirm new password"
+    }
   }
 }

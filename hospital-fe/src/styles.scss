@@ -1,66 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
-
 @use '@angular/material' as mat;
 @use 'src/styles/colors' as *;
 
 @include mat.core();
 
-//light theme
-//$my-primary: mat.define-palette(mat.$red-palette, 500);
-//$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-//
-//$my-red-theme: mat.define-light-theme((
-//  color: (
-//    primary: $my-primary,
-//    accent: $my-accent,
-//  ),
-//  typography: mat.define-typography-config(),
-//  density: 0,
-//));
-//
-//@include mat.core-theme($my-red-theme);
-//@include mat.button-theme($my-red-theme);
+// Light theme
+$my-primary: mat.define-palette(mat.$red-palette, 500);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
-//dark theme
-$mat-dark-theme: mat.define-dark-theme((
+$my-light-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+  ),
+  density: 0,
+));
+
+// Dark theme
+$my-dark-theme: mat.define-dark-theme((
   color: (
     primary: mat.define-palette(mat.$grey-palette),
     accent: mat.define-palette(mat.$grey-palette),
-  )
+  ),
 ));
 
-@include mat.all-component-themes($mat-dark-theme);
-
-/**
-TAILWIND
- */
+// Include theme styles only once
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
 html, body {
   height: 100%;
+  margin: 0;
 }
 
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  //dark theme
+//In case i want to change font
+//.mat-body, .mat-body-2, .mat-typography .mat-body, .mat-typography .mat-body-2, .mat-typography {
+//  font-family: 'Tiempos Fine Medium', sans-serif; // Override the font-family
+//}
+
+.light-theme {
+  @include mat.all-component-colors($my-light-theme);
+  background-color: whitesmoke;
+  color: black;
+
+  .header {
+    background-color: #f44336;
+  }
+}
+
+.dark-theme {
+  @include mat.all-component-colors($my-dark-theme);
   background-color: #212121;
   color: #f4f4f4;
-  //light theme
-  //background-color: whitesmoke;
+
+  .header {
+    background-color: grey;
+  }
+
+  .profile-input {
+    background-color: gray;
+  }
 }
 
-.header {
-  //dark theme
-  background-color: grey;
-  //light theme
-  //background-color: #f44336;
+// Other global styles
+.mdc-line-ripple {
+  display: none;
 }
-
 
 //.mat-form-field.mat-focused .mat-form-field-ripple {
 //  background-color: #f44336 !important;
 //  //background-color: #1dc70b !important;
 //}
+

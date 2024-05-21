@@ -1,0 +1,166 @@
+<ng-container *ngIf="currentUser$ | async as user">
+  <div class="text-4xl">{{ 'profile.title' | translate }}</div>
+  <mat-card>
+    <mat-card-title>{{ 'profile.account-details' | translate }}</mat-card-title>
+    <mat-divider></mat-divider>
+
+    <mat-label>{{ 'profile.user-name' | translate }}</mat-label>
+    <div class="mt-2">{{ user.username }}</div>
+    <mat-divider></mat-divider>
+
+    <div class="flex justify-between">
+      <div class="content-center">{{ 'profile.password' | translate }}</div>
+      <button mat-stroked-button type="button" *ngIf="!isEditing" (click)="openPasswordChangeDialog()">
+        {{ 'profile.change-button' | translate }}
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+
+    <form #emailPhoneNumberForm="ngForm" (ngSubmit)="onEmailPhoneNumberSubmit(emailPhoneNumberForm)">
+      <div class="flex justify-between" *ngIf="!editingPhoneNumber; else editPhoneNumberTemplate">
+        <div>
+          <mat-label>{{ 'profile.phone-number' | translate }}</mat-label>
+          <div class="mt-2">{{user.phoneNumber }}</div>
+        </div>
+
+        <button mat-stroked-button type="button" *ngIf="!isEditing" (click)="toggleEdit('phone')">
+          {{ 'profile.change-button' | translate }}
+        </button>
+      </div>
+      <ng-template #editPhoneNumberTemplate>
+        <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+          <mat-label>{{ 'profile.phone-number' | translate }}</mat-label>
+          <div>
+            <input class="mt-2 bg-gray-100 w-full focus:outline-none profile-input" type="text"
+                   [(ngModel)]="editablePhoneNumber" [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+      </ng-template>
+      <mat-divider></mat-divider>
+
+      <div class="flex justify-between" *ngIf="!editingEmail; else editEmailTemplate">
+        <div>
+          <mat-label>{{ 'profile.email' | translate }}</mat-label>
+          <div class="mt-2">{{user.email }}</div>
+        </div>
+
+        <button mat-stroked-button type="button" *ngIf="!isEditing" (click)="toggleEdit('email')">
+          {{ 'profile.change-button' | translate }}
+        </button>
+      </div>
+      <ng-template #editEmailTemplate>
+        <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+          <mat-label>{{ 'profile.email' | translate }}</mat-label>
+          <div>
+            <input class="mt-2 bg-gray-100 w-full focus:outline-none profile-input" type="text"
+                   [(ngModel)]="editableEmail" [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+      </ng-template>
+
+      <div class="flex justify-end mt-10" *ngIf="editingPhoneNumber || editingEmail">
+        <button mat-raised-button color="primary" class="save-cancel-button"
+                (click)="cancelEdits()"
+                type="button">{{ 'profile.cancel-button' | translate }}</button>
+
+        <button mat-stroked-button class="save-cancel-button ml-2"
+                type="submit">{{ 'profile.save-button' | translate }}</button>
+      </div>
+    </form>
+  </mat-card>
+
+  <div *ngIf="medic$ | async as medic">
+    <mat-card>
+      <mat-card-title>{{ 'profile.personal-information' | translate }}</mat-card-title>
+      <div class="flex mt-4">
+        <mat-icon>info</mat-icon>
+        <div class="ml-2 content-center">{{ 'profile.info' | translate }}</div>
+      </div>
+      <mat-divider></mat-divider>
+
+      <!-- TODO Add a profile picture -->
+
+
+      <mat-label>{{ 'profile.last-name' | translate }}</mat-label>
+      <div class="mt-2">{{ medic.lastName }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.first-name' | translate }}</mat-label>
+      <div class="mt-2">{{ medic.firstName }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.citizenship' | translate }}</mat-label>
+      <div class="mt-2">TODO</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.gender' | translate }}</mat-label>
+      <div class="mt-2">{{ medic.gender }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.specialization' | translate }}</mat-label>
+      <div class="mt-2">{{ medic.specialization }}</div>
+
+
+      <div class="flex justify-end mt-10">
+        <button mat-stroked-button
+                type="button">
+          {{ 'profile.change-button' | translate }}
+        </button>
+      </div>
+    </mat-card>
+  </div>
+
+  <div *ngIf="patient$ | async as patient">
+    <mat-card>
+      <mat-card-title>{{ 'profile.personal-information' | translate }}</mat-card-title>
+      <div class="flex mt-4">
+        <mat-icon>info</mat-icon>
+        <div class="ml-2 content-center">{{ 'profile.info' | translate }}</div>
+      </div>
+      <mat-divider></mat-divider>
+
+      <!-- TODO Add a profile picture -->
+
+      <mat-label>{{ 'profile.last-name' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.lastName }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.first-name' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.firstName }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.cnp' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.cnp }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.citizenship' | translate }}</mat-label>
+      <div class="mt-2">TODO</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.gender' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.gender }}</div>
+      <mat-divider></mat-divider>
+
+      <div class="flex justify-end mt-10">
+        <button mat-stroked-button
+                type="button">
+          {{ 'profile.change-button' | translate }}
+        </button>
+      </div>
+    </mat-card>
+  </div>
+
+  <mat-card>
+    <mat-card-title>{{ 'profile.delete-account' | translate }}</mat-card-title>
+    <mat-divider></mat-divider>
+
+    <div class="flex justify-between">
+      <div class="content-center w-3/5">{{ 'profile.delete-account-info' | translate }}</div>
+      <button mat-flat-button
+              color="warn"
+              type="button">
+        {{ 'profile.delete-account' | translate }}
+      </button>
+    </div>
+  </mat-card>
+</ng-container>

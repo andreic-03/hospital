@@ -7,11 +7,13 @@ import {SharedMaterialModule, SharedModule} from "../shared/shared.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import { StepTwoComponent } from './step-two/step-two.component';
 import {TranslateModule} from "@ngx-translate/core";
+import {ConfirmationComponent} from "./confirmation/confirmation.component";
 
 @NgModule({
   declarations: [
     StepOneComponent,
-    StepTwoComponent
+    StepTwoComponent,
+    ConfirmationComponent
   ],
   imports: [
     CommonModule,

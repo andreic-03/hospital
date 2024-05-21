@@ -1,5 +1,5 @@
 import {NgModule} from "@angular/core";
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {NotLoggedInHeaderComponent} from "./components/not-logged-in-header/not-logged-in-header.component";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
@@ -15,6 +15,10 @@ import {ErrorMessageComponent} from './components/error-message/error-message.co
 import {FormErrorTranslatePipe} from "./pipes/form-error-translate.pipe";
 import {HttpClient} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {BasePageComponent} from './base-page/base-page.component';
+import {MatSelectModule} from "@angular/material/select";
+import {FormsModule} from "@angular/forms";
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [],
@@ -25,6 +29,8 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
     MatProgressSpinnerModule,
     MatCardModule,
     MatMenuModule,
+    MatSelectModule,
+    MatDividerModule,
   ],
 })
 export class SharedMaterialModule {
@@ -37,6 +43,7 @@ export class SharedMaterialModule {
     HeaderUserComponent,
     ErrorMessageComponent,
     FormErrorTranslatePipe,
+    BasePageComponent,
   ],
   exports: [
     NotLoggedInHeaderComponent,
@@ -44,11 +51,13 @@ export class SharedMaterialModule {
     HeaderUserComponent,
     ErrorMessageComponent,
     FormErrorTranslatePipe,
+    BasePageComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     SharedMaterialModule,
+    FormsModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

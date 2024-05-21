@@ -1,15 +1,15 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthState} from "../../../redux/auth.state";
 import {Select, Store} from "@ngxs/store";
-import {catchError, EMPTY, Observable, switchMap, takeUntil, tap} from "rxjs";
+import {catchError, EMPTY, filter, Observable, switchMap, takeUntil} from "rxjs";
 import {Role, User} from "../../../model/user.model";
-import {GetCurrentUserInfo, Logout} from "../../../redux/auth.actions";
-import {PatientResponseModel} from "../../../model/patient.mode";
-import {PatientService} from "../../../services/patient.service";
+import {GetCurrentUserInfo, GetMedicInfo, GetPatientInfo, Logout} from "../../../redux/auth.actions";
 import {BaseComponent} from "../../../base/base.component";
-import {MedicService} from "../../../services/medic.service";
-import {MedicResponseModel} from "../../../model/medic.mode";
 import {Navigate} from "@ngxs/router-plugin";
+import {MedicResponseModel} from "../../../model/medic.model";
+import {PatientResponseModel} from "../../../model/patient.model";
+import {ThemeService} from "../../../services/theme.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-header-user',
@@ -18,17 +18,22 @@ import {Navigate} from "@ngxs/router-plugin";
 })
 export class HeaderUserComponent extends BaseComponent implements OnInit {
   Role = Role;
+  currentPerson: MedicResponseModel | PatientResponseModel | null = null;
+  selectedLanguage!: string;
+  isDarkTheme!: boolean;
 
   @Select(AuthState.getCurrentUserInfo)
   currentUser$!: Observable<User>;
 
-  currentPerson: MedicResponseModel | PatientResponseModel | null = null;
+  @Select(AuthState.getMedicInfo)
+  medic$!: Observable<MedicResponseModel>;
 
-  @Output() currentPersonOutput = new EventEmitter<MedicResponseModel | PatientResponseModel>();
+  @Select(AuthState.getPatientInfo)
+  patient$!: Observable<PatientResponseModel>;
 
   constructor(private store: Store,
-              private patientService: PatientService,
-              private medicService: MedicService) {
+              private themeService: ThemeService,
+              private translate: TranslateService) {
     super();
   }
 
@@ -37,43 +42,55 @@ export class HeaderUserComponent extends BaseComponent implements OnInit {
     this.currentUser$
       .pipe(
         takeUntil(this.unsubscribe$),
-        switchMap(user => this.getUserByType(user)),
+        filter(user => !!user), // Filter out null or undefined users
+        switchMap(user => {
+          if (user.roles.includes(Role.MEDIC)) {
+            this.store.dispatch(new GetMedicInfo(user.medicId));
+            return this.medic$;
+          } else {
+            this.store.dispatch(new GetPatientInfo(user.patientId));
+            return this.patient$;
+          }
+        }),
         catchError(error => {
           // Handle error appropriately
           return EMPTY; // or any default value
         })
-      ).subscribe();
-  }
+      )
+      .subscribe(person => {
+        this.currentPerson = person;
+      });
 
-  private getUserByType(user: User): Observable<PatientResponseModel | MedicResponseModel> {
-    if (!user) {
-      return EMPTY;
-    }
-
-    if (user.roles.includes(Role.MEDIC)) {
-      return this.medicService.findById(user.medicId).pipe(
-        catchError(this.getGenericErrorHandlingCallback()),
-        tap((medic: MedicResponseModel) => {
-          this.currentPerson = medic;
-          this.currentPersonOutput.emit(medic);
-        })
-      );
-    } else if (user.roles.includes(Role.PATIENT)) {
-      return this.patientService.findById(user.patientId).pipe(
-        catchError(this.getGenericErrorHandlingCallback()),
-        tap((patient: PatientResponseModel) => {
-          this.currentPerson = patient;
-          this.currentPersonOutput.emit(patient);
-        })
-      );
-    } else {
-      return EMPTY;
-    }
+    this.selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+    this.translate.use(this.selectedLanguage);
+    this.isDarkTheme = localStorage.getItem('currentTheme') === 'dark-theme';
+    this.themeService.setTheme(this.isDarkTheme ? 'dark-theme' : 'light-theme');
   }
 
   logout(): void {
     this.store
       .dispatch(new Logout())
       .subscribe(() => this.store.dispatch(new Navigate(["/login"])));
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
+
+  switchLanguage(language: string) {
+    this.selectedLanguage = language;
+    this.translate.use(language);
+    localStorage.setItem('selectedLanguage', language);
+  }
+
+  getFlagUrl(language: string): string {
+    switch (language) {
+      case 'en':
+        return 'assets/icons/uk-flag.svg';
+      case 'ro':
+        return 'assets/icons/romania-flag.svg';
+      default:
+        return 'assets/icons/uk-flag.svg';
+    }
   }
 }

@@ -16,7 +16,6 @@ public class PatientUpdateRequestModel {
     private Long age;
     private String gender;
     private String diagnosis;
-    private String mobilePhone;
     private String observations;
     private String indications;
     private List<MedicRequestModel> medics;

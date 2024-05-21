@@ -1,7 +1,7 @@
 package org.hospital.services;
 
 import jakarta.validation.Valid;
-import org.hospital.api.model.*;
+import org.hospital.api.model.user.*;
 
 import java.util.List;
 
@@ -17,5 +17,7 @@ public interface UserService {
 
     UserResponseModel update(final Long id, final UserUpdateRequestModel userModel);
 
-    public UserRegisterStepOneResponseModel registerUserStepOne(final UserRegisterStepOneRequestModel userRegisterStepOneRequestModel);
+    UserRegisterStepOneResponseModel registerUserStepOne(final UserRegisterStepOneRequestModel userRegisterStepOneRequestModel);
+
+    void changeUserPassword(final Long id, final ChangePasswordRequestModel changePasswordRequestModel);
 }

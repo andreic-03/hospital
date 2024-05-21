@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Store} from "@ngxs/store";
 import {Navigate} from "@ngxs/router-plugin";
 import {Router} from "@angular/router";
+import {ThemeService} from "../../services/theme.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-not-logged-in-header',
@@ -9,12 +11,15 @@ import {Router} from "@angular/router";
   styleUrls: ['./not-logged-in-header.component.scss']
 })
 export class NotLoggedInHeaderComponent implements OnInit {
-
   showCreateAccountButton: boolean = false;
   showSignInButton: boolean = false;
+  isDarkTheme!: boolean;
+  selectedLanguage!: string;
 
   constructor(private store: Store,
-              private router: Router) { }
+              private router: Router,
+              private translate: TranslateService,
+              private themeService: ThemeService) { }
 
   ngOnInit(): void {
     const currentRoute = this.router.url;
@@ -27,6 +32,11 @@ export class NotLoggedInHeaderComponent implements OnInit {
     if (currentRoute.startsWith('/register/step-two')) {
       this.showSignInButton = true;
     }
+
+    this.selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+    this.translate.use(this.selectedLanguage);
+    this.isDarkTheme = localStorage.getItem('currentTheme') === 'dark-theme';
+    this.themeService.setTheme(this.isDarkTheme ? 'dark-theme' : 'light-theme');
   }
 
   navigateToSignUp() {
@@ -35,6 +45,27 @@ export class NotLoggedInHeaderComponent implements OnInit {
 
   navigateToLogin() {
     this.store.dispatch(new Navigate(['/login']));
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
+
+  switchLanguage(language: string) {
+    this.selectedLanguage = language;
+    this.translate.use(language);
+    localStorage.setItem('selectedLanguage', language);
+  }
+
+  getFlagUrl(language: string): string {
+    switch (language) {
+      case 'en':
+        return 'assets/icons/uk-flag.svg';
+      case 'ro':
+        return 'assets/icons/romania-flag.svg';
+      default:
+        return 'assets/icons/uk-flag.svg'; // default to English if not found
+    }
   }
 
 }
