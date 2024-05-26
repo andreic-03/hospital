@@ -59,96 +59,30 @@
       </ng-template>
 
       <div class="flex justify-end mt-10" *ngIf="editingPhoneNumber || editingEmail">
-        <button mat-raised-button color="primary" class="save-cancel-button"
+        <button mat-stroked-button class="save-cancel-button"
                 (click)="cancelEdits()"
                 type="button">{{ 'profile.cancel-button' | translate }}</button>
 
-        <button mat-stroked-button class="save-cancel-button ml-2"
+        <button mat-raised-button color="primary" class="save-cancel-button ml-2"
                 type="submit">{{ 'profile.save-button' | translate }}</button>
       </div>
     </form>
   </mat-card>
 
-  <div *ngIf="medic$ | async as medic">
-    <mat-card>
-      <mat-card-title>{{ 'profile.personal-information' | translate }}</mat-card-title>
-      <div class="flex mt-4">
-        <mat-icon>info</mat-icon>
-        <div class="ml-2 content-center">{{ 'profile.info' | translate }}</div>
+  <ng-container *ngIf="medic$ | async as medic; else patientTemplate">
+<!--    <div *ngIf="medic">-->
+<!--      <app-medic-profile-personal-info [medic]="medic"></app-medic-profile-personal-info>-->
+<!--    </div>-->
+    AAAAAAAAAAAAAAA
+  </ng-container>
+
+  <ng-template #patientTemplate>
+    <ng-container *ngIf="patient$ | async as patient">
+      <div *ngIf="patient">
+        <app-patient-profile-personal-info [patient]="patient"></app-patient-profile-personal-info>
       </div>
-      <mat-divider></mat-divider>
-
-      <!-- TODO Add a profile picture -->
-
-
-      <mat-label>{{ 'profile.last-name' | translate }}</mat-label>
-      <div class="mt-2">{{ medic.lastName }}</div>
-      <mat-divider></mat-divider>
-
-      <mat-label>{{ 'profile.first-name' | translate }}</mat-label>
-      <div class="mt-2">{{ medic.firstName }}</div>
-      <mat-divider></mat-divider>
-
-      <mat-label>{{ 'profile.citizenship' | translate }}</mat-label>
-      <div class="mt-2">TODO</div>
-      <mat-divider></mat-divider>
-
-      <mat-label>{{ 'profile.gender' | translate }}</mat-label>
-      <div class="mt-2">{{ medic.gender }}</div>
-      <mat-divider></mat-divider>
-
-      <mat-label>{{ 'profile.specialization' | translate }}</mat-label>
-      <div class="mt-2">{{ medic.specialization }}</div>
-
-
-      <div class="flex justify-end mt-10">
-        <button mat-stroked-button
-                type="button">
-          {{ 'profile.change-button' | translate }}
-        </button>
-      </div>
-    </mat-card>
-  </div>
-
-  <div *ngIf="patient$ | async as patient">
-    <mat-card>
-      <mat-card-title>{{ 'profile.personal-information' | translate }}</mat-card-title>
-      <div class="flex mt-4">
-        <mat-icon>info</mat-icon>
-        <div class="ml-2 content-center">{{ 'profile.info' | translate }}</div>
-      </div>
-      <mat-divider></mat-divider>
-
-      <!-- TODO Add a profile picture -->
-
-      <mat-label>{{ 'profile.last-name' | translate }}</mat-label>
-      <div class="mt-2">{{ patient.lastName }}</div>
-      <mat-divider></mat-divider>
-
-      <mat-label>{{ 'profile.first-name' | translate }}</mat-label>
-      <div class="mt-2">{{ patient.firstName }}</div>
-      <mat-divider></mat-divider>
-
-      <mat-label>{{ 'profile.cnp' | translate }}</mat-label>
-      <div class="mt-2">{{ patient.cnp }}</div>
-      <mat-divider></mat-divider>
-
-      <mat-label>{{ 'profile.citizenship' | translate }}</mat-label>
-      <div class="mt-2">TODO</div>
-      <mat-divider></mat-divider>
-
-      <mat-label>{{ 'profile.gender' | translate }}</mat-label>
-      <div class="mt-2">{{ patient.gender }}</div>
-      <mat-divider></mat-divider>
-
-      <div class="flex justify-end mt-10">
-        <button mat-stroked-button
-                type="button">
-          {{ 'profile.change-button' | translate }}
-        </button>
-      </div>
-    </mat-card>
-  </div>
+    </ng-container>
+  </ng-template>
 
   <mat-card>
     <mat-card-title>{{ 'profile.delete-account' | translate }}</mat-card-title>

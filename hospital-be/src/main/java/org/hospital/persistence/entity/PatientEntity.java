@@ -27,14 +27,32 @@ public class PatientEntity extends AuditingEntity {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "citizenship")
+    private String citizenship;
+
+    @Column(name = "date_of_birth")
+    private String dateOfBirth;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "county")
+    private String county;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "marital_status")
+    private String maritalStatus;
+
     @Column
     private String gender;
 
     @Column(name = "cnp")
-    private Long cnp;
-
-    @Column(name = "age")
-    private Long age;
+    private String cnp;
 
     @Column(name = "diagnosis")
     private String diagnosis;

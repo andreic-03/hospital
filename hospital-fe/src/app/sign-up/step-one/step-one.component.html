@@ -64,16 +64,16 @@
             formControlName="confirmPassword"
             placeholder="{{ 'register.step-one.confirm-password' | translate }}"
             type="password"
-            [type]="shouldHidePassword ? 'password' : 'text'"/>
+            [type]="shouldHideConfirmPassword ? 'password' : 'text'"/>
           <button
             mat-icon-button
             matSuffix
             type="button"
-            (click)="shouldHidePassword = !shouldHidePassword"
+            (click)="shouldHideConfirmPassword = !shouldHideConfirmPassword"
             [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="shouldHidePassword">
+            [attr.aria-pressed]="shouldHideConfirmPassword">
             <mat-icon>{{
-              shouldHidePassword ? 'visibility_off' : 'visibility'
+              shouldHideConfirmPassword ? 'visibility_off' : 'visibility'
               }}</mat-icon>
           </button>
 

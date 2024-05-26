@@ -11,7 +11,6 @@ public class UserRegisterStepTwoRequestModel {
     private String token;
     private String firstName;
     private String lastName;
-    private Long cnp;
-    private Long age;
+    private String cnp;
     private String gender;
 }

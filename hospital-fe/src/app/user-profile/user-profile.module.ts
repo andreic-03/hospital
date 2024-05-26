@@ -10,10 +10,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
-import {SharedModule} from "../shared/shared.module";
+import {SharedMaterialModule, SharedModule} from "../shared/shared.module";
 import {UserProfileBaseComponent} from "./components/user-profile-base-component/user-profile-base.component";
 import {MatDividerModule} from "@angular/material/divider";
 import {PasswordChangeDialogComponent} from './components/password-change-dialog/password-change-dialog.component';
+import { PatientProfilePersonalInfoComponent } from './components/patient-profile-personal-info/patient-profile-personal-info.component';
 
 @NgModule({
   declarations: [],
@@ -35,6 +36,7 @@ class UserMaterialModule {
     UserProfileBaseComponent,
     UserProfileComponent,
     PasswordChangeDialogComponent,
+    PatientProfilePersonalInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +47,7 @@ class UserMaterialModule {
     TranslateModule,
     SharedModule,
     FormsModule,
+    SharedMaterialModule,
   ],
 })
 export class UserProfileModule {

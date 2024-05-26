@@ -12,9 +12,8 @@ import org.hospital.persistence.entity.*;
 import org.hospital.mappers.PatientMapper;
 import org.hospital.persistence.repository.*;
 import org.hospital.services.crypto.CryptoHashService;
+import org.hospital.util.Utils;
 import org.hospital.util.ValidationsUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -31,9 +30,7 @@ public class PatientServiceImpl implements PatientService {
     private final UserRepository userRepository;
     private final RegisterAccountTokenRepository registerAccountTokenRepository;
     private final CryptoHashService cryptoHashService;
-
-    @Autowired
-    private PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
 
     @Override
     public PatientResponseModel findById(Long id) {
@@ -42,12 +39,11 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientResponseModel createPatient(final PatientCreateRequestModel patientCreateRequestModel) {
-        try {
-            PatientEntity patient = patientRepository.saveAndFlush(patientMapper.toPatientEntity(patientCreateRequestModel));
-            return patientMapper.toPatientModel(patient);
-        } catch (DataIntegrityViolationException e) {
-            throw new HospitalException(ErrorType.EMAIL_ALREADY_EXISTS);
-        }
+        PatientEntity patientEntity = patientMapper.toPatientEntity(patientCreateRequestModel);
+
+        patientEntity.setDateOfBirth(Utils.getDateOfBirthFromCNP(patientCreateRequestModel.getCnp()));
+
+        return patientMapper.toPatientModel(patientRepository.save(patientEntity));
     }
 
     @Override
@@ -150,6 +146,8 @@ public class PatientServiceImpl implements PatientService {
 
         var patientEntity = patientMapper.toPatientStepTwoEntity(userRegisterStepTwoRequestModel);
         patientEntity.setUser(existingUserEntity);
+        patientEntity.setDateOfBirth(Utils.getDateOfBirthFromCNP(userRegisterStepTwoRequestModel.getCnp()));
+        patientEntity.setGender(Utils.getGenderFromCNP(userRegisterStepTwoRequestModel.getCnp()));
         patientRepository.save(patientEntity);
 
         existingUserEntity.setStatus(UserStatus.ACTIVE);

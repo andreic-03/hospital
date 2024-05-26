@@ -8,6 +8,7 @@ import org.hospital.common.model.NotificationDetails;
 import org.hospital.common.util.NotificationDetailsUtil;
 import org.hospital.configuration.exception.model.ErrorType;
 import org.hospital.configuration.exception.model.HospitalBadRequestException;
+import org.hospital.configuration.exception.model.HospitalException;
 import org.hospital.configuration.exception.model.HospitalNotFoundException;
 import org.hospital.configuration.porperties.EmailNotificationProperties;
 import org.hospital.mappers.MedicMapper;
@@ -106,6 +107,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserRegisterStepOneResponseModel registerUserStepOne(final UserRegisterStepOneRequestModel userRegisterStepOneRequestModel) {
+        if (getUserByEmail(userRegisterStepOneRequestModel.getEmail()) != null) {
+            throw new HospitalException(ErrorType.EMAIL_ALREADY_EXISTS);
+        }
+
         UserEntity userEntity = userMapper.stepOneToUserEntity(userRegisterStepOneRequestModel);
 
         Set<RoleEntity> roles = mapRoles(userRegisterStepOneRequestModel.getRoles());
@@ -156,6 +161,10 @@ public class UserServiceImpl implements UserService {
         user.setPassword(newHashedPassword);
 
         tokenService.invalidateAllUserSession(user);
+    }
+
+    private UserEntity getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     private UserEntity getUserById(Long id) {

@@ -19,6 +19,7 @@ export class StepOneComponent implements OnInit {
   userResponse!: RegisterStepOneModelResponse;
 
   shouldHidePassword = true;
+  shouldHideConfirmPassword = true;
 
   error = '';
 

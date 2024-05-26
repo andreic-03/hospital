@@ -16,7 +16,5 @@ export interface RegisterStepTwoModelRequest {
   firstName: string;
   lastName: string;
   cnp: number;
-  age: number;
   gender: string;
-  mobilePhone: string;
 }

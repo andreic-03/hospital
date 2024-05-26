@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from "./shared/redux/auth.guard";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'register',
@@ -18,6 +20,7 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule),
+    canActivate: [AuthGuard]
   },
 ];
 

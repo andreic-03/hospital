@@ -6,8 +6,10 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngxs/store";
 import {RegisterService} from "../../shared/services/register.service";
 import {Navigate} from "@ngxs/router-plugin";
-import {PatientResponseModel} from "../../shared/model/patient.model";
+import {Patient} from "../../shared/model/patient.model";
 import {ActivatedRoute, ParamMap} from "@angular/router";
+import {catchError, EMPTY} from "rxjs";
+import {mapError} from "../../shared/error.util";
 
 @Component({
   selector: 'app-step-two',
@@ -15,17 +17,16 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
   styleUrls: ['./step-two.component.scss']
 })
 export class StepTwoComponent implements OnInit {
-  patientResponse!: PatientResponseModel;
+  patientResponse!: Patient;
 
   token!: string;
+
+  error = '';
 
   form: FormGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     cnp: new FormControl('', [Validators.required]),
-    age: new FormControl('', [Validators.required]),
-    gender: new FormControl('', [Validators.required]),
-    mobilePhone: new FormControl('', [Validators.required]),
   });
 
   constructor(private store: Store,
@@ -47,8 +48,16 @@ export class StepTwoComponent implements OnInit {
     const user: RegisterStepTwoModelRequest = this.form?.value;
     user.token = this.token;
 
-    this.registerService.registerStepTwo(user).subscribe(
-      res => {
+    this.registerService
+      .registerStepTwo(user)
+      .pipe(
+        catchError(err => {
+          const errResponse = mapError(err);
+          this.error = errResponse.message;
+          return EMPTY;
+        })
+      )
+      .subscribe(res => {
         if (res) {
           this.patientResponse = res;
           this.store.dispatch(new Navigate(['/login']));

@@ -1,9 +1,15 @@
-export interface PatientResponseModel {
+export interface Patient {
   patientId: number;
   firstName: string;
   lastName: string;
-  cnp: number;
-  age: number;
+  citizenship: string;
+  dateOfBirth: string;
+  country: string;
+  county: string;
+  city: string;
+  address: string;
+  maritalStatus: string;
+  cnp: string;
   gender: string;
   diagnosis: string;
   observations: string;

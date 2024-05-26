@@ -3,8 +3,8 @@ import { User } from "../model/user.model";
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import {GetCurrentUserInfo, GetMedicInfo, GetPatientInfo, Login, Logout} from "./auth.actions";
 import { AuthService } from "../services/auth.service";
-import {tap, switchMap, EMPTY, filter} from 'rxjs';
-import {PatientResponseModel} from "../model/patient.model";
+import {tap, switchMap, EMPTY, filter, Observable, of} from 'rxjs';
+import {Patient} from "../model/patient.model";
 import {MedicResponseModel} from "../model/medic.model";
 import {MedicService} from "../services/medic.service";
 import {PatientService} from "../services/patient.service";
@@ -13,7 +13,7 @@ export class AuthStateModel {
   accessToken?: string;
   user?: User;
   medic?: MedicResponseModel;
-  patient?: PatientResponseModel;
+  patient?: Patient;
 }
 
 @State<AuthStateModel>({
@@ -43,8 +43,13 @@ export class AuthState {
   }
 
   @Selector()
-  static getPatientInfo(state: AuthStateModel): PatientResponseModel | undefined {
+  static getPatientInfo(state: AuthStateModel): Patient | undefined {
     return state.patient;
+  }
+
+  @Selector()
+  static isAuthenticated(state: AuthStateModel): boolean {
+    return !!state.accessToken;
   }
 
   @Action(Login)
@@ -146,6 +151,7 @@ export class AuthState {
   private static loadAccessToken(): string | undefined {
     return localStorage.getItem('accessToken') || undefined;
   }
+
   private static clearAccessToken(): void {
     localStorage.removeItem('accessToken');
   }

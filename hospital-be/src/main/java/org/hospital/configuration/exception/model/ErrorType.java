@@ -40,7 +40,10 @@ public enum ErrorType {
     BAD_REQUEST("F030", "Bad request"),
     INVALID_PARAMETERS("F030", "Invalid parameters"),
     AUTHORIZATION("F031", "Authorization error."),
-    OLD_PASSWORD_DID_NOT_MATCH("F032", "Old password did not match")
+    OLD_PASSWORD_DID_NOT_MATCH("F032", "Old password did not match"),
+    CNP_INVALID_LENGTH("F033", "Invalid CNP. CNP must be 13 characters long."),
+    CNP_INVALID("F034", "Invalid CNP. CNP must contain only digits."),
+    CNP_INVALID_FIRST_DIGIT("F035", "Invalid CNP. First digit must be between 1 and 9.")
     ;
 
     private final String errorCode;

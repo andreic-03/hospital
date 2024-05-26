@@ -19,7 +19,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
       catchError(err => {
         if (err.status && err.status === 401) {
           localStorage.clear();
-          this.store.dispatch(new Navigate(['login']));
+          this.store.dispatch(new Navigate(['/login']));
         }
         // return there error to the method that called it
         throw err;

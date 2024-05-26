@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MedicResponseModel} from "../../../shared/model/medic.model";
-import {PatientResponseModel} from "../../../shared/model/patient.model";
+import {Patient} from "../../../shared/model/patient.model";
 import {Select, Store} from "@ngxs/store";
 import {AuthState} from "../../../shared/redux/auth.state";
 import {User} from "../../../shared/model/user.model";
@@ -34,7 +34,7 @@ export class UserProfileComponent implements OnInit{
   medic$!: Observable<MedicResponseModel>;
 
   @Select(AuthState.getPatientInfo)
-  patient$!: Observable<PatientResponseModel>;
+  patient$!: Observable<Patient>;
 
   constructor(private dialog: MatDialog,
               private userService: UserProfileService,

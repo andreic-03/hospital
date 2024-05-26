@@ -4,7 +4,7 @@
 @include mat.core();
 
 // Light theme
-$my-primary: mat.define-palette(mat.$red-palette, 500);
+$my-primary: mat.define-palette(mat.$teal-palette, 500);
 $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 $my-light-theme: mat.define-light-theme((
@@ -12,7 +12,6 @@ $my-light-theme: mat.define-light-theme((
     primary: $my-primary,
     accent: $my-accent,
   ),
-  density: 0,
 ));
 
 // Dark theme
@@ -44,7 +43,9 @@ html, body {
   color: black;
 
   .header {
-    background-color: #f44336;
+    background-color: #009688;
+    //red
+    //background-color: #f44336;
   }
 }
 

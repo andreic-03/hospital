@@ -7,7 +7,7 @@ import {GetCurrentUserInfo, GetMedicInfo, GetPatientInfo, Logout} from "../../..
 import {BaseComponent} from "../../../base/base.component";
 import {Navigate} from "@ngxs/router-plugin";
 import {MedicResponseModel} from "../../../model/medic.model";
-import {PatientResponseModel} from "../../../model/patient.model";
+import {Patient} from "../../../model/patient.model";
 import {ThemeService} from "../../../services/theme.service";
 import {TranslateService} from "@ngx-translate/core";
 
@@ -18,7 +18,7 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class HeaderUserComponent extends BaseComponent implements OnInit {
   Role = Role;
-  currentPerson: MedicResponseModel | PatientResponseModel | null = null;
+  currentPerson: MedicResponseModel | Patient | null = null;
   selectedLanguage!: string;
   isDarkTheme!: boolean;
 
@@ -29,7 +29,7 @@ export class HeaderUserComponent extends BaseComponent implements OnInit {
   medic$!: Observable<MedicResponseModel>;
 
   @Select(AuthState.getPatientInfo)
-  patient$!: Observable<PatientResponseModel>;
+  patient$!: Observable<Patient>;
 
   constructor(private store: Store,
               private themeService: ThemeService,

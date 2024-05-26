@@ -10,8 +10,14 @@ import lombok.Setter;
 public class PatientCreateRequestModel {
     private String firstName;
     private String lastName;
-    private Long cnp;
-    private Long age;
+    private String citizenship;
+    private String dateOfBirth;
+    private String country;
+    private String county;
+    private String city;
+    private String address;
+    private String maritalStatus;
+    private String cnp;
     private String gender;
     private String diagnosis;
     private String observations;

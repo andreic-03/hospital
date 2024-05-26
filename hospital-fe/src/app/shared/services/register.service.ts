@@ -6,7 +6,7 @@ import {
   RegisterStepTwoModelRequest
 } from "../model/register.model";
 import {Observable} from "rxjs";
-import {PatientResponseModel} from "../model/patient.model";
+import {Patient} from "../model/patient.model";
 
 
 @Injectable({
@@ -22,7 +22,7 @@ export class RegisterService {
     return this.http.post<RegisterStepOneModelResponse>(this.REGISTER_STEP_ONE_URL, registerStepOneRequest);
   }
 
-  public registerStepTwo(registerStepTwoRequest: RegisterStepTwoModelRequest): Observable<PatientResponseModel> {
-    return this.http.post<PatientResponseModel>(this.REGISTER_STEP_TWO_URL, registerStepTwoRequest);
+  public registerStepTwo(registerStepTwoRequest: RegisterStepTwoModelRequest): Observable<Patient> {
+    return this.http.post<Patient>(this.REGISTER_STEP_TWO_URL, registerStepTwoRequest);
   }
 }

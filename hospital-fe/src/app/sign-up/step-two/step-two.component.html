@@ -32,34 +32,16 @@
                    formControlName="cnp" />
           </mat-form-field>
         </p>
-        <p>
-          <mat-form-field appearance="fill">
-            <input type="text"
-                   matInput
-                   placeholder="{{ 'register.step-two.age' | translate }}"
-                   formControlName="age" />
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field appearance="fill">
-            <input type="text"
-                   matInput
-                   placeholder="{{ 'register.step-two.gender' | translate }}"
-                   formControlName="gender" />
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field appearance="fill">
-            <input type="text"
-                   matInput
-                   placeholder="{{ 'register.step-two.phone-number' | translate }}"
-                   formControlName="mobilePhone" />
-          </mat-form-field>
-        </p>
 
         <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">
           {{ 'register.step-two.register-button' | translate }}
         </button>
+
+        <!-- TODO Here when token is expired it is thrown
+            TODO "Register account token not found" TBD
+            TODO Change error also handle the case if the token expired but user already created -->
+
+        <app-error-message [errorMessage]="error"></app-error-message>
 
       </form>
     </mat-card-content>

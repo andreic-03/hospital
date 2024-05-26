@@ -1,0 +1,191 @@
+<div *ngIf="patient">
+  <mat-card>
+    <mat-card-title>{{ 'profile.personal-information' | translate }}</mat-card-title>
+    <div class="flex mt-4">
+      <mat-icon>info</mat-icon>
+      <div class="ml-2 content-center">{{ 'profile.info' | translate }}</div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <!-- TODO Add a profile picture -->
+
+    <div *ngIf="!isEditMode">
+      <mat-label>{{ 'profile.last-name' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.lastName || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.first-name' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.firstName || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.citizenship' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.citizenship || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.cnp' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.cnp || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.date-of-birth' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.dateOfBirth || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.gender' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.gender || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.country' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.country || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.county' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.county || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.city' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.city || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.address' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.address || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.marital-status' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.maritalStatus || '-' }}</div>
+
+      <div class="flex justify-end mt-10">
+        <button mat-stroked-button
+                type="button"
+                (click)="enableEdit()">
+          {{ 'profile.change-button' | translate }}
+        </button>
+      </div>
+
+    </div>
+
+    <form *ngIf="isEditMode" [formGroup]="profileForm" (ngSubmit)="onSubmitProfileForm()">
+      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+        <mat-label>{{ 'profile.last-name' | translate }}</mat-label>
+        <div>
+          <input class="mt-2 bg-gray-100 w-full focus:outline-none profile-input" type="text"
+                 formControlName="lastName">
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.first-name' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.firstName || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.citizenship' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.citizenship || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.cnp' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.cnp || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.date-of-birth' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.dateOfBirth || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <mat-label>{{ 'profile.gender' | translate }}</mat-label>
+      <div class="mt-2">{{ patient.gender || '-' }}</div>
+      <mat-divider></mat-divider>
+
+      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+        <mat-label>{{ 'profile.country' | translate }}</mat-label>
+        <mat-select class="mt-2 w-full" formControlName="country">
+          <mat-option *ngFor="let country of countries" [value]="country">{{ country }}</mat-option>
+        </mat-select>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+        <mat-label>{{ 'profile.county' | translate }}</mat-label>
+        <mat-select class="mt-2 w-full" formControlName="county">
+          <mat-option *ngFor="let county of counties" [value]="county">{{ county }}</mat-option>
+        </mat-select>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+        <mat-label>{{ 'profile.city' | translate }}</mat-label>
+        <div>
+          <input class="mt-2 bg-gray-100 w-full focus:outline-none profile-input" type="text"
+                 formControlName="city">
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+        <mat-label>{{ 'profile.address' | translate }}</mat-label>
+        <div>
+          <input class="mt-2 bg-gray-100 w-full focus:outline-none profile-input" type="text"
+                 formControlName="address">
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+        <mat-label>{{ 'profile.marital-status' | translate }}</mat-label>
+        <mat-select class="mt-2 w-full" formControlName="maritalStatus">
+          <mat-option *ngFor="let maritalStatus of maritalStatuses" [value]="maritalStatus">{{ maritalStatus }}</mat-option>
+        </mat-select>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="flex justify-end mt-10">
+        <button mat-stroked-button class="save-cancel-button"
+                (click)="cancelEdit()"
+                type="button">{{ 'profile.cancel-button' | translate }}</button>
+
+        <button mat-raised-button color="primary" class="save-cancel-button ml-2"
+                type="submit">{{ 'profile.save-button' | translate }}</button>
+      </div>
+
+    </form>
+  </mat-card>
+</div>
+
+
+<!--<div *ngIf="medic$ | async as medic">-->
+<!--  <mat-card>-->
+<!--    <mat-card-title>{{ 'profile.personal-information' | translate }}</mat-card-title>-->
+<!--    <div class="flex mt-4">-->
+<!--      <mat-icon>info</mat-icon>-->
+<!--      <div class="ml-2 content-center">{{ 'profile.info' | translate }}</div>-->
+<!--    </div>-->
+<!--    <mat-divider></mat-divider>-->
+
+<!--    &lt;!&ndash; TODO Add a profile picture &ndash;&gt;-->
+
+
+<!--    <mat-label>{{ 'profile.last-name' | translate }}</mat-label>-->
+<!--    <div class="mt-2">{{ medic.lastName }}</div>-->
+<!--    <mat-divider></mat-divider>-->
+
+<!--    <mat-label>{{ 'profile.first-name' | translate }}</mat-label>-->
+<!--    <div class="mt-2">{{ medic.firstName }}</div>-->
+<!--    <mat-divider></mat-divider>-->
+
+<!--    <mat-label>{{ 'profile.citizenship' | translate }}</mat-label>-->
+<!--    <div class="mt-2">TODO</div>-->
+<!--    <mat-divider></mat-divider>-->
+
+<!--    <mat-label>{{ 'profile.gender' | translate }}</mat-label>-->
+<!--    <div class="mt-2">{{ medic.gender }}</div>-->
+<!--    <mat-divider></mat-divider>-->
+
+<!--    <mat-label>{{ 'profile.specialization' | translate }}</mat-label>-->
+<!--    <div class="mt-2">{{ medic.specialization }}</div>-->
+
+
+<!--    <div class="flex justify-end mt-10">-->
+<!--      <button mat-stroked-button-->
+<!--              type="button">-->
+<!--        {{ 'profile.change-button' | translate }}-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </mat-card>-->
+<!--</div>-->
