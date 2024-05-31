@@ -1,0 +1,37 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="insert-default-user" author="Andrei">
+        <insert tableName="users">
+            <column name="username" value="admin"/>
+            <column name="password" value="$2a$10$4oXaWJoVwoYyNXVGinkeu..yHDizHp9Zr3rrwUKTBbs7xxIvjkDnG"/> <!-- andrei -->
+            <column name="email" value="admin@admin.com"/>
+            <column name="phone_number" value="0712312311"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="created_on" valueComputed="CURRENT_TIMESTAMP"/>
+            <column name="version" value="1"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="testpatient12"/>
+            <column name="password" value="$2a$10$4oXaWJoVwoYyNXVGinkeu..yHDizHp9Zr3rrwUKTBbs7xxIvjkDnG"/> <!-- andrei -->
+            <column name="email" value="testpatient12@asd.com"/>
+            <column name="phone_number" value="0712312312"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="created_on" valueComputed="CURRENT_TIMESTAMP"/>
+            <column name="version" value="1"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="testmedic12"/>
+            <column name="password" value="$2a$10$4oXaWJoVwoYyNXVGinkeu..yHDizHp9Zr3rrwUKTBbs7xxIvjkDnG"/> <!-- andrei -->
+            <column name="email" value="testmedic12@asd.com"/>
+            <column name="phone_number" value="0712312314"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="created_on" valueComputed="CURRENT_TIMESTAMP"/>
+            <column name="version" value="1"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,16 +1,24 @@
 server:
   servlet:
     context-path: /api
+  error:
+    include-stacktrace: never
 
 spring:
+  application:
+    name: hospital-app
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      max-lifetime: 300000
   jpa:
-    show-sql: true
     properties:
       hibernate:
-        format_sql: true
-        dialect: org.hibernate.dialect.PostgreSQLDialect  # Set in dev profile
-    hibernate:
-      ddl-auto: update
+        default_schema: public
   mvc:
     throw-exception-if-no-handler-found: true
   servlet:
@@ -19,28 +27,19 @@ spring:
       max-request-size: 6MB
   main:
     allow-circular-references: true
-  datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: postgres
-    jpa:
-      properties:
-        hibernate:
-          dialect: org.hibernate.dialect.PostgreSQLDialect
-      hibernate:
-        ddl-auto: update
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username: andrei.cioropar.stmp@gmail.com #gmail password Testpass12#
-    password: joppwqlqpwslkxdi
+    host: CHANGE_ME
+    port: CHANGE_ME
+    username: CHANGE_ME
+    password: CHANGE_ME
+    protocol: smtp
+    test-connection: false
+    default-encoding: UTF-8
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
-
-# JWT Configuration
-jwt:
-  secret: CHANGE_ME  # Replace with a strong secret
+  liquibase:
+    change-log: classpath:db/db.changelog-master.xml
 
 # Swagger Configuration
 springdoc:
@@ -85,6 +84,8 @@ security:
 
 # Password Reset Configuration
 app:
+  jwt:
+    secret: CHANGE_ME
   password-reset:
     expire-in: 5
   mail:

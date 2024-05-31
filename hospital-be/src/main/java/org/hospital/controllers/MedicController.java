@@ -2,8 +2,8 @@ package org.hospital.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.hospital.api.model.MedicRequestModel;
-import org.hospital.api.model.MedicResponseModel;
+import org.hospital.api.model.medic.MedicRequestModel;
+import org.hospital.api.model.medic.MedicResponseModel;
 import org.hospital.services.MedicService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;

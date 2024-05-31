@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "patient")
@@ -48,7 +47,7 @@ public class PatientEntity extends AuditingEntity {
     @Column(name = "marital_status")
     private String maritalStatus;
 
-    @Column
+    @Column(name = "gender")
     private String gender;
 
     @Column(name = "cnp")
@@ -63,16 +62,17 @@ public class PatientEntity extends AuditingEntity {
     @Column(name = "indications")
     private String indications;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "patient_id")
-    List<AppointmentEntity> appointments = new ArrayList<>();
+    @OneToMany(mappedBy = "patient",
+               cascade = CascadeType.ALL,
+               orphanRemoval = true)
+    private List<AppointmentEntity> appointments = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
             name = "patient_medic",
             joinColumns = @JoinColumn(name = "patient_id"),
             inverseJoinColumns = @JoinColumn(name = "medic_id"))
-    private List<MedicEntity> medics;
+    private List<MedicEntity> medics = new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name = "user_id")

@@ -1,8 +1,7 @@
 package org.hospital.services.auth;
 
-import org.hospital.api.model.AuthRequestModel;
-import org.hospital.api.model.AuthResponseModel;
-import org.springframework.security.core.Authentication;
+import org.hospital.api.model.auth.AuthRequestModel;
+import org.hospital.api.model.auth.AuthResponseModel;
 
 public interface AuthenticationService {
 

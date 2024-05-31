@@ -1,0 +1,50 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-table-appointment" author="Andrei">
+        <createTable tableName="appointment">
+            <column name="appointment_id" type="int" autoIncrement="true" generationType="ALWAYS">
+                <constraints primaryKey="true" primaryKeyName="pk_appointment" />
+            </column>
+            <column name="start_date" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            <column name="appointment_details" type="varchar(500)">
+                <constraints />
+            </column>
+            <column name="patient_id" type="integer">
+                <constraints nullable="false" foreignKeyName="fk_appointment_patient" references="patient(patient_id)" />
+            </column>
+            <column name="medic_id" type="integer">
+                <constraints nullable="false" foreignKeyName="fk_appointment_medic" references="medic(medic_id)" />
+            </column>
+            <column name="created_by" type="int">
+                <constraints />
+            </column>
+            <column name="created_on" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="int">
+                <constraints />
+            </column>
+            <column name="updated_on" type="timestamp"></column>
+            <column name="version" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_appointment_created_by_user"
+                                 baseTableName="appointment" baseColumnNames="created_by"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 deleteCascade="false"/>
+
+        <addForeignKeyConstraint constraintName="fk_appointment_updated_by_user"
+                                 baseTableName="appointment" baseColumnNames="updated_by"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 deleteCascade="false"/>
+    </changeSet>
+
+</databaseChangeLog>

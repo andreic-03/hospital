@@ -1,0 +1,21 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="changelog/01-users.xml" relativeToChangelogFile="true" />
+    <include file="changelog/02-role.xml" relativeToChangelogFile="true" />
+    <include file="changelog/03-user-role.xml" relativeToChangelogFile="true" />
+    <include file="changelog/04-default-user.xml" relativeToChangelogFile="true" />
+    <include file="changelog/05-default-user-roles.sql" relativeToChangelogFile="true" />
+    <include file="changelog/06-patient.xml" relativeToChangelogFile="true" />
+    <include file="changelog/07-default-user-patient.sql" relativeToChangelogFile="true" />
+    <include file="changelog/08-medic.xml" relativeToChangelogFile="true" />
+    <include file="changelog/09-default-user-medic.sql" relativeToChangelogFile="true" />
+    <include file="changelog/10-jwt-token.xml" relativeToChangelogFile="true" />
+    <include file="changelog/11-register-account-token.xml" relativeToChangelogFile="true" />
+    <include file="changelog/12-patient-medic.xml" relativeToChangelogFile="true" />
+    <include file="changelog/13-appointment.xml" relativeToChangelogFile="true" />
+
+</databaseChangeLog>

@@ -2,8 +2,8 @@ package org.hospital.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.hospital.api.model.AuthRequestModel;
-import org.hospital.api.model.AuthResponseModel;
+import org.hospital.api.model.auth.AuthRequestModel;
+import org.hospital.api.model.auth.AuthResponseModel;
 import org.hospital.services.auth.AuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

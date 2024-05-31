@@ -77,26 +77,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseModel create(@Valid final UserRequestModel userDTO) {
-        UserEntity userEntity = userMapper.toUserEntity(userDTO);
+    public UserResponseModel create(@Valid final UserRequestModel requestModel) {
+        UserEntity userEntity = userMapper.toUserEntity(requestModel);
 
-        Set<RoleEntity> roles = mapRoles(userDTO.getRoles());
+        Set<RoleEntity> roles = mapRoles(requestModel.getRoles());
         userEntity.setRoles(roles);
 
-        userEntity.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        userEntity.setPassword(passwordEncoder.encode(requestModel.getPassword()));
         userEntity.setStatus(UserStatus.ACTIVE);
 
         UserEntity user = userRepository.saveAndFlush(userEntity);
 
-        if (userDTO.getMedic() != null) {
-            MedicEntity medic = medicMapper.toMedicEntity(userDTO.getMedic());
+        if (requestModel.getMedic() != null) {
+            MedicEntity medic = medicMapper.toMedicEntity(requestModel.getMedic());
             medic.setUser(user);
 
             medicRepository.save(medic);
         }
 
-        if (userDTO.getPatient() != null) {
-            PatientEntity patient = patientMapper.toPatientEntity(userDTO.getPatient());
+        if (requestModel.getPatient() != null) {
+            PatientEntity patient = patientMapper.toPatientEntity(requestModel.getPatient());
             patient.setUser(user);
 
             patientRepository.save(patient);
@@ -135,6 +135,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(final Long id) {
+        getUserById(id);
         userRepository.deleteById(id);
     }
 
@@ -144,7 +145,7 @@ public class UserServiceImpl implements UserService {
 
         userMapper.updateUserEntity(existingUser, userModel);
 
-        return userMapper.toUserModel(userRepository.saveAndFlush(existingUser));
+        return userMapper.toUserModel(userRepository.save(existingUser));
     }
 
     @Override
@@ -159,6 +160,7 @@ public class UserServiceImpl implements UserService {
 
         final var newHashedPassword = passwordEncoder.encode(changePasswordRequestModel.getNewPassword());
         user.setPassword(newHashedPassword);
+        userRepository.save(user);
 
         tokenService.invalidateAllUserSession(user);
     }
@@ -180,7 +182,7 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toSet());
     }
 
-    private void sendRegistrationEmail(UserRegisterStepOneRequestModel userRegisterStepOneRequestModel, String token) {
+    protected void sendRegistrationEmail(UserRegisterStepOneRequestModel userRegisterStepOneRequestModel, String token) {
         final var notificationRegisterLink = NotificationDetailsUtil.getAdditionalProperty(
                 emailNotificationProperties,
                 NotificationDetails.NotificationType.REGISTER_ACCOUNT,

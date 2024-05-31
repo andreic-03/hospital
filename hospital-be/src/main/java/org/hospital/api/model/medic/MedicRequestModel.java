@@ -1,4 +1,4 @@
-package org.hospital.api.model;
+package org.hospital.api.model.medic;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -8,11 +8,11 @@ import org.hospital.persistence.entity.MedicSpecialization;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
 @Setter
-public class MedicResponseModel {
-    private Long medicId;
+public class MedicRequestModel {
     private String firstName;
     private String lastName;
     private String gender;
+    private String cnp;
     private MedicSpecialization specialization;
 
 }

@@ -2,7 +2,8 @@ package org.hospital.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.hospital.api.model.AppointmentDTO;
+import org.hospital.api.model.appointment.AppointmentRequestModel;
+import org.hospital.api.model.appointment.AppointmentResponseModel;
 import org.hospital.services.AppointmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -20,12 +21,18 @@ public class AppointmentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public AppointmentDTO create(@Valid @RequestBody final AppointmentDTO appointmentDTO) {
-        return appointmentService.createAppointment(appointmentDTO);
+    public AppointmentResponseModel create(@Valid @RequestBody final AppointmentRequestModel appointmentRequestModel) {
+        return appointmentService.createAppointment(appointmentRequestModel);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    public AppointmentDTO update(@PathVariable final Long id, @Valid @RequestBody final AppointmentDTO appointmentDTO) {
-        return appointmentService.updateAppointment(appointmentDTO, id);
+    public AppointmentResponseModel update(@PathVariable final Long id, @Valid @RequestBody final AppointmentRequestModel appointmentRequestModel) {
+        return appointmentService.updateAppointment(appointmentRequestModel, id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable final Long id) {
+        appointmentService.deleteAppointment(id);
     }
 }

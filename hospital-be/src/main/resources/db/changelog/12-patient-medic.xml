@@ -1,0 +1,28 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-table-patient-medic" author="Andrei">
+        <createTable tableName="patient_medic">
+            <column name="patient_id" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="medic_id" type="integer">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <addForeignKeyConstraint constraintName="fk_patient"
+                                 baseTableName="patient_medic" baseColumnNames="patient_id"
+                                 referencedTableName="patient" referencedColumnNames="patient_id" />
+        <addForeignKeyConstraint constraintName="fk_medic"
+                                 baseTableName="patient_medic" baseColumnNames="medic_id"
+                                 referencedTableName="medic" referencedColumnNames="medic_id" />
+        <addUniqueConstraint
+                tableName="patient_medic"
+                columnNames="patient_id, medic_id"
+                constraintName="uq_patient_id_medic_id"/>
+    </changeSet>
+
+</databaseChangeLog>

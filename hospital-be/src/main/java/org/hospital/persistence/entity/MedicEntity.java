@@ -1,12 +1,11 @@
 package org.hospital.persistence.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,15 +25,23 @@ public class MedicEntity extends AuditingEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column
+    @Column(name = "gender")
     private String gender;
+
+    @Column(name = "cnp")
+    private String cnp;
 
     @Column(name = "specialization", nullable = false)
     @Enumerated(EnumType.STRING)
     private MedicSpecialization specialization;
 
     @ManyToMany(mappedBy = "medics")
-    private List<PatientEntity> patients;
+    private List<PatientEntity> patients = new ArrayList<>();
+
+    @OneToMany(mappedBy = "medic",
+               cascade = CascadeType.ALL,
+               orphanRemoval = true)
+    private List<AppointmentEntity> appointments = new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name = "user_id")

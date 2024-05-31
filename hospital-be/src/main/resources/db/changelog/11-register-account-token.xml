@@ -1,0 +1,50 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-table-register_account_token" author="Andrei">
+        <createTable tableName="register_account_token">
+            <column name="id" type="int" autoIncrement="true" generationType="ALWAYS">
+                <constraints primaryKey="true" primaryKeyName="pk_register_account_token"/>
+            </column>
+            <column name="token" type="varchar(256)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_register_account_token_user" references="users(id)"/>
+            </column>
+            <column name="expire_at" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            <column name="used" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_by" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_on" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="int">
+                <constraints />
+            </column>
+            <column name="updated_on" type="timestamp"/>
+            <column name="version" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_register_account_token_created_by_user"
+                                 baseTableName="register_account_token" baseColumnNames="created_by"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 deleteCascade="false"/>
+
+        <addForeignKeyConstraint constraintName="fk_register_account_token_updated_by_user"
+                                 baseTableName="register_account_token" baseColumnNames="updated_by"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 deleteCascade="false"/>
+    </changeSet>
+
+</databaseChangeLog>

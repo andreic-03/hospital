@@ -30,7 +30,7 @@ public class JwtTokenUtil {
 
     private final String secret;
 
-    public JwtTokenUtil(@Value("${jwt.secret}") String secret) {
+    public JwtTokenUtil(@Value("${app.jwt.secret}") String secret) {
 		this.secret = secret;
 	}
 

@@ -1,4 +1,4 @@
-package org.hospital.api.model;
+package org.hospital.api.model.auth;
 
 import jakarta.validation.constraints.NotBlank;
 

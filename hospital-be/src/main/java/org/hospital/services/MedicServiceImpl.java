@@ -2,8 +2,8 @@ package org.hospital.services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hospital.api.model.MedicRequestModel;
-import org.hospital.api.model.MedicResponseModel;
+import org.hospital.api.model.medic.MedicRequestModel;
+import org.hospital.api.model.medic.MedicResponseModel;
 import org.hospital.configuration.exception.model.ErrorType;
 import org.hospital.configuration.exception.model.HospitalException;
 import org.hospital.persistence.entity.MedicEntity;

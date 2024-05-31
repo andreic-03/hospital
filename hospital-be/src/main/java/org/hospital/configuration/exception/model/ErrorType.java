@@ -43,7 +43,8 @@ public enum ErrorType {
     OLD_PASSWORD_DID_NOT_MATCH("F032", "Old password did not match"),
     CNP_INVALID_LENGTH("F033", "Invalid CNP. CNP must be 13 characters long."),
     CNP_INVALID("F034", "Invalid CNP. CNP must contain only digits."),
-    CNP_INVALID_FIRST_DIGIT("F035", "Invalid CNP. First digit must be between 1 and 9.")
+    CNP_INVALID_FIRST_DIGIT("F035", "Invalid CNP. First digit must be between 1 and 9."),
+    APPOINTMENT_NOT_FOUND("F036", "Appointment not found.")
     ;
 
     private final String errorCode;

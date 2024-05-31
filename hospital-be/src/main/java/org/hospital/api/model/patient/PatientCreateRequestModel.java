@@ -1,16 +1,13 @@
-package org.hospital.api.model;
+package org.hospital.api.model.patient;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PatientResponseModel {
-    private Long patientId;
+public class PatientCreateRequestModel {
     private String firstName;
     private String lastName;
     private String citizenship;
@@ -25,7 +22,5 @@ public class PatientResponseModel {
     private String diagnosis;
     private String observations;
     private String indications;
-    private List<MedicRequestModel> medics;
-    private List<AppointmentDTO> appointments;
 
 }

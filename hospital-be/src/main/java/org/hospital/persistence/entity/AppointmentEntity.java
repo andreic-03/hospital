@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Entity
 @Table(name = "appointment")
@@ -19,13 +18,17 @@ public class AppointmentEntity extends AuditingEntity {
     @Column(name = "appointment_id")
     private Long appointmentId;
 
-    @Column(name = "patient_id")
-    private Long patientId;
-
     @Column(name = "start_date")
     private LocalDateTime startDate;
 
     @Column(name = "appointment_details")
     private String appointmentDetails;
 
+    @ManyToOne
+    @JoinColumn(name = "patient_id", nullable = false)
+    private PatientEntity patient;
+
+    @ManyToOne
+    @JoinColumn(name = "medic_id", nullable = false)
+    private MedicEntity medic;
 }

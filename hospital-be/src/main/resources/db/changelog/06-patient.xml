@@ -1,0 +1,89 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-table-patient" author="Andrei">
+        <createTable tableName="patient">
+            <column name="patient_id" type="int" autoIncrement="true" generationType="ALWAYS">
+                <constraints primaryKey="true" primaryKeyName="pk_patient"/>
+            </column>
+            <column name="first_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="citizenship" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="date_of_birth" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="country" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="county" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="city" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="address" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="marital_status" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="gender" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="cnp" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="diagnosis" type="varchar(500)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="observations" type="varchar(500)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="indications" type="varchar(500)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="created_by" type="int">
+                <constraints />
+            </column>
+            <column name="created_on" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="int">
+                <constraints />
+            </column>
+            <column name="updated_on" type="timestamp"/>
+            <column name="version" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_patient_created_by_user"
+                                 baseTableName="patient" baseColumnNames="created_by"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 deleteCascade="false"/>
+
+        <addForeignKeyConstraint constraintName="fk_patient_updated_by_user"
+                                 baseTableName="patient" baseColumnNames="updated_by"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 deleteCascade="false"/>
+
+        <addForeignKeyConstraint constraintName="fk_patient_user_id"
+                                 baseTableName="patient" baseColumnNames="user_id"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 deleteCascade="false"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,86 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-table-medic" author="Andrei">
+        <createTable tableName="medic">
+            <column name="medic_id" type="int" autoIncrement="true" generationType="ALWAYS">
+                <constraints primaryKey="true" primaryKeyName="pk_medic"/>
+            </column>
+            <column name="first_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="cnp" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="specialization" type="varchar(50)">
+                <constraints/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_by" type="int">
+                <constraints />
+            </column>
+            <column name="created_on" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="int">
+                <constraints />
+            </column>
+            <column name="updated_on" type="timestamp"/>
+            <column name="version" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_medic_created_by_user"
+                                 baseTableName="medic" baseColumnNames="created_by"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 deleteCascade="false"/>
+
+        <addForeignKeyConstraint constraintName="fk_medic_updated_by_user"
+                                 baseTableName="medic" baseColumnNames="updated_by"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 deleteCascade="false"/>
+
+        <addForeignKeyConstraint constraintName="fk_medic_user_id"
+                                 baseTableName="medic" baseColumnNames="user_id"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 deleteCascade="false"/>
+
+        <createTable tableName="medic_specialization">
+            <column name="specialization" type="varchar(100)">
+                <constraints primaryKey="true" primaryKeyName="pk_medic_specialization"/>
+            </column>
+            <column name="description" type="varchar(500)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_medic_specialization"
+                                 baseTableName="medic" baseColumnNames="specialization"
+                                 referencedTableName="medic_specialization" referencedColumnNames="specialization"
+                                 deleteCascade="false"/>
+    </changeSet>
+
+    <changeSet id="insert-default-medic-specialization" author="Andrei">
+        <insert tableName="medic_specialization">
+            <column name="specialization" value="SURGEON" />
+            <column name="description" value="Surgeon."/>
+        </insert>
+        <insert tableName="medic_specialization">
+            <column name="specialization" value="CARDIOLOGIST" />
+            <column name="description" value="Cardiologist."/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

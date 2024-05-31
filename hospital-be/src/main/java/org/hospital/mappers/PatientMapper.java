@@ -1,13 +1,14 @@
 package org.hospital.mappers;
 
-import org.hospital.api.model.PatientCreateRequestModel;
-import org.hospital.api.model.PatientUpdateRequestModel;
+import org.hospital.api.model.patient.PatientCreateRequestModel;
+import org.hospital.api.model.patient.PatientUpdateRequestModel;
 import org.hospital.api.model.user.UserRegisterStepTwoRequestModel;
 import org.hospital.persistence.entity.PatientEntity;
 import org.mapstruct.*;
-import org.hospital.api.model.PatientResponseModel;
+import org.hospital.api.model.patient.PatientResponseModel;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+        uses = {AppointmentMapper.class, MedicMapper.class},
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface PatientMapper {
     PatientEntity toPatientEntity(PatientCreateRequestModel patientResponseModel);

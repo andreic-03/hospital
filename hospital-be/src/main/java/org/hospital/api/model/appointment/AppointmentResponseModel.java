@@ -1,4 +1,4 @@
-package org.hospital.api.model;
+package org.hospital.api.model.appointment;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,8 +7,10 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class AppointmentDTO {
-    private Long patientId;
+public class AppointmentResponseModel {
+    private Long appointmentId;
     private LocalDateTime startDate;
     private String appointmentDetails;
+    private Long patientId;
+    private Long medicId;
 }

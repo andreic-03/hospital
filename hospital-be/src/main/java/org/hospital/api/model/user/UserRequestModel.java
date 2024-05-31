@@ -2,8 +2,8 @@ package org.hospital.api.model.user;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hospital.api.model.MedicRequestModel;
-import org.hospital.api.model.PatientCreateRequestModel;
+import org.hospital.api.model.medic.MedicRequestModel;
+import org.hospital.api.model.patient.PatientCreateRequestModel;
 
 import java.util.Set;
 

@@ -2,9 +2,9 @@ package org.hospital.services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hospital.api.model.PatientCreateRequestModel;
-import org.hospital.api.model.PatientResponseModel;
-import org.hospital.api.model.PatientUpdateRequestModel;
+import org.hospital.api.model.patient.PatientCreateRequestModel;
+import org.hospital.api.model.patient.PatientResponseModel;
+import org.hospital.api.model.patient.PatientUpdateRequestModel;
 import org.hospital.api.model.user.UserRegisterStepTwoRequestModel;
 import org.hospital.configuration.exception.model.ErrorType;
 import org.hospital.configuration.exception.model.HospitalException;
@@ -162,7 +162,7 @@ public class PatientServiceImpl implements PatientService {
 
     private void setPatientIdForAllAppointments(PatientEntity patient) {
         List<AppointmentEntity> appointments = patient.getAppointments().stream()
-                .peek(appointment -> appointment.setPatientId(patient.getPatientId()))
+                .peek(appointment -> appointment.setPatient(patient))
                 .collect(Collectors.toList());
 
         patient.setAppointments(appointments);

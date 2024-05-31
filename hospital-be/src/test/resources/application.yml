@@ -1,0 +1,31 @@
+spring:
+  profiles:
+    active: test
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:h2:mem:hospitaldb;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  sql:
+    init:
+      mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: H2
+    open-in-view: false
+    hibernate:
+      ddl-auto: create-drop
+  liquibase:
+    enabled: false
+
+# Application Information
+module-name: "hospital-server"
+api-version: "1.0"
+
+# Password Reset Configuration
+app:
+  jwt:
+    secret: CHANGE_ME
+  password-reset:
+    expire-in: 5

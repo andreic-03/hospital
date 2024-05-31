@@ -1,7 +1,7 @@
 package org.hospital.services;
 
-import org.hospital.api.model.MedicRequestModel;
-import org.hospital.api.model.MedicResponseModel;
+import org.hospital.api.model.medic.MedicRequestModel;
+import org.hospital.api.model.medic.MedicResponseModel;
 
 import java.util.List;
 

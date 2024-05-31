@@ -1,9 +1,8 @@
 package org.hospital.mappers;
 
-import org.hospital.api.model.AuthResponseModel;
+import org.hospital.api.model.auth.AuthResponseModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface AuthMapper {

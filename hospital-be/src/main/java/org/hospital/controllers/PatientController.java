@@ -2,7 +2,9 @@ package org.hospital.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.hospital.api.model.*;
+import org.hospital.api.model.patient.PatientCreateRequestModel;
+import org.hospital.api.model.patient.PatientResponseModel;
+import org.hospital.api.model.patient.PatientUpdateRequestModel;
 import org.hospital.api.model.user.UserRegisterStepTwoRequestModel;
 import org.hospital.services.PatientService;
 import org.springframework.http.HttpStatus;

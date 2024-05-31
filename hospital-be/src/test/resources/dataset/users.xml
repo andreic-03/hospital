@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <users
+            id="1"
+            username="login"
+            password="pass"
+            phone_number="123123123"
+            email="asdfa@asd.com"
+            status="ACTIVE"
+            created_by="1"
+            created_on="2024-05-21 16:27:53.274614"
+            updated_by="1"
+            updated_on="2024-05-21 16:27:53.274614"
+            version="1"
+    />
+
+</dataset>
