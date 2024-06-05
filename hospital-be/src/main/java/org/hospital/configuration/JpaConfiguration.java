@@ -1,4 +1,4 @@
-package org.hospital.security;
+package org.hospital.configuration;
 
 import org.hospital.persistence.entity.UserEntity;
 import org.hospital.security.model.AppUserPrincipal;

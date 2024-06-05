@@ -39,9 +39,6 @@ public class PatientMapperTest {
             assertEquals(patient.getCity(), patientResponseModel.getCity());
             assertEquals(patient.getCountry(), patientResponseModel.getCountry());
             assertEquals(patient.getCounty(), patientResponseModel.getCounty());
-            assertEquals(patient.getDiagnosis(), patientResponseModel.getDiagnosis());
-            assertEquals(patient.getObservations(), patientResponseModel.getObservations());
-            assertEquals(patient.getIndications(), patientResponseModel.getIndications());
             assertEquals(patient.getMaritalStatus(), patientResponseModel.getMaritalStatus());
         });
     }

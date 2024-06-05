@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {MedicResponseModel} from "../model/medic.model";
+import {Medic} from "../model/medic.model";
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ export class MedicService {
   constructor(private http: HttpClient) {
   }
 
-  public findById(id: number): Observable<MedicResponseModel> {
-    return this.http.get<MedicResponseModel>(`${this.MEDIC_URL}/${id}`);
+  public findById(id: number): Observable<Medic> {
+    return this.http.get<Medic>(`${this.MEDIC_URL}/${id}`);
   }
 }

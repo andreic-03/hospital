@@ -23,10 +23,6 @@ public class PatientUpdateRequestModel {
     private String maritalStatus;
     private String cnp;
     private String gender;
-    private String diagnosis;
-    private String observations;
-    private String indications;
-    private List<MedicRequestModel> medics;
     private List<AppointmentResponseModel> appointments;
 
 }

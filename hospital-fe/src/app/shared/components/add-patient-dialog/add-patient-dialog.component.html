@@ -1,0 +1,97 @@
+<div mat-dialog-content>
+  <h3 class="category-title">
+    {{ 'create-patient.add-patient' | translate }}
+  </h3>
+  <form [formGroup]="addPatientForm" (ngSubmit)="onSubmitAddPatientForm()">
+    <div class="ml-2 mb-2">{{ 'profile.personal-information' | translate }}</div>
+    <div class="flex justify-between gap-4">
+      <div class="p-4 mb-5 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
+        <input class="bg-gray-100 w-full focus:outline-none global-input"
+               formControlName="lastName"
+               placeholder="{{ 'profile.last-name' | translate }}">
+      </div>
+      <div class="p-4 mb-5 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
+        <input class="bg-gray-100 w-full focus:outline-none global-input"
+               formControlName="firstName"
+               placeholder="{{ 'profile.first-name' | translate }}">
+      </div>
+    </div>
+
+    <div class="flex justify-between gap-4">
+      <div class="p-4 mb-5 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
+        <input class="bg-gray-100 w-full focus:outline-none global-input"
+               formControlName="cnp"
+               placeholder="{{ 'profile.cnp' | translate }}">
+      </div>
+      <div class="p-4 mb-5 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
+        <input class="bg-gray-100 w-full focus:outline-none global-input"
+               formControlName="citizenship"
+               placeholder="{{ 'profile.citizenship' | translate }}">
+      </div>
+    </div>
+    <mat-error *ngIf="
+          addPatientForm.controls['cnp'].touched &&
+          addPatientForm.controls['cnp'].invalid">
+      {{
+      addPatientForm.controls['cnp'].errors
+        | formErrorTranslate
+      }}
+    </mat-error>
+
+    <div class="ml-2 mb-2">{{ 'create-patient.address' | translate }}</div>
+    <div class="flex justify-between gap-4">
+      <div class="p-4 mb-5 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
+        <input class="bg-gray-100 w-full focus:outline-none global-input"
+               formControlName="country"
+               placeholder="{{ 'profile.country' | translate }}">
+      </div>
+      <div class="p-4 mb-5 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
+        <input class="bg-gray-100 w-full focus:outline-none global-input"
+               formControlName="county"
+               placeholder="{{ 'profile.county' | translate }}">
+      </div>
+    </div>
+    <div class="p-4 mb-5 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
+      <input class="bg-gray-100 w-full focus:outline-none global-input"
+             formControlName="address"
+             placeholder="{{ 'profile.address' | translate }}">
+    </div>
+    <mat-divider></mat-divider>
+
+<!--    <div class="ml-2 mb-2">{{ 'create-patient.diagnosis' | translate }}</div>-->
+<!--    <div class="p-4 mb-5 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">-->
+<!--      <input class="bg-gray-100 w-full focus:outline-none global-input"-->
+<!--             formControlName="diagnosis">-->
+<!--    </div>-->
+
+<!--    <div class="ml-2 mb-2">{{ 'create-patient.observations' | translate }}</div>-->
+<!--    <div class="p-4 mb-5 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">-->
+<!--      <textarea class="bg-gray-100 w-full focus:outline-none global-input resize-none"-->
+<!--                formControlName="observations"-->
+<!--                rows="1"-->
+<!--                (input)="autoGrow($event)"></textarea>-->
+<!--    </div>-->
+
+<!--    <div class="ml-2 mb-2">{{ 'create-patient.indications' | translate }}</div>-->
+<!--    <div class="p-4 mb-5 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">-->
+<!--      <textarea class="bg-gray-100 w-full focus:outline-none global-input resize-none"-->
+<!--                formControlName="indications"-->
+<!--                rows="1"-->
+<!--                (input)="autoGrow($event)"></textarea>-->
+<!--    </div>-->
+
+    <mat-error *ngIf="error" class="mb-2">{{
+      error
+      }}</mat-error>
+
+    <div class="flex justify-end mt-8">
+      <button mat-stroked-button class="mr-2"
+              (click)="onCancelClick()"
+              type="button">{{ 'profile.cancel-button' | translate }}</button>
+
+      <button mat-raised-button color="primary"
+              [disabled]="!this.addPatientForm.touched || !this.addPatientForm.valid"
+              type="submit">{{ 'create-patient.add-patient' | translate }}</button>
+    </div>
+  </form>
+</div>

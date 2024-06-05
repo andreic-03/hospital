@@ -11,6 +11,9 @@ public class AppointmentResponseModel {
     private Long appointmentId;
     private LocalDateTime startDate;
     private String appointmentDetails;
+    private String diagnosis;
+    private String observations;
+    private String indications;
     private Long patientId;
     private Long medicId;
 }

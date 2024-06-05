@@ -64,10 +64,10 @@
     </div>
 
     <form *ngIf="isEditMode" [formGroup]="profileForm" (ngSubmit)="onSubmitProfileForm()">
-      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
         <mat-label>{{ 'profile.last-name' | translate }}</mat-label>
         <div>
-          <input class="mt-2 bg-gray-100 w-full focus:outline-none profile-input" type="text"
+          <input class="mt-2 bg-gray-100 w-full focus:outline-none global-input" type="text"
                  formControlName="lastName">
         </div>
       </div>
@@ -93,7 +93,7 @@
       <div class="mt-2">{{ patient.gender || '-' }}</div>
       <mat-divider></mat-divider>
 
-      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
         <mat-label>{{ 'profile.country' | translate }}</mat-label>
         <mat-select class="mt-2 w-full" formControlName="country">
           <mat-option *ngFor="let country of countries" [value]="country">{{ country }}</mat-option>
@@ -101,7 +101,7 @@
       </div>
       <mat-divider></mat-divider>
 
-      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
         <mat-label>{{ 'profile.county' | translate }}</mat-label>
         <mat-select class="mt-2 w-full" formControlName="county">
           <mat-option *ngFor="let county of counties" [value]="county">{{ county }}</mat-option>
@@ -109,25 +109,25 @@
       </div>
       <mat-divider></mat-divider>
 
-      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
         <mat-label>{{ 'profile.city' | translate }}</mat-label>
         <div>
-          <input class="mt-2 bg-gray-100 w-full focus:outline-none profile-input" type="text"
+          <input class="mt-2 bg-gray-100 w-full focus:outline-none global-input" type="text"
                  formControlName="city">
         </div>
       </div>
       <mat-divider></mat-divider>
 
-      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
         <mat-label>{{ 'profile.address' | translate }}</mat-label>
         <div>
-          <input class="mt-2 bg-gray-100 w-full focus:outline-none profile-input" type="text"
+          <input class="mt-2 bg-gray-100 w-full focus:outline-none global-input" type="text"
                  formControlName="address">
         </div>
       </div>
       <mat-divider></mat-divider>
 
-      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+      <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
         <mat-label>{{ 'profile.marital-status' | translate }}</mat-label>
         <mat-select class="mt-2 w-full" formControlName="maritalStatus">
           <mat-option *ngFor="let maritalStatus of maritalStatuses" [value]="maritalStatus">{{ maritalStatus }}</mat-option>

@@ -28,10 +28,10 @@
         </button>
       </div>
       <ng-template #editPhoneNumberTemplate>
-        <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+        <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
           <mat-label>{{ 'profile.phone-number' | translate }}</mat-label>
           <div>
-            <input class="mt-2 bg-gray-100 w-full focus:outline-none profile-input" type="text"
+            <input class="mt-2 bg-gray-100 w-full focus:outline-none global-input" type="text"
                    [(ngModel)]="editablePhoneNumber" [ngModelOptions]="{standalone: true}">
           </div>
         </div>
@@ -49,10 +49,10 @@
         </button>
       </div>
       <ng-template #editEmailTemplate>
-        <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full profile-input">
+        <div class="p-2 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">
           <mat-label>{{ 'profile.email' | translate }}</mat-label>
           <div>
-            <input class="mt-2 bg-gray-100 w-full focus:outline-none profile-input" type="text"
+            <input class="mt-2 bg-gray-100 w-full focus:outline-none global-input" type="text"
                    [(ngModel)]="editableEmail" [ngModelOptions]="{standalone: true}">
           </div>
         </div>
@@ -89,7 +89,7 @@
     <mat-divider></mat-divider>
 
     <div class="flex justify-between">
-      <div class="content-center w-3/5">{{ 'profile.delete-account-info' | translate }}</div>
+      <div class="content-center w-4/5">{{ 'profile.delete-account-info' | translate }}</div>
       <button mat-flat-button
               color="warn"
               type="button">

@@ -6,11 +6,15 @@ import org.hospital.api.model.patient.PatientCreateRequestModel;
 import org.hospital.api.model.patient.PatientResponseModel;
 import org.hospital.api.model.patient.PatientUpdateRequestModel;
 import org.hospital.api.model.user.UserRegisterStepTwoRequestModel;
+import org.hospital.security.model.AppUserPrincipal;
 import org.hospital.services.PatientService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.util.List;
 
 import static org.hospital.api.model.general.Constants.API_PATIENT;
 
@@ -39,7 +43,7 @@ public class PatientController {
     }
 
     @GetMapping(value = "/cnp/{cnp}")
-    public PatientResponseModel findPatientByCnp(@PathVariable final Long cnp) {
+    public PatientResponseModel findPatientByCnp(@PathVariable final String cnp) {
         return patientService.findPatientByCnp(cnp);
     }
 
@@ -62,5 +66,10 @@ public class PatientController {
     @PostMapping("/registration/step-two")
     public PatientResponseModel userRegisterStepTwo(@RequestBody final UserRegisterStepTwoRequestModel userRegisterStepTwoRequestModel) {
         return patientService.registerUserStepTwo(userRegisterStepTwoRequestModel);
+    }
+
+    @GetMapping("/createdByCurrentUser")
+    public List<PatientResponseModel> getPatientsCreatedByCurrentUser(@AuthenticationPrincipal AppUserPrincipal user) {
+        return patientService.getPatientsCreatedByCurrentUser(user.getUserEntity());
     }
 }

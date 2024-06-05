@@ -87,10 +87,7 @@ public class TestUtils {
         patient.setCity("Cluj-Napoca");
         patient.setCountry("Romania");
         patient.setCounty("Cluj");
-        patient.setDiagnosis("AAAAAAAA");
-        patient.setObservations("AAAAAAAAA");
         patient.setMaritalStatus("Married");
-        patient.setIndications("AAAAAAAAAA");
         patient.setUser(user);
 
         return patient;

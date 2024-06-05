@@ -86,17 +86,17 @@ public class UserServiceImpl implements UserService {
         userEntity.setPassword(passwordEncoder.encode(requestModel.getPassword()));
         userEntity.setStatus(UserStatus.ACTIVE);
 
-        UserEntity user = userRepository.saveAndFlush(userEntity);
+        UserEntity user = userRepository.save(userEntity);
 
         if (requestModel.getMedic() != null) {
-            MedicEntity medic = medicMapper.toMedicEntity(requestModel.getMedic());
+            MedicEntity medic = medicRepository.findMedicByCnp(requestModel.getMedic().getCnp());
             medic.setUser(user);
 
             medicRepository.save(medic);
         }
 
         if (requestModel.getPatient() != null) {
-            PatientEntity patient = patientMapper.toPatientEntity(requestModel.getPatient());
+            PatientEntity patient = patientRepository.findPatientByCnp(requestModel.getPatient().getCnp());
             patient.setUser(user);
 
             patientRepository.save(patient);

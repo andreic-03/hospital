@@ -1,8 +1,8 @@
-<div class="flex justify-between items-center p-2 header">
-  <div class="flex items-center justify-start pl-40">
-    <a routerLink="/dashboard" class="flex items-center justify-start">
-      <img src="../../../../assets/images/logo4.svg" alt="Logo" class="h-12">
-      <div class="ml-4 flex items-center -mb-4">
+<div class="header" fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxFlex fxLayout="row" fxLayoutAlign="start center" [ngClass]="{'start-content': !isMobile, 'mobile-start-content': isMobile}">
+    <a routerLink="/dashboard" fxLayout="row" fxLayoutAlign="start center">
+      <img src="../../../../assets/images/logo4.svg" alt="Logo" class="h-8">
+      <div class="ml-4 -mb-4" fxHide fxShow.gt-xs>
         <h1 class="text-white">{{ 'app.title' | translate }}</h1>
       </div>
     </a>
@@ -12,13 +12,13 @@
     </button>
 
     <button [matMenuTriggerFor]="langMenu" mat-button>
-      <img [src]="getFlagUrl(selectedLanguage)" alt="Selected Language" class="w-8" />
+      <img [src]="getFlagUrl(selectedLanguage)" alt="Selected Language" class="w-8">
     </button>
 
     <mat-menu #langMenu="matMenu">
       <div class="mb-2 ml-2">
         <button (click)="switchLanguage('en')" class="flex items-center">
-          <img src="assets/icons/uk-flag.svg" alt="English" class="w-8"/>
+          <img src="assets/icons/uk-flag.svg" alt="English" class="w-8">
           <span class="ml-2">EN</span>
           <mat-icon *ngIf="selectedLanguage === 'en'" class="ml-2">check</mat-icon>
         </button>
@@ -26,7 +26,7 @@
       <mat-divider></mat-divider>
       <div class="mt-2 ml-2">
         <button (click)="switchLanguage('ro')" class="flex items-center">
-          <img src="assets/icons/romania-flag.svg" alt="Română" class="w-8"/>
+          <img src="assets/icons/romania-flag.svg" alt="Română" class="w-8">
           <span class="ml-2">RO</span>
           <mat-icon *ngIf="selectedLanguage === 'ro'" class="ml-2">check</mat-icon>
         </button>
@@ -34,21 +34,21 @@
     </mat-menu>
   </div>
 
-  <div *ngIf="showCreateAccountButton" class="flex items-center pr-44">
-    <div class="mr-5 text-white">{{ 'header.info.no-account' | translate }}</div>
+  <div fxFlex fxLayout="row" fxLayoutAlign="end center" [ngClass]="{'end-content': !isMobile, 'mobile-end-content': isMobile}">
+    <div *ngIf="showCreateAccountButton" class="flex items-center">
+      <div class="mr-5 text-white" fxHide fxShow.gt-xs>{{ 'header.info.no-account' | translate }}</div>
+      <button (click)="navigateToSignUp()" class="button-with-border" mat-button>
+        <mat-icon class="text-white">person_add</mat-icon>
+        <span class="text-white" fxHide fxShow.gt-xs>{{ 'header.create-account' | translate }}</span>
+      </button>
+    </div>
 
-    <button (click)="navigateToSignUp()" class="button-with-border" mat-button>
-      <mat-icon class="text-white">person_add</mat-icon>
-      <span class="text-white">{{ 'header.create-account' | translate }}</span>
-    </button>
-  </div>
-
-  <div *ngIf="showSignInButton" class="flex items-center pr-44">
-    <span class="mr-5 text-white">{{ 'header.info.have-account' | translate }}</span>
-
-    <button (click)="navigateToLogin()" class="button-with-border" mat-button>
-      <mat-icon class="text-white">person</mat-icon>
-      <span class="text-white">{{ 'header.login' | translate }}</span>
-    </button>
+    <div *ngIf="showSignInButton" class="flex items-center">
+      <span class="mr-5 text-white" fxHide fxShow.gt-xs>{{ 'header.info.have-account' | translate }}</span>
+      <button (click)="navigateToLogin()" class="button-with-border" mat-button>
+        <mat-icon class="text-white">person</mat-icon>
+        <span class="text-white" fxHide fxShow.gt-xs>{{ 'header.login' | translate }}</span>
+      </button>
+    </div>
   </div>
 </div>

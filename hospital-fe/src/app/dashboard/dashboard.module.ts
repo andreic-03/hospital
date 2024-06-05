@@ -9,9 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SharedModule } from "../shared/shared.module";
+import {SharedMaterialModule, SharedModule} from "../shared/shared.module";
 import { DashboardBaseComponent } from "./dashboard-base-component/dashboard-base.component";
 import { DashboardComponent } from "./dashboard-component/dashboard.component";
+import { MedicDashboardComponent } from './medic-dashboard-component/medic-dashboard.component';
 
 @NgModule({
   declarations: [],
@@ -30,6 +31,7 @@ class UserMaterialModule {}
   declarations: [
     DashboardBaseComponent,
     DashboardComponent,
+    MedicDashboardComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +41,7 @@ class UserMaterialModule {}
     ReactiveFormsModule,
     TranslateModule,
     SharedModule,
+    SharedMaterialModule,
   ],
 })
 export class DashboardModule {}

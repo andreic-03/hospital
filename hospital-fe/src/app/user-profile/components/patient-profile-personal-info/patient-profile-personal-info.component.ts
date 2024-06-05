@@ -1,14 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Select, Store} from "@ngxs/store";
-import {AuthState} from "../../../shared/redux/auth.state";
-import {Observable} from "rxjs";
-import {User} from "../../../shared/model/user.model";
-import {MedicResponseModel} from "../../../shared/model/medic.model";
 import {Patient} from "../../../shared/model/patient.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {PatientService} from "../../../shared/services/patient.service";
 import {mapError} from "../../../shared/error.util";
-import {GetCurrentUserInfo} from "../../../shared/redux/auth.actions";
 
 @Component({
   selector: 'app-patient-profile-personal-info',
@@ -27,8 +21,7 @@ export class PatientProfilePersonalInfoComponent implements OnInit {
   profileErrorMessage: string | null = null;
 
   constructor(private formBuilder: FormBuilder,
-              private patientService: PatientService,
-              private store: Store) {
+              private patientService: PatientService) {
   }
 
   ngOnInit() {

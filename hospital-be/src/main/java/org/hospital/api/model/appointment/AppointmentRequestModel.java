@@ -11,5 +11,8 @@ public class AppointmentRequestModel {
     private Long patientId;
     private LocalDateTime startDate;
     private String appointmentDetails;
+    private String diagnosis;
+    private String observations;
+    private String indications;
     private Long medicId;
 }

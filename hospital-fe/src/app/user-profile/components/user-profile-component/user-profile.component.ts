@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MedicResponseModel} from "../../../shared/model/medic.model";
+import {Medic} from "../../../shared/model/medic.model";
 import {Patient} from "../../../shared/model/patient.model";
 import {Select, Store} from "@ngxs/store";
 import {AuthState} from "../../../shared/redux/auth.state";
@@ -31,7 +31,7 @@ export class UserProfileComponent implements OnInit{
   currentUser$!: Observable<User>;
 
   @Select(AuthState.getMedicInfo)
-  medic$!: Observable<MedicResponseModel>;
+  medic$!: Observable<Medic>;
 
   @Select(AuthState.getPatientInfo)
   patient$!: Observable<Patient>;

@@ -24,6 +24,15 @@ public class AppointmentEntity extends AuditingEntity {
     @Column(name = "appointment_details")
     private String appointmentDetails;
 
+    @Column(name = "observations", columnDefinition = "TEXT")
+    private String observations;
+
+    @Column(name = "indications", columnDefinition = "TEXT")
+    private String indications;
+
+    @Column(name = "diagnosis")
+    private String diagnosis;
+
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
     private PatientEntity patient;

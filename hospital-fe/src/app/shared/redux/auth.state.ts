@@ -5,14 +5,14 @@ import {GetCurrentUserInfo, GetMedicInfo, GetPatientInfo, Login, Logout} from ".
 import { AuthService } from "../services/auth.service";
 import {tap, switchMap, EMPTY, filter, Observable, of} from 'rxjs';
 import {Patient} from "../model/patient.model";
-import {MedicResponseModel} from "../model/medic.model";
+import {Medic} from "../model/medic.model";
 import {MedicService} from "../services/medic.service";
 import {PatientService} from "../services/patient.service";
 
 export class AuthStateModel {
   accessToken?: string;
   user?: User;
-  medic?: MedicResponseModel;
+  medic?: Medic;
   patient?: Patient;
 }
 
@@ -38,7 +38,7 @@ export class AuthState {
   }
 
   @Selector()
-  static getMedicInfo(state: AuthStateModel): MedicResponseModel | undefined {
+  static getMedicInfo(state: AuthStateModel): Medic | undefined {
     return state.medic;
   }
 

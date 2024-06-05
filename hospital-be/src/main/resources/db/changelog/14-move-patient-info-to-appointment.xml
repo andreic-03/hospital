@@ -1,0 +1,25 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="14-move-observations-indications-diagnosis" author="Andrei">
+        <addColumn tableName="appointment">
+            <column name="observations" type="TEXT"/>
+            <column name="indications" type="TEXT"/>
+            <column name="diagnosis" type="varchar(100)"/>
+        </addColumn>
+
+        <update tableName="appointment">
+            <column name="observations" valueComputed="(SELECT observations FROM patient WHERE appointment.patient_id = patient.patient_id)"/>
+            <column name="indications" valueComputed="(SELECT indications FROM patient WHERE appointment.patient_id = patient.patient_id)"/>
+            <column name="diagnosis" valueComputed="(SELECT diagnosis FROM patient WHERE appointment.patient_id = patient.patient_id)"/>
+        </update>
+
+        <dropColumn tableName="patient" columnName="observations"/>
+        <dropColumn tableName="patient" columnName="indications"/>
+        <dropColumn tableName="patient" columnName="diagnosis"/>
+    </changeSet>
+
+</databaseChangeLog>

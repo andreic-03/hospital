@@ -24,9 +24,6 @@ public class PatientResponseModel {
     private String maritalStatus;
     private String cnp;
     private String gender;
-    private String diagnosis;
-    private String observations;
-    private String indications;
     private List<MedicResponseModel> medics;
     private List<AppointmentResponseModel> appointments;
 

@@ -53,15 +53,6 @@ public class PatientEntity extends AuditingEntity {
     @Column(name = "cnp")
     private String cnp;
 
-    @Column(name = "diagnosis")
-    private String diagnosis;
-
-    @Column(name = "observations")
-    private String observations;
-
-    @Column(name = "indications")
-    private String indications;
-
     @OneToMany(mappedBy = "patient",
                cascade = CascadeType.ALL,
                orphanRemoval = true)

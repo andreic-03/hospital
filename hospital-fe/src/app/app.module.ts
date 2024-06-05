@@ -13,6 +13,7 @@ import {SharedModule} from "./shared/shared.module";
 import {LOCATION_INITIALIZED} from "@angular/common";
 import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
         AppRoutingModule,
         BrowserAnimationsModule,
         SharedModule,
+        FlexLayoutModule,
         NgxsModule.forRoot(appStates, {
           developmentMode: !environment.production,
         }),

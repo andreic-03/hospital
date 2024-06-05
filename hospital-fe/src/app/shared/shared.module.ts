@@ -17,8 +17,11 @@ import {HttpClient} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {BasePageComponent} from './base-page/base-page.component';
 import {MatSelectModule} from "@angular/material/select";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatDividerModule} from "@angular/material/divider";
+import {FlexLayoutModule} from "@angular/flex-layout";
+import { AddPatientDialogComponent } from './components/add-patient-dialog/add-patient-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [],
@@ -30,6 +33,8 @@ import {MatDividerModule} from "@angular/material/divider";
     MatCardModule,
     MatMenuModule,
     MatSelectModule,
+    MatDividerModule,
+    MatDialogModule,
     MatDividerModule,
   ],
 })
@@ -44,6 +49,7 @@ export class SharedMaterialModule {
     ErrorMessageComponent,
     FormErrorTranslatePipe,
     BasePageComponent,
+    AddPatientDialogComponent,
   ],
   exports: [
     NotLoggedInHeaderComponent,
@@ -58,6 +64,8 @@ export class SharedMaterialModule {
     RouterModule,
     SharedMaterialModule,
     FormsModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

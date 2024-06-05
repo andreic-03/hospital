@@ -51,14 +51,13 @@ export class PasswordChangeDialogComponent {
       .subscribe({
         next: () => {
           this.dialogRef.close();
-          this.store.dispatch(new Navigate(['/login']))
+          this.store.dispatch(new Navigate(['/login']));
         },
         error: error => {
           const errResponse = mapError(error);
           this.passwordErrorMessage = errResponse.message;
         },
       });
-
   }
 
   onCancelClick(): void {

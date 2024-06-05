@@ -27,6 +27,8 @@ spring:
       max-request-size: 6MB
   main:
     allow-circular-references: true
+  banner:
+    location: banner.txt
   mail:
     host: CHANGE_ME
     port: CHANGE_ME

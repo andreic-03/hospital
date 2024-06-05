@@ -4,6 +4,9 @@ import org.hospital.api.model.patient.PatientCreateRequestModel;
 import org.hospital.api.model.patient.PatientResponseModel;
 import org.hospital.api.model.patient.PatientUpdateRequestModel;
 import org.hospital.api.model.user.UserRegisterStepTwoRequestModel;
+import org.hospital.persistence.entity.UserEntity;
+
+import java.util.List;
 
 public interface PatientService {
 
@@ -13,7 +16,7 @@ public interface PatientService {
 
     PatientResponseModel findPatientByFirstNameAndLastName(final String firstName, final String lastName);
 
-    PatientResponseModel findPatientByCnp(final Long cnp);
+    PatientResponseModel findPatientByCnp(final String cnp);
 
     PatientResponseModel findPatientByMedic(final Long medicId);
 
@@ -22,4 +25,6 @@ public interface PatientService {
     void delete(final Long id);
 
     PatientResponseModel registerUserStepTwo(final UserRegisterStepTwoRequestModel userRegisterStepTwoRequestModel);
+
+    List<PatientResponseModel> getPatientsCreatedByCurrentUser(final UserEntity user);
 }

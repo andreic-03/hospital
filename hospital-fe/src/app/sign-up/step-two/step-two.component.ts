@@ -10,6 +10,7 @@ import {Patient} from "../../shared/model/patient.model";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {catchError, EMPTY} from "rxjs";
 import {mapError} from "../../shared/error.util";
+import {validateCNP} from "../../shared/util/validators.util";
 
 @Component({
   selector: 'app-step-two',
@@ -26,7 +27,7 @@ export class StepTwoComponent implements OnInit {
   form: FormGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
-    cnp: new FormControl('', [Validators.required]),
+    cnp: new FormControl('', [Validators.required, validateCNP]),
   });
 
   constructor(private store: Store,

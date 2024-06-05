@@ -13,6 +13,12 @@
       "numbers": "The password must contain at least one number.",
       "special-char": "The password must contain at least one special character: {{charOptions}}",
       "length": "The password had to consist of at least {{minLength}} characters."
+    },
+    "cnp-validation": {
+      "first-digit": "Invalid first digit. Please enter a number less than 7.",
+      "month": "Invalid birth month. Please enter a month between 01 and 12.",
+      "day": "Invalid birth day. Please enter a valid day for the chosen month.",
+      "length": "Invalid CNP format. Please enter a valid 13-digit CNP number."
     }
   },
   "login": {
@@ -97,5 +103,22 @@
       "new-password": "New password",
       "confirm-new-password": "Confirm new password"
     }
+  },
+  "dashboard": {
+    "hello-title": "Hello",
+    "hello-text": "we wish you a great day!",
+    "my-patients": "My patients",
+    "visit-date": "VISIT DATE",
+    "diagnosis": "DIAGNOSIS",
+    "observations": "OBSERVATIONS",
+    "add-appointment-for-patient" : "Add appointment for a patient",
+    "history-patient": "See patient history",
+    "my-appointments": "My appointments",
+    "remove-patient": "Remove patient",
+    "view-all-patients": "See all patients"
+  },
+  "create-patient": {
+    "add-patient": "Add patient",
+    "address": "Address"
   }
 }

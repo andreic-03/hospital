@@ -1,7 +1,8 @@
 <ng-container *ngIf="currentUser$ | async as user">
   <div class="flex items-center">
     <button *ngIf="user.roles.includes(Role.MEDIC); else createAppointmentTemplate" mat-button
-            class="button-with-border">
+            class="button-with-border"
+            (click)="openAddPatientDialog()">
       <mat-icon class="text-white">add</mat-icon>
       <span class="text-white">{{ 'header.add-patient' | translate }}</span>
     </button>

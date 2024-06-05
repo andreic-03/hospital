@@ -13,6 +13,12 @@
       "numbers": "Parola trebuie sa contina cel putin un numar",
       "special-char": "Parola trebuie sa contina cel putin un caracter special: {{charOptions}}",
       "length": "Parola trebuia sa fie alcatunita din minim {{minLength}} caractere."
+    },
+    "cnp-validation": {
+      "first-digit": "Prima cifra nu este corecta. Prima cifra din CNP trebuie sa fie mai mica decat 7",
+      "month": "Luna introdusa nu este corecta. Luna din CNP trebuie sa fie intre 01 si 12.",
+      "day": "Ziua introdusa nu este corecta. Ziua introdusa trebuies a coresponda pentru luna aleasa.",
+      "length": "Format CNP incorect. CNP trebuie sa contina 13 cifre."
     }
   },
   "login": {
@@ -97,5 +103,22 @@
       "new-password": "Noua parola",
       "confirm-new-password": "Confirmare noua parola"
     }
+  },
+  "dashboard": {
+    "hello-title": "Salut",
+    "hello-text": "o zi minunata iti dorim!",
+    "my-patients": "Pacientii mei",
+    "visit-date": "DATA VIZITEI",
+    "diagnosis": "DIAGNOSTIC",
+    "observations": "OBSERVATII",
+    "add-appointment-for-patient" : "Creaza programare pentru un pacient",
+    "history-patient": "Vezi istoric pacient",
+    "my-appointments": "Programarile mele",
+    "remove-patient": "Elimina pacient",
+    "view-all-patients": "Vezi toti pacientii"
+  },
+  "create-patient": {
+    "add-patient": "Adauga pacient",
+    "address": "Adresa"
   }
 }

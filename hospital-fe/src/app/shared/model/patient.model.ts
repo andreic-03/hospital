@@ -11,7 +11,5 @@ export interface Patient {
   maritalStatus: string;
   cnp: string;
   gender: string;
-  diagnosis: string;
-  observations: string;
-  indications: string;
+  // appointments: Appointment[];
 }

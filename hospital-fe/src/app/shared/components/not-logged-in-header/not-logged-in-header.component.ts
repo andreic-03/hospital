@@ -4,6 +4,7 @@ import {Navigate} from "@ngxs/router-plugin";
 import {Router} from "@angular/router";
 import {ThemeService} from "../../services/theme.service";
 import {TranslateService} from "@ngx-translate/core";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
 @Component({
   selector: 'app-not-logged-in-header',
@@ -15,13 +16,20 @@ export class NotLoggedInHeaderComponent implements OnInit {
   showSignInButton: boolean = false;
   isDarkTheme!: boolean;
   selectedLanguage!: string;
+  isMobile!: boolean;
 
   constructor(private store: Store,
               private router: Router,
               private translate: TranslateService,
-              private themeService: ThemeService) { }
+              private themeService: ThemeService,
+              private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
+    this.breakpointObserver.observe([Breakpoints.Handset])
+      .subscribe(result => {
+        this.isMobile = result.matches;
+      });
+
     const currentRoute = this.router.url;
     if (currentRoute === '/login') {
       this.showCreateAccountButton = true;

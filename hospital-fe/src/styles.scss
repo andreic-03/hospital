@@ -32,11 +32,6 @@ html, body {
   margin: 0;
 }
 
-//In case i want to change font
-//.mat-body, .mat-body-2, .mat-typography .mat-body, .mat-typography .mat-body-2, .mat-typography {
-//  font-family: 'Tiempos Fine Medium', sans-serif; // Override the font-family
-//}
-
 .light-theme {
   @include mat.all-component-colors($my-light-theme);
   background-color: whitesmoke;
@@ -46,6 +41,10 @@ html, body {
     background-color: #009688;
     //red
     //background-color: #f44336;
+  }
+
+  .card-button {
+    background-color: #efefef;
   }
 }
 
@@ -58,8 +57,16 @@ html, body {
     background-color: grey;
   }
 
-  .profile-input {
+  .global-input {
     background-color: gray;
+  }
+
+  .card-button {
+    background-color: #9e9e9e;
+
+      span {
+        color: #212121;
+      }
   }
 }
 

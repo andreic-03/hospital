@@ -42,6 +42,7 @@ public class PatientServiceImpl implements PatientService {
         PatientEntity patientEntity = patientMapper.toPatientEntity(patientCreateRequestModel);
 
         patientEntity.setDateOfBirth(Utils.getDateOfBirthFromCNP(patientCreateRequestModel.getCnp()));
+        patientEntity.setGender(Utils.getGenderFromCNP(patientCreateRequestModel.getCnp()));
 
         return patientMapper.toPatientModel(patientRepository.save(patientEntity));
     }
@@ -58,7 +59,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public PatientResponseModel findPatientByCnp(final Long cnp) {
+    public PatientResponseModel findPatientByCnp(final String cnp) {
 
         PatientEntity patient = patientRepository.findPatientByCnp(cnp);
 
@@ -87,10 +88,6 @@ public class PatientServiceImpl implements PatientService {
 
         patientMapper.updatePatientEntity(existingPatient, patientUpdateRequestModel);
 
-        //TODO Check if user is already assigned to the medic
-        if (patientUpdateRequestModel.getMedics() != null) {
-            setMedicsForPatient(patientUpdateRequestModel, existingPatient);
-        }
         if (patientUpdateRequestModel.getAppointments() != null) {
             setPatientIdForAllAppointments(existingPatient);
         }
@@ -105,7 +102,6 @@ public class PatientServiceImpl implements PatientService {
 
         UserEntity user = patientEntity.getUser();
 
-        //If there is a patient who is assigned to this medic, remove the medic from patient
         if (!patientEntity.getAppointments().isEmpty()) {
             appointmentRepository.deleteAll(patientEntity.getAppointments());
         }
@@ -156,6 +152,12 @@ public class PatientServiceImpl implements PatientService {
         return patientMapper.toPatientModel(patientEntity);
     }
 
+    public List<PatientResponseModel> getPatientsCreatedByCurrentUser(final UserEntity user) {
+        return patientRepository.findPatientByCreatedBy(user).stream()
+                .map(patientMapper::toPatientModel)
+                .collect(Collectors.toList());
+    }
+
     private PatientEntity findPatientById(Long id) {
         return ValidationsUtil.validateEntityExistence(patientRepository.findById(id), "patient.id", id);
     }
@@ -168,11 +170,4 @@ public class PatientServiceImpl implements PatientService {
         patient.setAppointments(appointments);
     }
 
-    private void setMedicsForPatient(PatientUpdateRequestModel patientUpdateRequestModel, PatientEntity existingPatient) {
-        List<MedicEntity> medics = patientUpdateRequestModel.getMedics().stream()
-                .map(medic -> medicRepository.findMedicByFirstNameAndLastName(medic.getFirstName(), medic.getLastName()))
-                .collect(Collectors.toList());
-
-        existingPatient.setMedics(medics);
-    }
 }

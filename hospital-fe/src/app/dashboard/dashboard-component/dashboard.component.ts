@@ -3,7 +3,7 @@ import {Select} from "@ngxs/store";
 import {AuthState} from "../../shared/redux/auth.state";
 import {Observable} from "rxjs";
 import {User} from "../../shared/model/user.model";
-import {MedicResponseModel} from "../../shared/model/medic.model";
+import {Medic} from "../../shared/model/medic.model";
 import {Patient} from "../../shared/model/patient.model";
 
 @Component({
@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   currentUser$!: Observable<User>;
 
   @Select(AuthState.getMedicInfo)
-  medic$!: Observable<MedicResponseModel>;
+  medic$!: Observable<Medic>;
 
   @Select(AuthState.getPatientInfo)
   patient$!: Observable<Patient>;

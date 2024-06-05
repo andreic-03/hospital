@@ -6,10 +6,12 @@ import {Role, User} from "../../../model/user.model";
 import {GetCurrentUserInfo, GetMedicInfo, GetPatientInfo, Logout} from "../../../redux/auth.actions";
 import {BaseComponent} from "../../../base/base.component";
 import {Navigate} from "@ngxs/router-plugin";
-import {MedicResponseModel} from "../../../model/medic.model";
+import {Medic} from "../../../model/medic.model";
 import {Patient} from "../../../model/patient.model";
 import {ThemeService} from "../../../services/theme.service";
 import {TranslateService} from "@ngx-translate/core";
+import {AddPatientDialogComponent} from "../../add-patient-dialog/add-patient-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-header-user',
@@ -18,7 +20,7 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class HeaderUserComponent extends BaseComponent implements OnInit {
   Role = Role;
-  currentPerson: MedicResponseModel | Patient | null = null;
+  currentPerson: Medic | Patient | null = null;
   selectedLanguage!: string;
   isDarkTheme!: boolean;
 
@@ -26,14 +28,15 @@ export class HeaderUserComponent extends BaseComponent implements OnInit {
   currentUser$!: Observable<User>;
 
   @Select(AuthState.getMedicInfo)
-  medic$!: Observable<MedicResponseModel>;
+  medic$!: Observable<Medic>;
 
   @Select(AuthState.getPatientInfo)
   patient$!: Observable<Patient>;
 
   constructor(private store: Store,
               private themeService: ThemeService,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private dialog: MatDialog) {
     super();
   }
 
@@ -92,5 +95,17 @@ export class HeaderUserComponent extends BaseComponent implements OnInit {
       default:
         return 'assets/icons/uk-flag.svg';
     }
+  }
+
+  openAddPatientDialog(): void {
+    const dialogRef = this.dialog.open(AddPatientDialogComponent, {
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        window.location.reload();
+      }
+    });
   }
 }
