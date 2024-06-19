@@ -15,22 +15,37 @@ import org.hospital.services.crypto.CryptoHashService;
 import org.hospital.util.Utils;
 import org.hospital.util.ValidationsUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.hospital.util.Utils.getProcessedSearchTerm;
 
 @Service
 @Slf4j
 @AllArgsConstructor
 public class PatientServiceImpl implements PatientService {
     private final PatientMapper patientMapper;
-    private final MedicRepository medicRepository;
     private final AppointmentRepository appointmentRepository;
     private final UserRepository userRepository;
     private final RegisterAccountTokenRepository registerAccountTokenRepository;
     private final CryptoHashService cryptoHashService;
     private final PatientRepository patientRepository;
+
+    @Override
+    public List<PatientResponseModel> filterPatients(String searchTerm) {
+        final var processedSearchTerm = getProcessedSearchTerm(searchTerm);
+
+        final var patient = StringUtils.hasLength(processedSearchTerm) ?
+                patientRepository.filterPatients(processedSearchTerm) :
+                patientRepository.findAll();
+
+        return patient.stream()
+                .map(patientMapper::toPatientModel)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public PatientResponseModel findById(Long id) {
@@ -63,7 +78,7 @@ public class PatientServiceImpl implements PatientService {
 
         PatientEntity patient = patientRepository.findPatientByCnp(cnp);
 
-        if (patient == null ){
+        if (patient == null) {
             throw new HospitalException(ErrorType.CNP_NOT_FOUND);
         }
 
@@ -71,15 +86,11 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public PatientResponseModel findPatientByMedic(final Long medicId) {
+    public List<PatientResponseModel> findPatientsByMedic(final Long medicId) {
 
-        PatientEntity patient = patientRepository.findPatientByMedicId(medicId);
-
-        if (patient == null ){
-            throw new HospitalException(ErrorType.PATIENT_FOR_MEDIC_NOT_FOUND);
-        }
-
-        return patientMapper.toPatientModel(patient);
+        return patientRepository.findByMedicsMedicId(medicId)
+                .stream().map(patientMapper::toPatientModel)
+                .collect(Collectors.toList());
     }
 
     @Override

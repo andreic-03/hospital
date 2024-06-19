@@ -22,6 +22,9 @@ import {MatDividerModule} from "@angular/material/divider";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { AddPatientDialogComponent } from './components/add-patient-dialog/add-patient-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { PatientSearchComponent } from './components/patient-search/patient-search.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { MedicSearchComponent } from './components/medic-search/medic-search.component';
 
 @NgModule({
   declarations: [],
@@ -36,6 +39,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatDividerModule,
     MatDialogModule,
     MatDividerModule,
+    MatAutocompleteModule,
   ],
 })
 export class SharedMaterialModule {
@@ -50,6 +54,8 @@ export class SharedMaterialModule {
     FormErrorTranslatePipe,
     BasePageComponent,
     AddPatientDialogComponent,
+    PatientSearchComponent,
+    MedicSearchComponent,
   ],
   exports: [
     NotLoggedInHeaderComponent,
@@ -58,6 +64,8 @@ export class SharedMaterialModule {
     ErrorMessageComponent,
     FormErrorTranslatePipe,
     BasePageComponent,
+    PatientSearchComponent,
+    MedicSearchComponent,
   ],
   imports: [
     CommonModule,

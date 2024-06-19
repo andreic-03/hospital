@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Patient} from "../model/patient.model";
 
@@ -9,6 +9,7 @@ import {Patient} from "../model/patient.model";
 export class PatientService {
   private readonly PATIENT_URL = '/api/patient';
   private readonly CREATED_BY_CURRENT_USER = this.PATIENT_URL + '/createdByCurrentUser'
+  private readonly PATIENTS_BY_MEDIC = this.PATIENT_URL + '/medic'
 
   constructor(private http: HttpClient) {
   }
@@ -31,5 +32,21 @@ export class PatientService {
 
   public createPatient(patient: Patient): Observable<Patient> {
     return this.http.post<Patient>(`${this.PATIENT_URL}`, patient);
+  }
+
+  public searchPatient(searchTerm: string): Observable<Patient[]> {
+    const params = searchTerm
+      ? new HttpParams({
+        fromObject: {searchTerm},
+      })
+      : new HttpParams();
+
+    return this.http.get<Patient[]>(this.PATIENT_URL, {
+      params,
+    });
+  }
+
+  public getPatientsByMedic(medicId: number): Observable<Patient[]> {
+    return this.http.get<Patient[]>(`${this.PATIENTS_BY_MEDIC}/${medicId}`);
   }
 }

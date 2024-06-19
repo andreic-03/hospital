@@ -1,0 +1,68 @@
+<ng-container *ngIf="medic" xmlns="http://www.w3.org/1999/html">
+  <div class="mb-8">
+    <h1 class="title">
+      {{ 'header.make-appointment' | translate }}
+    </h1>
+  </div>
+
+  <button mat-raised-button [routerLink]="'/dashboard'">
+    <mat-icon>arrow_back</mat-icon>
+    <span>{{ 'appointment.back' | translate }}</span>
+  </button>
+
+  <mat-card class="p-4 mt-8">
+    <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+      <div class="flex">
+        <app-patient-search (patientSelected)="onPatientSelected($event)" class="w-full"></app-patient-search>
+        <app-medic-search (medicSelected)="onMedicSelected($event)" class="w-full ml-2"></app-medic-search>
+      </div>
+
+      <mat-form-field class="mt-2 w-full">
+        <mat-label>{{ 'appointment.diagnosis' | translate }}</mat-label>
+        <textarea matInput
+                  formControlName="diagnosis"
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="1"></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="mt-2 w-full">
+        <mat-label>{{ 'appointment.observations' | translate }}</mat-label>
+        <textarea matInput
+                  formControlName="observations"
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="1"></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="mt-2 w-full">
+        <mat-label>{{ 'appointment.indications' | translate }}</mat-label>
+        <textarea matInput
+                  formControlName="indications"
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="1"></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput formControlName="appointmentDate" [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-error *ngIf="errorMessage" class="mb-2">{{
+        errorMessage
+        }}</mat-error>
+      <div *ngIf="wasAdded" class="flex justify-end text-teal-500 text-base m-2">{{ 'appointment.added' | translate }}</div>
+
+      <div class="flex justify-end mt-6">
+        <button mat-raised-button color="primary"
+                [disabled]="!isFormValid()"
+                type="submit">{{ 'appointment.add-appointment' | translate }}</button>
+      </div>
+    </form>
+  </mat-card>
+
+</ng-container>
+

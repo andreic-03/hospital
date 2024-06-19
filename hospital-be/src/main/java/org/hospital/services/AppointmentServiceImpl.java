@@ -18,6 +18,7 @@ import org.hospital.util.ValidationsUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -89,6 +90,22 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentRepository.delete(appointment);
 
 //        logger.info("Deleted appointment with id {}", appointmentId);
+    }
+
+    @Transactional
+    @Override
+    public List<AppointmentResponseModel> findAllAppointmentsByMedic(MedicEntity medic) {
+        return appointmentRepository.findByMedicOrderByCreatedOn(medic).stream()
+                .map(appointmentMapper::toAppointmentModel)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    @Override
+    public List<AppointmentResponseModel> findAllAppointmentsByPatient(PatientEntity patient) {
+        return appointmentRepository.findByPatientOrderByCreatedOn(patient).stream()
+                .map(appointmentMapper::toAppointmentModel)
+                .collect(Collectors.toList());
     }
 
     private AppointmentEntity findAppointmentById(Long id) {

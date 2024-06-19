@@ -1,0 +1,14 @@
+<ng-container>
+  <div *ngIf="medic$ | async as medic; else patientTemplate">
+    <app-medic-appointment [medic]="medic"></app-medic-appointment>
+  </div>
+
+  <ng-template #patientTemplate>
+    <ng-container *ngIf="patient$ | async as patient">
+      <div *ngIf="patient">
+        <!--        <app-patient-dashboard [patient]="patient"></app-patient-dashboard>-->
+        AAAAAAAAAAAAAA
+      </div>
+    </ng-container>
+  </ng-template>
+</ng-container>

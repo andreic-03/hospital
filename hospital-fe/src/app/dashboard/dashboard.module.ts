@@ -10,9 +10,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import {SharedMaterialModule, SharedModule} from "../shared/shared.module";
-import { DashboardBaseComponent } from "./dashboard-base-component/dashboard-base.component";
-import { DashboardComponent } from "./dashboard-component/dashboard.component";
-import { MedicDashboardComponent } from './medic-dashboard-component/medic-dashboard.component';
+import { DashboardBaseComponent } from "./components/dashboard-base-component/dashboard-base.component";
+import { DashboardComponent } from "./components/dashboard-component/dashboard.component";
+import { MedicDashboardComponent } from './components/medic-dashboard-component/medic-dashboard.component';
 
 @NgModule({
   declarations: [],

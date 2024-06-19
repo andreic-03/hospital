@@ -8,6 +8,7 @@ import org.hospital.configuration.exception.model.ErrorType;
 import org.hospital.configuration.exception.model.HospitalException;
 import org.hospital.persistence.entity.MedicEntity;
 import org.hospital.mappers.MedicMapper;
+import org.hospital.persistence.entity.MedicSpecialty;
 import org.hospital.persistence.entity.PatientEntity;
 import org.hospital.persistence.entity.UserEntity;
 import org.hospital.persistence.repository.MedicRepository;
@@ -15,9 +16,12 @@ import org.hospital.persistence.repository.UserRepository;
 import org.hospital.util.ValidationsUtil;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.hospital.util.Utils.getProcessedSearchTerm;
 
 @Slf4j
 @Service
@@ -28,6 +32,19 @@ public class MedicServiceImpl implements MedicService {
     private MedicMapper medicMapper;
 
     @Override
+    public List<MedicResponseModel> filterMedics(String searchTerm) {
+        final var processedSearchTerm = getProcessedSearchTerm(searchTerm);
+
+        final var patient = StringUtils.hasLength(processedSearchTerm) ?
+                medicRepository.filterMedics(processedSearchTerm) :
+                medicRepository.findAll();
+
+        return patient.stream()
+                .map(medicMapper::toMedicModel)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public MedicResponseModel createMedic(final MedicRequestModel medicRequestModel) {
         try {
             MedicEntity medic = medicRepository.saveAndFlush(medicMapper.toMedicEntity(medicRequestModel));
@@ -35,13 +52,6 @@ public class MedicServiceImpl implements MedicService {
         } catch (DataIntegrityViolationException e) {
             throw new HospitalException(ErrorType.EMAIL_ALREADY_EXISTS);
         }
-    }
-
-    @Override
-    public List<MedicResponseModel> findAll() {
-        return medicRepository.findAll().stream()
-                .map(medicMapper::toMedicModel)
-                .collect(Collectors.toList());
     }
 
     @Override
@@ -83,6 +93,15 @@ public class MedicServiceImpl implements MedicService {
         if (user != null) {
             userRepository.delete(user);
         }
+    }
+
+    @Override
+    public List<MedicResponseModel> getAllMedicsBySpecialty(String specialty) {
+        MedicSpecialty medicSpecialty = MedicSpecialty.valueOf(specialty.toUpperCase());
+
+        return medicRepository.findMedicsBySpecialty(medicSpecialty).stream()
+                .map(medicMapper::toMedicModel)
+                .collect(Collectors.toList());
     }
 
     private MedicEntity findMedicById(Long id) {

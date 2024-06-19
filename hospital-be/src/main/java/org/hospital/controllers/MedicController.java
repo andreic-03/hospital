@@ -33,14 +33,19 @@ public class MedicController {
     }
 
     @GetMapping
-    public List<MedicResponseModel> list() {
-        return medicService.findAll();
+    public List<MedicResponseModel> getAll(@RequestParam(required = false) final String searchTerm) {
+        return medicService.filterMedics(searchTerm);
     }
 
     @GetMapping("/getByFirstNameAndLastName")
     public MedicResponseModel findMedicByFirstNameAndLastName(@RequestParam("firstName") final String firstName,
                                                               @RequestParam("lastName") final String lastName) {
         return medicService.findMedicByFirstNameAndLastName(firstName, lastName);
+    }
+
+    @GetMapping("/getAllBySpecialty/{specialty}")
+    public List<MedicResponseModel> getAllMedicsBySpecialty(@PathVariable final String specialty) {
+        return medicService.getAllMedicsBySpecialty(specialty);
     }
 
     @DeleteMapping("/{id}")

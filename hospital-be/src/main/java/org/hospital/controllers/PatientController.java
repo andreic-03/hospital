@@ -25,6 +25,11 @@ import static org.hospital.api.model.general.Constants.API_PATIENT;
 public class PatientController {
     private PatientService patientService;
 
+    @GetMapping()
+    public List<PatientResponseModel> getAll(final @RequestParam(required = false) String searchTerm) {
+        return patientService.filterPatients(searchTerm);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PatientResponseModel create(@Valid @RequestBody final PatientCreateRequestModel patientCreateRequestModel) {
@@ -48,8 +53,8 @@ public class PatientController {
     }
 
     @GetMapping(value = "/medic/{medicId}")
-    public PatientResponseModel findPatientByMedic(@PathVariable final Long medicId) {
-        return patientService.findPatientByMedic(medicId);
+    public List<PatientResponseModel> findPatientsByMedic(@PathVariable final Long medicId) {
+        return patientService.findPatientsByMedic(medicId);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)

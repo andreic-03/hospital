@@ -1,0 +1,40 @@
+<mat-form-field class="w-full">
+  <mat-label>{{ 'patients.search.search' | translate }}</mat-label>
+  <input
+    matInput
+    [matAutocomplete]="auto"
+    [formControl]="searchCtrl"/>
+
+  <button
+    *ngIf="searchCtrl.value"
+    matSuffix
+    mat-icon-button
+    (click)="clearSelection()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <button *ngIf="!searchCtrl.value" mat-icon-button matSuffix type="button">
+    <mat-icon>search</mat-icon>
+  </button>
+</mat-form-field>
+
+<mat-autocomplete
+  #auto="matAutocomplete"
+  [displayWith]="displayWith"
+  (optionSelected)="onSelected($event)">
+  <mat-option *ngIf="isLoading" [disabled]="true" class="is-loading">
+    <div class="spinner-wrapper">
+      <mat-spinner class="mb-2" [diameter]="30"></mat-spinner>
+      <span class="ml-1">{{ 'patients.search.loading' | translate }}</span>
+    </div>
+  </mat-option>
+
+  <mat-option *ngIf="hasNoResults" [disabled]="true" class="is-loading">{{
+    'patients.search.no-results' | translate
+    }}</mat-option>
+
+  <ng-container *ngIf="!isLoading">
+    <mat-option *ngFor="let patient of filteredResult" [value]="patient">
+      <span>{{ patient.firstName }} {{ patient.lastName }}</span>
+    </mat-option>
+  </ng-container>
+</mat-autocomplete>

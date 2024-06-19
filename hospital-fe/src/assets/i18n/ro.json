@@ -38,7 +38,7 @@
     "profile": "Profil",
     "create-account": "Creaza un cont nou",
     "add-patient": "Adauga un pacient",
-    "make-appointment": "Solicita programare",
+    "make-appointment": "Solicita o programare",
     "info": {
       "no-account": "Nu ai un cont ?",
       "have-account": "Ai deja un cont ?"
@@ -111,14 +111,41 @@
     "visit-date": "DATA VIZITEI",
     "diagnosis": "DIAGNOSTIC",
     "observations": "OBSERVATII",
-    "add-appointment-for-patient" : "Creaza programare pentru un pacient",
+    "add-appointment-for-patient" : "Adauga programare pentru un pacient",
     "history-patient": "Vezi istoric pacient",
     "my-appointments": "Programarile mele",
     "remove-patient": "Elimina pacient",
-    "view-all-patients": "Vezi toti pacientii"
+    "remove-appointment": "Elimina programarea",
+    "view-all-patients": "Vezi toti pacientii",
+    "view-all-appointments": "Vezi toate programarile",
+    "patient-name": "NUMELE PACIENTULUI",
+    "see-appointment": "Vezi programarea"
   },
   "create-patient": {
     "add-patient": "Adauga pacient",
     "address": "Adresa"
+  },
+  "patients": {
+    "search": {
+      "search": "Cautare pacient",
+      "loading": "Cautare",
+      "no-results": "Nu a fost gasit nici un rezultat."
+    }
+  },
+  "medics": {
+    "search": {
+      "search": "Cautare medic",
+      "loading": "Cautare",
+      "no-results": "Nu a fost gasit nici un rezultat."
+    }
+  },
+  "appointment": {
+    "observations": "Observatii",
+    "indications": "Indicatii",
+    "appointment-date": "Data",
+    "diagnosis": "Diagnostic",
+    "add-appointment": "Solicita programarea",
+    "back": "Inapoi",
+    "added": "Programearea a fost creata"
   }
 }

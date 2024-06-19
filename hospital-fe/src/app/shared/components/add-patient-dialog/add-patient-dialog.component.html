@@ -58,28 +58,6 @@
     </div>
     <mat-divider></mat-divider>
 
-<!--    <div class="ml-2 mb-2">{{ 'create-patient.diagnosis' | translate }}</div>-->
-<!--    <div class="p-4 mb-5 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">-->
-<!--      <input class="bg-gray-100 w-full focus:outline-none global-input"-->
-<!--             formControlName="diagnosis">-->
-<!--    </div>-->
-
-<!--    <div class="ml-2 mb-2">{{ 'create-patient.observations' | translate }}</div>-->
-<!--    <div class="p-4 mb-5 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">-->
-<!--      <textarea class="bg-gray-100 w-full focus:outline-none global-input resize-none"-->
-<!--                formControlName="observations"-->
-<!--                rows="1"-->
-<!--                (input)="autoGrow($event)"></textarea>-->
-<!--    </div>-->
-
-<!--    <div class="ml-2 mb-2">{{ 'create-patient.indications' | translate }}</div>-->
-<!--    <div class="p-4 mb-5 bg-gray-100 border-2 rounded-xl border-gray-300 w-full global-input">-->
-<!--      <textarea class="bg-gray-100 w-full focus:outline-none global-input resize-none"-->
-<!--                formControlName="indications"-->
-<!--                rows="1"-->
-<!--                (input)="autoGrow($event)"></textarea>-->
-<!--    </div>-->
-
     <mat-error *ngIf="error" class="mb-2">{{
       error
       }}</mat-error>
@@ -90,7 +68,7 @@
               type="button">{{ 'profile.cancel-button' | translate }}</button>
 
       <button mat-raised-button color="primary"
-              [disabled]="!this.addPatientForm.touched || !this.addPatientForm.valid"
+              [disabled]="!addPatientForm.touched || !addPatientForm.valid"
               type="submit">{{ 'create-patient.add-patient' | translate }}</button>
     </div>
   </form>

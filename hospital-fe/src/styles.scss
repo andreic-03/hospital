@@ -46,6 +46,10 @@ html, body {
   .card-button {
     background-color: #efefef;
   }
+
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: #f1f1f1;
+  }
 }
 
 .dark-theme {

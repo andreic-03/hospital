@@ -115,10 +115,37 @@
     "history-patient": "See patient history",
     "my-appointments": "My appointments",
     "remove-patient": "Remove patient",
-    "view-all-patients": "See all patients"
+    "remove-appointment": "Remove appointment",
+    "view-all-patients": "See all patients",
+    "view-all-appointments": "See all appointments",
+    "patient-name": "PATIENT NAME",
+    "see-appointment": "See appointment"
   },
   "create-patient": {
     "add-patient": "Add patient",
     "address": "Address"
+  },
+  "patients": {
+    "search": {
+      "search": "Search patient",
+      "loading": "Searching",
+      "no-results": "No result found."
+    }
+  },
+  "medics": {
+    "search": {
+      "search": "Search medic",
+      "loading": "Searching",
+      "no-results": "No result found."
+    }
+  },
+  "appointment": {
+    "observations": "Observations",
+    "indications": "Indications",
+    "appointment-date": "Date",
+    "diagnosis": "Diagnosis",
+    "add-appointment": "Submit appointment",
+    "back": "Back",
+    "added": "Appointment has been created"
   }
 }

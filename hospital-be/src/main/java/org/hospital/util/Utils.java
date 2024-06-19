@@ -3,6 +3,10 @@ package org.hospital.util;
 import org.hospital.configuration.exception.model.ErrorType;
 import org.hospital.configuration.exception.model.HospitalException;
 
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 public class Utils {
 
     public static String getDateOfBirthFromCNP(final String cnp) {
@@ -38,5 +42,16 @@ public class Utils {
             case '2', '4', '6' -> "Feminin";
             default -> throw new HospitalException(ErrorType.CNP_INVALID_FIRST_DIGIT);
         };
+    }
+
+    public static String getProcessedSearchTerm(String searchTerm) {
+        return Optional.ofNullable(searchTerm)
+                .map(value -> value.trim().replaceAll("\\s{2,}", " "))
+                .map(value -> Arrays.stream(value.split(" "))
+                        .map(word -> word + ":*")
+                        // if multiple values are provided, & should be added instead of space
+                        .collect(Collectors.joining("&"))
+                )
+                .orElse("");
     }
 }

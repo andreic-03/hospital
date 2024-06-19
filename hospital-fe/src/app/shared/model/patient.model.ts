@@ -1,3 +1,5 @@
+import {AppointmentResponseModel} from "./appointment.model";
+
 export interface Patient {
   patientId: number;
   firstName: string;
@@ -11,5 +13,5 @@ export interface Patient {
   maritalStatus: string;
   cnp: string;
   gender: string;
-  // appointments: Appointment[];
+  appointments: AppointmentResponseModel[];
 }

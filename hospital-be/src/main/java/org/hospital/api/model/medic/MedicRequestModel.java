@@ -3,7 +3,7 @@ package org.hospital.api.model.medic;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
-import org.hospital.persistence.entity.MedicSpecialization;
+import org.hospital.persistence.entity.MedicSpecialty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
@@ -13,6 +13,6 @@ public class MedicRequestModel {
     private String lastName;
     private String gender;
     private String cnp;
-    private MedicSpecialization specialization;
+    private MedicSpecialty specialty;
 
 }

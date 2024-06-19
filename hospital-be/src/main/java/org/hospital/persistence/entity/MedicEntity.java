@@ -31,9 +31,9 @@ public class MedicEntity extends AuditingEntity {
     @Column(name = "cnp")
     private String cnp;
 
-    @Column(name = "specialization", nullable = false)
+    @Column(name = "specialty", nullable = false)
     @Enumerated(EnumType.STRING)
-    private MedicSpecialization specialization;
+    private MedicSpecialty specialty;
 
     @ManyToMany(mappedBy = "medics")
     private List<PatientEntity> patients = new ArrayList<>();

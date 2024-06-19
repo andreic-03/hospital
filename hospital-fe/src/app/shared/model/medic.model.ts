@@ -1,14 +1,15 @@
 export interface Medic {
+  medicId: number;
   patientId: number;
   firstName: string;
   lastName: string;
   gender: string;
   cnp: string
-  specialization: Specialization;
+  specialty: Specialty;
   // appointments: Appointment[];
 }
 
-export enum Specialization {
+export enum Specialty {
   SURGEON = 'Surgeon',
   CARDIOLOGIST = 'Cardiologist',
 }

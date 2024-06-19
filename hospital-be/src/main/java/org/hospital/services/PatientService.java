@@ -18,7 +18,7 @@ public interface PatientService {
 
     PatientResponseModel findPatientByCnp(final String cnp);
 
-    PatientResponseModel findPatientByMedic(final Long medicId);
+    List<PatientResponseModel> findPatientsByMedic(final Long medicId);
 
     PatientResponseModel updatePatient(final PatientUpdateRequestModel patientUpdateRequestModel, final Long id);
 
@@ -27,4 +27,6 @@ public interface PatientService {
     PatientResponseModel registerUserStepTwo(final UserRegisterStepTwoRequestModel userRegisterStepTwoRequestModel);
 
     List<PatientResponseModel> getPatientsCreatedByCurrentUser(final UserEntity user);
+
+    List<PatientResponseModel> filterPatients(final String searchTerm);
 }

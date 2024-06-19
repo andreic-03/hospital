@@ -17,6 +17,9 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
     @Query("SELECT p FROM PatientEntity p WHERE p.createdBy = :user ORDER BY p.createdOn DESC")
     List<PatientEntity> findPatientByCreatedBy(@Param("user") final UserEntity user);
 
-    @Query("SELECT p FROM PatientEntity p JOIN p.medics m WHERE m.medicId = :medicId")
-    PatientEntity findPatientByMedicId(@Param("medicId")Long medicId);
+    List<PatientEntity> findByMedicsMedicId(@Param("medicId")Long medicId);
+
+    @Query(value = "SELECT * FROM patient WHERE ts @@ to_tsquery('romanian', :searchTerm) = true",
+            nativeQuery = true)
+    List<PatientEntity> filterPatients(@Param("searchTerm") String searchTerm);
 }
